@@ -36,6 +36,46 @@ namespace BCSS.Services
                 }
             }
 
+            if (string.Equals(key, "border", StringComparison.InvariantCultureIgnoreCase))
+            {
+                switch (value)
+                {
+                    case "solid":
+                        return "border-style:solid";
+                    case "dashed":
+                        return "border-style:dashed";
+                    case "dotted":
+                        return "border-style:dotted";
+                    case "double":
+                        return "border-style:double";
+                    case "hidden":
+                        return "border-style:hidden";
+                    case "none":
+                        return "border-style:none";
+                }
+                return DimensionResult(value, "border-width");
+            }
+
+            if (string.Equals(key, "borderb", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-bottom-width");
+            }
+
+            if (string.Equals(key, "bordert", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-top-width");
+            }
+
+            if (string.Equals(key, "borderl", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-left-width");
+            }
+
+            if (string.Equals(key, "borderr", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-right-width");
+            }
+
             if (string.Equals(key, "box", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
@@ -181,6 +221,16 @@ namespace BCSS.Services
                 return DimensionResult(value?.Replace('n', '-'), "margin-inline-end");
             }
 
+            if (string.Equals(key, "opacity", StringComparison.InvariantCultureIgnoreCase))
+            {
+                double dividedNum;
+                if (double.TryParse(value, out dividedNum))
+                {
+                    return $"opacity:{(dividedNum / 100d).ToString().Replace(',', '.')}";
+                }
+                return $"opacity:{value}";
+            }
+
             if (string.Equals(key, "overflowx", StringComparison.InvariantCultureIgnoreCase))
             {
                 return $"overflow-x:{value}";
@@ -253,6 +303,61 @@ namespace BCSS.Services
                     default:
                         return $"position:{value}";
                 }
+            }
+
+            if (string.Equals(key, "r", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-radius");
+            }
+
+            if (string.Equals(key, "rlt", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-top-left-radius");
+            }
+
+            if (string.Equals(key, "rlb", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-bottom-left-radius");
+            }
+
+            if (string.Equals(key, "rrt", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-top-right-radius");
+            }
+
+            if (string.Equals(key, "rrb", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-bottom-right-radius");
+            }
+
+            if (string.Equals(key, "rt", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-top-left-radius") + " " + DimensionResult(value, "border-top-right-radius");
+            }
+
+            if (string.Equals(key, "rb", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-bottom-left-radius") + " " + DimensionResult(value, "border-bottom-right-radius");
+            }
+
+            if (string.Equals(key, "rl", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-top-left-radius") + " " + DimensionResult(value, "border-bottom-left-radius");
+            }
+
+            if (string.Equals(key, "rr", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-top-right-radius") + " " + DimensionResult(value, "border-bottom-right-radius");
+            }
+
+            if (string.Equals(key, "rs", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-start-start-radius") + " " + DimensionResult(value, "border-end-start-radius");
+            }
+
+            if (string.Equals(key, "re", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(value, "border-end-end-radius") + " " + DimensionResult(value, "border-start-end-radius");
             }
 
             if (string.Equals(key, "w", StringComparison.InvariantCultureIgnoreCase))
