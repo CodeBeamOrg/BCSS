@@ -5,13 +5,14 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>0.4</Version>
+		<Version>0.1.0-alpha</Version>
 		<Authors>CodeBeam</Authors>
 		<Copyright>CodeBeam OpenSource MIT</Copyright>
 		<PackageTags>Blazor; CSS; Style</PackageTags>
 		<Description>Runtime CSS generator for Blazor.</Description>
 		<Title>CodeBeam.BCSS</Title>
 		<PackageIcon>BCSS.jpg</PackageIcon>
+		<RepositoryUrl>https://github.com/CodeBeamOrg/BCSS</RepositoryUrl>
 	</PropertyGroup>
 
 
