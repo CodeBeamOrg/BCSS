@@ -17,10 +17,11 @@ namespace BCSS.Services
 
             string[] processedString = className.Split('-');
             string? key = processedString.FirstOrDefault();
-            string? value = processedString.LastOrDefault();
+            int keyLength = key?.Length ?? 0;
+            string? value = processedString.Length < 2 ? string.Empty : className.Substring(keyLength + 1);
             //string? value = string.Join(null, processedString.Skip(1));
-            
-            if (key == "aspect")
+
+            if (string.Equals(key, "aspect", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -35,7 +36,7 @@ namespace BCSS.Services
                 }
             }
 
-            if (key == "box")
+            if (string.Equals(key, "box", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -48,7 +49,7 @@ namespace BCSS.Services
                 }
             }
 
-            if (key == "clear")
+            if (string.Equals(key, "clear", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -65,7 +66,7 @@ namespace BCSS.Services
                 }
             }
 
-            if (key == "d")
+            if (string.Equals(key, "d", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -78,7 +79,7 @@ namespace BCSS.Services
                 }
             }
 
-            if (key == "float")
+            if (string.Equals(key, "float", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -93,7 +94,7 @@ namespace BCSS.Services
                 }
             }
 
-            if (key == "h")
+            if (string.Equals(key, "h", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -107,7 +108,7 @@ namespace BCSS.Services
                 return DimensionResult(value, "height");
             }
 
-            if (key == "hmin")
+            if (string.Equals(key, "hmin", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -121,7 +122,7 @@ namespace BCSS.Services
                 return DimensionResult(value, "min-height");
             }
 
-            if (key == "hmax")
+            if (string.Equals(key, "hmax", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -135,97 +136,107 @@ namespace BCSS.Services
                 return DimensionResult(value, "max-height");
             }
 
-            if (key == "m")
+            if (string.Equals(key, "m", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value?.Replace('n', '-'), "margin");
             }
 
-            if (key == "mt")
+            if (string.Equals(key, "mt", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value?.Replace('n', '-'), "margin-top");
             }
 
-            if (key == "mb")
+            if (string.Equals(key, "mb", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value?.Replace('n', '-'), "margin-bottom");
             }
 
-            if (key == "ml")
+            if (string.Equals(key, "ml", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value?.Replace('n', '-'), "margin-left");
             }
 
-            if (key == "mr")
+            if (string.Equals(key, "mr", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value?.Replace('n', '-'), "margin-right");
             }
 
-            if (key == "mx")
+            if (string.Equals(key, "mx", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value?.Replace('n', '-'), "margin-left") + " " + DimensionResult(value, "margin-right");
             }
 
-            if (key == "my")
+            if (string.Equals(key, "my", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value?.Replace('n', '-'), "margin-top") + " " + DimensionResult(value, "margin-bottom");
             }
 
-            if (key == "ms")
+            if (string.Equals(key, "ms", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value?.Replace('n', '-'), "margin-inline-start");
             }
 
-            if (key == "me")
+            if (string.Equals(key, "me", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value?.Replace('n', '-'), "margin-inline-end");
             }
 
-            if (key == "p")
+            if (string.Equals(key, "overflowx", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"overflow-x:{value}";
+            }
+
+            if (string.Equals(key, "overflowy", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"overflow-y:{value}";
+            }
+
+            if (string.Equals(key, "p", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "padding");
             }
 
-            if (key == "pt")
+            if (string.Equals(key, "pt", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "padding-top");
             }
 
-            if (key == "pb")
+            if (string.Equals(key, "pb", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "padding-bottom");
             }
 
-            if (key == "pl")
+            if (string.Equals(key, "pl", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "padding-left");
             }
 
-            if (key == "pr")
+            if (string.Equals(key, "pr", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "padding-right");
             }
 
-            if (key == "px")
+            if (string.Equals(key, "px", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "padding-left") + " " + DimensionResult(value, "padding-right");
             }
 
-            if (key == "py")
+            if (string.Equals(key, "py", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "padding-top") + " " + DimensionResult(value, "padding-bottom");
             }
 
-            if (key == "ps")
+            if (string.Equals(key, "ps", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "padding-inline-start");
             }
 
-            if (key == "pe")
+            if (string.Equals(key, "pe", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "padding-inline-end");
             }
 
-            if (key == "pos")
+            if (string.Equals(key, "pos", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -244,7 +255,7 @@ namespace BCSS.Services
                 }
             }
 
-            if (key == "w")
+            if (string.Equals(key, "w", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -258,7 +269,7 @@ namespace BCSS.Services
                 return DimensionResult(value, "width");
             }
 
-            if (key == "wmin")
+            if (string.Equals(key, "wmin", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -272,7 +283,7 @@ namespace BCSS.Services
                 return DimensionResult(value, "min-width");
             }
 
-            if (key == "wmax")
+            if (string.Equals(key, "wmax", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -286,7 +297,7 @@ namespace BCSS.Services
                 return DimensionResult(value, "max-width");
             }
 
-            if (key == "z")
+            if (string.Equals(key, "z", StringComparison.InvariantCultureIgnoreCase))
             {
                 if (value == "auto")
                 {
@@ -295,7 +306,7 @@ namespace BCSS.Services
                 return $"z-index:{value}";
             }
 
-            return string.Empty;
+            return $"{key?.ToLower()}:{value.ToLower()}";
         }
 
         public static string DimensionResult(string? value, string cssName)

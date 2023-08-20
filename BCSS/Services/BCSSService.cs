@@ -28,7 +28,6 @@ namespace BCSS
                     continue;
                 }
 
-                //string? result = Provider.Decode(value);
                 string? result = BlazorCssConverter.Convert(val);
                 Provider.AddToDict(Decode(val), result);
             }
