@@ -5,7 +5,8 @@
 <style>
     @foreach (var item in _keyValuePairs)
     {
-        @($".{item.Key} {{ {item.Value} !important; }}")
+        var processedValue = item.Value?.Split(' ') ?? new string[0];
+        @($".{item.Key} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
     }
 </style>
 

@@ -95,18 +95,6 @@ namespace BCSS.Services
 
             if (key == "h")
             {
-                if (value?.Contains("rem") == true)
-                {
-                    return $"height:{value}";
-                }
-                if (value?.Contains('.') == true)
-                {
-                    return $"height:{value}rem";
-                }
-                if (value?.Contains('%') == true)
-                {
-                    return $"height:{value}";
-                }
                 switch (value)
                 {
                     case "min":
@@ -115,25 +103,12 @@ namespace BCSS.Services
                         return "height:max-content";
                     case "fit":
                         return "height:fit-content";
-                    default:
-                        return $"height:{value}px";
                 }
+                return DimensionResult(value, "height");
             }
 
             if (key == "hmin")
             {
-                if (value?.Contains("rem") == true)
-                {
-                    return $"min-height:{value}";
-                }
-                if (value?.Contains('.') == true)
-                {
-                    return $"min-height:{value}rem";
-                }
-                if (value?.Contains('%') == true)
-                {
-                    return $"min-height:{value}";
-                }
                 switch (value)
                 {
                     case "min":
@@ -142,25 +117,12 @@ namespace BCSS.Services
                         return "min-height:max-content";
                     case "fit":
                         return "min-height:fit-content";
-                    default:
-                        return $"min-height:{value}px";
                 }
+                return DimensionResult(value, "min-height");
             }
 
             if (key == "hmax")
             {
-                if (value?.Contains("rem") == true)
-                {
-                    return $"max-height:{value}";
-                }
-                if (value?.Contains('.') == true)
-                {
-                    return $"max-height:{value}rem";
-                }
-                if (value?.Contains('%') == true)
-                {
-                    return $"max-height:{value}";
-                }
                 switch (value)
                 {
                     case "min":
@@ -169,9 +131,98 @@ namespace BCSS.Services
                         return "max-height:max-content";
                     case "fit":
                         return "max-height:fit-content";
-                    default:
-                        return $"max-height:{value}px";
                 }
+                return DimensionResult(value, "max-height");
+            }
+
+            if (key == "m")
+            {
+                return DimensionResult(value?.Replace('n', '-'), "margin");
+            }
+
+            if (key == "mt")
+            {
+                return DimensionResult(value?.Replace('n', '-'), "margin-top");
+            }
+
+            if (key == "mb")
+            {
+                return DimensionResult(value?.Replace('n', '-'), "margin-bottom");
+            }
+
+            if (key == "ml")
+            {
+                return DimensionResult(value?.Replace('n', '-'), "margin-left");
+            }
+
+            if (key == "mr")
+            {
+                return DimensionResult(value?.Replace('n', '-'), "margin-right");
+            }
+
+            if (key == "mx")
+            {
+                return DimensionResult(value?.Replace('n', '-'), "margin-left") + " " + DimensionResult(value, "margin-right");
+            }
+
+            if (key == "my")
+            {
+                return DimensionResult(value?.Replace('n', '-'), "margin-top") + " " + DimensionResult(value, "margin-bottom");
+            }
+
+            if (key == "ms")
+            {
+                return DimensionResult(value?.Replace('n', '-'), "margin-inline-start");
+            }
+
+            if (key == "me")
+            {
+                return DimensionResult(value?.Replace('n', '-'), "margin-inline-end");
+            }
+
+            if (key == "p")
+            {
+                return DimensionResult(value, "padding");
+            }
+
+            if (key == "pt")
+            {
+                return DimensionResult(value, "padding-top");
+            }
+
+            if (key == "pb")
+            {
+                return DimensionResult(value, "padding-bottom");
+            }
+
+            if (key == "pl")
+            {
+                return DimensionResult(value, "padding-left");
+            }
+
+            if (key == "pr")
+            {
+                return DimensionResult(value, "padding-right");
+            }
+
+            if (key == "px")
+            {
+                return DimensionResult(value, "padding-left") + " " + DimensionResult(value, "padding-right");
+            }
+
+            if (key == "py")
+            {
+                return DimensionResult(value, "padding-top") + " " + DimensionResult(value, "padding-bottom");
+            }
+
+            if (key == "ps")
+            {
+                return DimensionResult(value, "padding-inline-start");
+            }
+
+            if (key == "pe")
+            {
+                return DimensionResult(value, "padding-inline-end");
             }
 
             if (key == "pos")
@@ -195,18 +246,6 @@ namespace BCSS.Services
 
             if (key == "w")
             {
-                if (value?.Contains("rem") == true)
-                {
-                    return $"width:{value}";
-                }
-                if (value?.Contains('.') == true)
-                {
-                    return $"width:{value}rem";
-                }
-                if (value?.Contains('%') == true)
-                {
-                    return $"width:{value}";
-                }
                 switch (value)
                 {
                     case "min":
@@ -215,25 +254,12 @@ namespace BCSS.Services
                         return "width:max-content";
                     case "fit":
                         return "width:fit-content";
-                    default:
-                        return $"width:{value}px";
                 }
+                return DimensionResult(value, "width");
             }
 
             if (key == "wmin")
             {
-                if (value?.Contains("rem") == true)
-                {
-                    return $"min-width:{value}";
-                }
-                if (value?.Contains('.') == true)
-                {
-                    return $"min-width:{value}rem";
-                }
-                if (value?.Contains('%') == true)
-                {
-                    return $"min-width:{value}";
-                }
                 switch (value)
                 {
                     case "min":
@@ -242,25 +268,12 @@ namespace BCSS.Services
                         return "min-width:max-content";
                     case "fit":
                         return "min-width:fit-content";
-                    default:
-                        return $"min-width:{value}px";
                 }
+                return DimensionResult(value, "min-width");
             }
 
             if (key == "wmax")
             {
-                if (value?.Contains("rem") == true)
-                {
-                    return $"max-width:{value}";
-                }
-                if (value?.Contains('.') == true)
-                {
-                    return $"max-width:{value}rem";
-                }
-                if (value?.Contains('%') == true)
-                {
-                    return $"max-width:{value}";
-                }
                 switch (value)
                 {
                     case "min":
@@ -269,9 +282,8 @@ namespace BCSS.Services
                         return "max-width:max-content";
                     case "fit":
                         return "max-width:fit-content";
-                    default:
-                        return $"max-width:{value}px";
                 }
+                return DimensionResult(value, "max-width");
             }
 
             if (key == "z")
@@ -285,5 +297,28 @@ namespace BCSS.Services
 
             return string.Empty;
         }
+
+        public static string DimensionResult(string? value, string cssName)
+        {
+            if (value == null)
+            {
+                return string.Empty;
+            }
+
+            if (value?.Contains("rem") == true)
+            {
+                return $"{cssName}:{value}";
+            }
+            if (value?.Contains('.') == true)
+            {
+                return $"{cssName}:{value}rem";
+            }
+            if (value?.Contains('%') == true)
+            {
+                return $"{cssName}:{value}";
+            }
+            return $"{cssName}:{value}px";
+        }
+
     }
 }
