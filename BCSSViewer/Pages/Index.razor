@@ -1,0 +1,25 @@
+﻿@page "/"
+@inject BCSSService BC
+
+<BlazorCSSProvider />
+
+<MudPaper Class="@BC.Add(_cssString)" Width="200px" Height="200px" Style="background-color: blue">
+
+</MudPaper>
+
+<MudTextField @bind-Value="_cssString" Immediate="true" />
+
+<MudButton OnClick="StateHasChanged">Refresh</MudButton>
+
+@code {
+    string _cssString = "w-400";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            StateHasChanged();
+        }
+    }
+}

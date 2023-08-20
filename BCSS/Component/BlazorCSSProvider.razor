@@ -1,0 +1,11 @@
+﻿@namespace BCSS
+@inherits ComponentBase
+@inject BCSSService BCSSService
+
+<style>
+    @foreach (var item in _keyValuePairs)
+    {
+        @($".{item.Key} {{ {item.Value} !important; }}")
+    }
+</style>
+

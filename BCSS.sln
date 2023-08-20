@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSS", "BCSS\BCSS.csproj", "{45998C7D-6BC9-43F4-840F-A3CAFD0113B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSSViewer", "BCSSViewer\BCSSViewer.csproj", "{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}"
+	ProjectSection(ProjectDependencies) = postProject
+		{45998C7D-6BC9-43F4-840F-A3CAFD0113B4} = {45998C7D-6BC9-43F4-840F-A3CAFD0113B4}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45998C7D-6BC9-43F4-840F-A3CAFD0113B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45998C7D-6BC9-43F4-840F-A3CAFD0113B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45998C7D-6BC9-43F4-840F-A3CAFD0113B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45998C7D-6BC9-43F4-840F-A3CAFD0113B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26FB81CE-CAB7-45B7-ABF7-2F90FF5FDEA3}
+	EndGlobalSection
+EndGlobal

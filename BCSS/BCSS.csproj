@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Version>0.4</Version>
+		<Authors>CodeBeam</Authors>
+		<Copyright>CodeBeam OpenSource MIT</Copyright>
+		<PackageTags>Blazor; CSS; Style</PackageTags>
+		<Description>Runtime CSS generator for Blazor.</Description>
+		<Title>CodeBeam.BCSS</Title>
+		<PackageIcon>BCSS.jpg</PackageIcon>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.11" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="wwwroot\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\..\..\Desktop\BCSS.jpg">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+</Project>
