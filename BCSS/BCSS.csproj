@@ -13,6 +13,7 @@
 		<Title>CodeBeam.BCSS</Title>
 		<PackageIcon>BCSS.jpg</PackageIcon>
 		<RepositoryUrl>https://github.com/CodeBeamOrg/BCSS</RepositoryUrl>
+		<PackageId>CodeBeam.BCSS</PackageId>
 	</PropertyGroup>
 
 

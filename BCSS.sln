@@ -3,12 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSS", "BCSS\BCSS.csproj", "{45998C7D-6BC9-43F4-840F-A3CAFD0113B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCSS", "BCSS\BCSS.csproj", "{45998C7D-6BC9-43F4-840F-A3CAFD0113B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSSViewer", "BCSSViewer\BCSSViewer.csproj", "{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCSSViewer", "BCSSViewer\BCSSViewer.csproj", "{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}"
+	ProjectSection(ProjectDependencies) = postProject
+		{45998C7D-6BC9-43F4-840F-A3CAFD0113B4} = {45998C7D-6BC9-43F4-840F-A3CAFD0113B4}
+		{837AA5FF-99D6-41CD-A38B-DFE148A8A205} = {837AA5FF-99D6-41CD-A38B-DFE148A8A205}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSSViewer.Docs", "BCSSViewer.Docs\BCSSViewer.Docs.csproj", "{837AA5FF-99D6-41CD-A38B-DFE148A8A205}"
 	ProjectSection(ProjectDependencies) = postProject
 		{45998C7D-6BC9-43F4-840F-A3CAFD0113B4} = {45998C7D-6BC9-43F4-840F-A3CAFD0113B4}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSSViewer.Wasm", "BCSSViewer.Wasm\BCSSViewer.Wasm.csproj", "{C26FD032-E5A7-45A2-8333-285E9F126BA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +32,14 @@ Global
 		{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C7AE5DE-B388-4B4C-854C-6A6EEA496F41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{837AA5FF-99D6-41CD-A38B-DFE148A8A205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{837AA5FF-99D6-41CD-A38B-DFE148A8A205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{837AA5FF-99D6-41CD-A38B-DFE148A8A205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{837AA5FF-99D6-41CD-A38B-DFE148A8A205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C26FD032-E5A7-45A2-8333-285E9F126BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C26FD032-E5A7-45A2-8333-285E9F126BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C26FD032-E5A7-45A2-8333-285E9F126BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C26FD032-E5A7-45A2-8333-285E9F126BA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
