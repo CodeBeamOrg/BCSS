@@ -8,6 +8,28 @@ namespace BCSS.Services
 {
     public static class BlazorCssConverter
     {
+        public static List<string> GetSuffixes(string className)
+        {
+            var suffixes = new List<string>();
+            if (string.IsNullOrWhiteSpace(className))
+            {
+                return suffixes;
+            }
+
+            string key = className.Split('-').First();
+            if (key.Contains(':') == false)
+            {
+                return suffixes;
+            }
+
+            string[] partials = key.Split(':');
+            for (int i = 0; i < partials.Length - 1; i++)
+            {
+                suffixes.Add(partials[i]);
+            }
+            return suffixes;
+        }
+
         public static string Convert (string className)
         {
             if (string.IsNullOrWhiteSpace(className))
@@ -16,14 +38,13 @@ namespace BCSS.Services
             }
 
             string[] processedString = className.Split('-');
-            string? key = processedString.FirstOrDefault();
-            if (key?.Contains(':') == true)
+            string? key = processedString.First().Split(':').Last();
+            string? value = processedString.Length < 2 ? string.Empty : className.Substring(processedString.First().Length + 1);
+
+            if (string.IsNullOrEmpty(value))
             {
-                key = key.Split(':').LastOrDefault();
+                return string.Empty;
             }
-            int keyLength = key?.Length ?? 0;
-            string? value = processedString.Length < 2 ? string.Empty : className.Substring(processedString.FirstOrDefault().Length + 1);
-            //string? value = string.Join(null, processedString.Skip(1));
 
             if (string.Equals(key, "aspect", StringComparison.InvariantCultureIgnoreCase))
             {

@@ -9,11 +9,12 @@
 
 </MudPaper>
 
-<MudTextField @bind-Value="_cssString" Immediate="true" />
+<MudTextField @bind-Value="_cssString" Immediate="false" />
 
 <MudButton OnClick="StateHasChanged">Refresh</MudButton>
 
 @code {
+    BlazorCSSProvider? _blazorCssProvider;
     string _cssString = "w-400";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

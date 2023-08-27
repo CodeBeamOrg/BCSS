@@ -3,11 +3,36 @@
 @inject BCSSService BCSSService
 
 <style>
-    @foreach (var item in _keyValuePairs)
+    @foreach (var info in _bcssInfos)
     {
-        var processedValue = item.Value?.Split(' ') ?? new string[0];
-        string? suffix = item.Key.Split("_1").FirstOrDefault();
-        @($".{item.Key}{(item.Key.Contains("_1") == false ? null : $":{suffix}")} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
+        if (_breakpoints.Intersect(info.Suffixes).Any())
+        {
+            continue;
+        }
+        var processedValue = info.Value?.Split(' ') ?? new string[0];
+        @($".{info.Key}{(info.Suffixes.Contains("hover") ? ":hover" : null)} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
     }
 </style>
+
+<style>
+    @($"@media screen and (min-width:{Sm}px) {{ {GetMediaString("sm")} }}")
+</style>
+
+<style>
+    @($"@media screen and (min-width:{Md}px) {{ {GetMediaString("md")} }}")
+</style>
+
+<style>
+    @($"@media screen and (min-width:{Lg}px) {{ {GetMediaString("lg")} }}")
+</style>
+
+<style>
+    @($"@media screen and (min-width:{Xl}px) {{ {GetMediaString("xl")} }}")
+</style>
+
+Suffixes: @string.Join(", ", _bcssInfos.Select(x => x.Suffixes).LastOrDefault() ?? new List<string>())
+<br />
+Keys: @string.Join(", ", _bcssInfos.Select(x => x.Key))
+<br />
+Values: @string.Join(", ", _bcssInfos.Select(x => x.Value))
 

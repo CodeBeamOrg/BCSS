@@ -1,4 +1,5 @@
-﻿using BCSS.Services;
+﻿using BCSS.Models;
+using BCSS.Services;
 
 namespace BCSS
 {
@@ -29,7 +30,12 @@ namespace BCSS
                 }
 
                 string? result = BlazorCssConverter.Convert(val);
-                Provider.AddToDict(Decode(val), result);
+
+                BCSSInfo info = new BCSSInfo();
+                info.Suffixes = BlazorCssConverter.GetSuffixes(val);
+                info.Key = Decode(val);
+                info.Value = result;
+                Provider.AddInfo(info);
             }
             
             Provider.Update();
