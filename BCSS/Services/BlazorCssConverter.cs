@@ -176,7 +176,7 @@ namespace BCSS.Services
                 }
             }
 
-            if (string.Equals(key, "d", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(key, "d", StringComparison.InvariantCultureIgnoreCase) || string.Equals(key, "display", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -291,6 +291,41 @@ namespace BCSS.Services
                 return DimensionResult(value?.Replace('n', '-'), "margin-inline-end");
             }
 
+            if (string.Equals(key, "object", StringComparison.InvariantCultureIgnoreCase))
+            {
+                switch (value)
+                {
+                    case "contain":
+                        return "object-fit:contain";
+                    case "cover":
+                        return "object-fit:cover";
+                    case "fill":
+                        return "object-fit:fill";
+                    case "none":
+                        return "object-fit:none";
+                    case "scale-down":
+                        return "object-fit:scale-down";
+                    case "bottom":
+                        return "object-position:bottom";
+                    case "center":
+                        return "object-position:center";
+                    case "top":
+                        return "object-position:top";
+                    case "left":
+                        return "object-position:left";
+                    case "right":
+                        return "object-position:right";
+                    case "left-bottom":
+                        return "object-position:left bottom";
+                    case "left-top":
+                        return "object-position:left top";
+                    case "right-bottom":
+                        return "object-position:right bottom";
+                    case "right-top":
+                        return "object-position:right top";
+                }
+            }
+
             if (string.Equals(key, "opacity", StringComparison.InvariantCultureIgnoreCase))
             {
                 double dividedNum;
@@ -356,7 +391,7 @@ namespace BCSS.Services
                 return DimensionResult(value, "padding-inline-end");
             }
 
-            if (string.Equals(key, "pos", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(key, "pos", StringComparison.InvariantCultureIgnoreCase) || string.Equals(key, "position", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -430,6 +465,53 @@ namespace BCSS.Services
                 return DimensionResult(value, "border-end-end-radius") + " " + DimensionResult(value, "border-start-end-radius");
             }
 
+            if (string.Equals(key, "resize", StringComparison.InvariantCultureIgnoreCase))
+            {
+                switch (value)
+                {
+                    case "x":
+                        return "resize:horizontal";
+                    case "y":
+                        return "resize:vertical";
+                    case "":
+                    case null:
+                        return "resize:both";
+                }
+                return $"resize:{value}";
+            }
+
+            if (string.Equals(key, "scroll", StringComparison.InvariantCultureIgnoreCase))
+            {
+                switch (value)
+                {
+                    case "auto":
+                        return "scroll-behavior:auto";
+                    case "smooth":
+                        return "scroll-behavior:smooth";
+                }
+                return $"scroll-behavior:{value}";
+            }
+
+            if (string.Equals(key, "select", StringComparison.InvariantCultureIgnoreCase))
+            {
+                switch (value)
+                {
+                    case "none":
+                        return "user-select:none";
+                }
+                return $"user-select:{value}";
+            }
+
+            if (string.Equals(key, "touch", StringComparison.InvariantCultureIgnoreCase))
+            {
+                switch (value)
+                {
+                    case "auto":
+                        return "touch-action:auto";
+                }
+                return $"touch-action:{value}";
+            }
+
             if (string.Equals(key, "w", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
@@ -481,6 +563,8 @@ namespace BCSS.Services
                 return $"z-index:{value}";
             }
 
+            // Support all kinds of basic CSS statements.
+            // Like appearance, cursor.
             return $"{key?.ToLower()}:{value.ToLower()}";
         }
 
