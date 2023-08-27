@@ -17,8 +17,12 @@ namespace BCSS.Services
 
             string[] processedString = className.Split('-');
             string? key = processedString.FirstOrDefault();
+            if (key?.Contains(':') == true)
+            {
+                key = key.Split(':').LastOrDefault();
+            }
             int keyLength = key?.Length ?? 0;
-            string? value = processedString.Length < 2 ? string.Empty : className.Substring(keyLength + 1);
+            string? value = processedString.Length < 2 ? string.Empty : className.Substring(processedString.FirstOrDefault().Length + 1);
             //string? value = string.Join(null, processedString.Skip(1));
 
             if (string.Equals(key, "aspect", StringComparison.InvariantCultureIgnoreCase))
@@ -305,7 +309,7 @@ namespace BCSS.Services
                 }
             }
 
-            if (string.Equals(key, "r", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(key, "r", StringComparison.InvariantCultureIgnoreCase) || string.Equals(key, "rounded", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "border-radius");
             }

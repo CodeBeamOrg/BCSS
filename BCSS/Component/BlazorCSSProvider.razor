@@ -6,7 +6,8 @@
     @foreach (var item in _keyValuePairs)
     {
         var processedValue = item.Value?.Split(' ') ?? new string[0];
-        @($".{item.Key} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
+        string? suffix = item.Key.Split("_1").FirstOrDefault();
+        @($".{item.Key}{(item.Key.Contains("_1") == false ? null : $":{suffix}")} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
     }
 </style>
 
