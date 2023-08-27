@@ -40,6 +40,72 @@ namespace BCSS.Services
                 }
             }
 
+            if (string.Equals(key, "bg", StringComparison.InvariantCultureIgnoreCase))
+            {
+                switch (value)
+                {
+                    case "fixed":
+                        return "background-attachment:fixed";
+                    case "local":
+                        return "background-attachment:local";
+                    case "scroll":
+                        return "background-attachment:scroll";
+                    case "clip-box":
+                        return "background-clip:border-box";
+                    case "clip-padding":
+                        return "background-clip:padding-box";
+                    case "clip-content":
+                        return "background-clip:content-box";
+                    case "clip-text":
+                        return "background-clip:text";
+                    case "origin-border":
+                        return "background-origin:border-box";
+                    case "origin-padding":
+                        return "background-origin:padding-box";
+                    case "origin-content":
+                        return "background-origin:content-box";
+                    case "bottom":
+                        return "background-position:bottom";
+                    case "center":
+                        return "background-position:center";
+                    case "top":
+                        return "background-position:top";
+                    case "left":
+                        return "background-position:left";
+                    case "right":
+                        return "background-position:right";
+                    case "left-bottom":
+                        return "background-position:left bottom";
+                    case "left-top":
+                        return "background-position:left top";
+                    case "right-bottom":
+                        return "background-position:right bottom";
+                    case "right-top":
+                        return "background-position:right top";
+                    case "repeat":
+                        return "background-repeat:repeat";
+                    case "no-repeat":
+                        return "background-repeat:no-repeat";
+                    case "repeat-x":
+                        return "background-repeat:repeat-x";
+                    case "repeat-y":
+                        return "background-repeat:repeat-y";
+                    case "repeat-round":
+                        return "background-repeat:round";
+                    case "repeat-space":
+                        return "background-repeat:space";
+                    case "auto":
+                        return "background-size:auto";
+                    case "cover":
+                        return "background-size:cover";
+                    case "contain":
+                        return "background-size:contain";
+                    case "none":
+                        return "background-image:none";
+                }
+                return $"background:{value}";
+            }
+
             if (string.Equals(key, "border", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
