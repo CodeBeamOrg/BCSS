@@ -10,7 +10,7 @@
             continue;
         }
         var processedValue = info.Value?.Split(' ') ?? new string[0];
-        @($".{info.Key}{(info.Suffixes.Contains("hover") ? ":hover" : null)}{(info.Suffixes.Contains("focus") ? ":focus" : null)} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
+        @($".{info.Key}{GetSuffixString(info.Suffixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
     }
 </style>
 

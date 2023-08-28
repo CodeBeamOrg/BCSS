@@ -16,7 +16,7 @@
                 return suffixes;
             }
 
-            string[] partials = key.Split(':');
+            string[] partials = key.Replace('/', '-').Split(':');
             for (int i = 0; i < partials.Length - 1; i++)
             {
                 suffixes.Add(partials[i]);
@@ -32,7 +32,7 @@
             }
 
             string[] processedString = className.Split('-');
-            string? key = processedString.First().Split(':').Last();
+            string? key = processedString.First().Split(':').Last().Replace('/', '-');
             string? value = processedString.Length < 2 ? string.Empty : className.Substring(processedString.First().Length + 1);
 
             if (string.IsNullOrEmpty(value))

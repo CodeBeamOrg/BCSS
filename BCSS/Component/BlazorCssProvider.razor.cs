@@ -67,6 +67,18 @@ namespace BCSS
             return result;
         }
 
+        protected string GetSuffixString(List<string> suffixes)
+        {
+            var result = string.Empty;
+            List<string> match = _suffixes.Intersect(suffixes).ToList();
+            if (match.Any())
+            {
+                result = $":{match.First()}";
+            }
+            
+            return result;
+        }
+
         public void Update()
         {
             StateHasChanged();
@@ -90,6 +102,32 @@ namespace BCSS
             StateHasChanged();
         }
 
-        private List<string> _breakpoints = new List<string>() { "xs", "sm", "md", "lg", "xl" };
+        private readonly List<string> _breakpoints = new List<string>() { "xs", "sm", "md", "lg", "xl" };
+        private readonly List<string> _suffixes = new List<string>() 
+        { 
+            "active",
+            "checked",
+            "disabled",
+            "empty",
+            "enabled",
+            "hover", 
+            "focus",
+            "focus-visible",
+            "focus-within", 
+            "first-child", 
+            "last-child",
+            "link",
+            "optional",
+            "out-of-range",
+            "read-only",
+            "read-write",
+            "required",
+            "root",
+            "target",
+            "valid",
+            "invalid",
+            "visited"
+        };
+
     }
 }
