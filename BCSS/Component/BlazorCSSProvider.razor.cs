@@ -1,11 +1,16 @@
-﻿using BCSS.Models;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace BCSS
 {
-    public partial class BlazorCSSProvider : ComponentBase
+    public partial class BlazorCssProvider : ComponentBase
     {
         protected List<BCSSInfo> _bcssInfos = new();
+
+        /// <summary>
+        /// If true, deletes and overrides all other same CSS properties when new value is added. Default is false.
+        /// </summary>
+        [Parameter]
+        public bool KeepSingleValue { get; set; }
 
         [Parameter]
         public int Xs { get; set; } = 0;
@@ -38,6 +43,11 @@ namespace BCSS
             {
                 return;
             }
+
+            if (KeepSingleValue)
+            {
+                Clear(info.Key);
+            }
             _bcssInfos.Add(info);
         }
 
@@ -52,7 +62,7 @@ namespace BCSS
             foreach (var info in _bcssInfos.Where(x => x.Suffixes.Contains(breakpoint)))
             {
                 var processedValue = info.Value?.Split(' ') ?? new string[0];
-                result += $".{info.Key}{(info.Suffixes.Contains("hover") ? ":hover" : null)} {{ {string.Join("!important;", processedValue) + "!important;"}}} ";
+                result += $".{info.Key}{(info.Suffixes.Contains("hover") ? ":hover" : null)}{(info.Suffixes.Contains("focus") ? ":focus" : null)} {{ {string.Join("!important;", processedValue) + "!important;"}}} ";
             }
             return result;
         }
@@ -62,9 +72,21 @@ namespace BCSS
             StateHasChanged();
         }
 
-        public void Clear()
+        public void Clear(string key)
+        {
+            _bcssInfos.RemoveAll(x => x.Key?.Split("-").First() == key.Split('-').First());
+            StateHasChanged();
+        }
+
+        public void ClearAll()
         {
             _bcssInfos.Clear();
+            StateHasChanged();
+        }
+
+        public void ClearLast()
+        {
+            _bcssInfos.Remove(_bcssInfos.Last());
             StateHasChanged();
         }
 

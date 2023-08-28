@@ -1,13 +1,12 @@
-﻿using BCSS.Models;
-using BCSS.Services;
+﻿using BCSS.Services;
 
 namespace BCSS
 {
     public class BCSSService
     {
-        public BlazorCSSProvider? Provider { get; set; }
+        public BlazorCssProvider? Provider { get; set; }
 
-        public void Attach(BlazorCSSProvider provider)
+        public void Attach(BlazorCssProvider provider)
         {
             Provider = provider;
         }

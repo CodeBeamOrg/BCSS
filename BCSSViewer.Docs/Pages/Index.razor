@@ -1,7 +1,7 @@
 ﻿@page "/"
 @inject BCSSService BC
 
-<BlazorCSSProvider />
+<BlazorCssProvider />
 
 <MudText>BCSS</MudText>
 
@@ -14,7 +14,7 @@
 <MudButton OnClick="StateHasChanged">Refresh</MudButton>
 
 @code {
-    BlazorCSSProvider? _blazorCssProvider;
+    BlazorCssProvider? _blazorCssProvider;
     string _cssString = "w-400";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
