@@ -3,7 +3,9 @@
 
 <MudText>BCSS</MudText>
 
-<MudPaper Class="@BC.Add(_cssString)" Width="200px" Height="200px" Style="background-color: blue" tabindex="1">
+
+
+<MudPaper Class="@BC.Add(_cssString)" Width="200px" Height="200px" tabindex="1">
 
 </MudPaper>
 
@@ -12,15 +14,5 @@
 <MudButton OnClick="StateHasChanged">Refresh</MudButton>
 
 @code {
-    BlazorCssProvider? _blazorCssProvider;
-    string _cssString = "w-400";
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
-        {
-            StateHasChanged();
-        }
-    }
+    string _cssString = "bg-blue w-400";
 }

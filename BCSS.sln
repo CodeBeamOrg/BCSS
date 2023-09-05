@@ -11,12 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCSSViewer", "BCSSViewer\BC
 		{837AA5FF-99D6-41CD-A38B-DFE148A8A205} = {837AA5FF-99D6-41CD-A38B-DFE148A8A205}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSSViewer.Docs", "BCSSViewer.Docs\BCSSViewer.Docs.csproj", "{837AA5FF-99D6-41CD-A38B-DFE148A8A205}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCSSViewer.Docs", "BCSSViewer.Docs\BCSSViewer.Docs.csproj", "{837AA5FF-99D6-41CD-A38B-DFE148A8A205}"
 	ProjectSection(ProjectDependencies) = postProject
 		{45998C7D-6BC9-43F4-840F-A3CAFD0113B4} = {45998C7D-6BC9-43F4-840F-A3CAFD0113B4}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSSViewer.Wasm", "BCSSViewer.Wasm\BCSSViewer.Wasm.csproj", "{C26FD032-E5A7-45A2-8333-285E9F126BA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCSSViewer.Wasm", "BCSSViewer.Wasm\BCSSViewer.Wasm.csproj", "{C26FD032-E5A7-45A2-8333-285E9F126BA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -30,8 +30,8 @@
     @($"@media screen and (min-width:{Xl}px) {{ {GetMediaString("xl")} }}")
 </style>
 
-Suffixes: @string.Join(", ", _bcssInfos.Select(x => x.Suffixes).LastOrDefault() ?? new List<string>())
-<br />
-Keys: @string.Join(", ", _bcssInfos.Select(x => x.Key))
-<br />
-Values: @string.Join(", ", _bcssInfos.Select(x => x.Value))
+@* Suffixes: @string.Join(", ", _bcssInfos.Select(x => x.Suffixes).LastOrDefault() ?? new List<string>()) *@
+@* <br /> *@
+@* Keys: @string.Join(", ", _bcssInfos.Select(x => x.Key)) *@
+@* <br /> *@
+@* Values: @string.Join(", ", _bcssInfos.Select(x => x.Value)) *@

@@ -34,6 +34,7 @@
             string[] processedString = className.Split('-');
             string? key = processedString.First().Split(':').Last().Replace('/', '-');
             string? value = processedString.Length < 2 ? string.Empty : className.Substring(processedString.First().Length + 1);
+            string? processedKey = key.Replace("-", null);
 
             if (string.IsNullOrEmpty(value))
             {
@@ -141,22 +142,22 @@
                 return DimensionResult(value, "border-width");
             }
 
-            if (string.Equals(key, "borderb", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "borderb", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "border-bottom-width");
             }
 
-            if (string.Equals(key, "bordert", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "bordert", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "border-top-width");
             }
 
-            if (string.Equals(key, "borderl", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "borderl", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "border-left-width");
             }
 
-            if (string.Equals(key, "borderr", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "borderr", StringComparison.InvariantCultureIgnoreCase))
             {
                 return DimensionResult(value, "border-right-width");
             }
@@ -233,7 +234,7 @@
                 return DimensionResult(value, "height");
             }
 
-            if (string.Equals(key, "hmin", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "hmin", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -247,7 +248,7 @@
                 return DimensionResult(value, "min-height");
             }
 
-            if (string.Equals(key, "hmax", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "hmax", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -351,12 +352,12 @@
                 return $"opacity:{value}";
             }
 
-            if (string.Equals(key, "overflowx", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "overflowx", StringComparison.InvariantCultureIgnoreCase))
             {
                 return $"overflow-x:{value}";
             }
 
-            if (string.Equals(key, "overflowy", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "overflowy", StringComparison.InvariantCultureIgnoreCase))
             {
                 return $"overflow-y:{value}";
             }
@@ -541,7 +542,7 @@
                 return DimensionResult(value, "width");
             }
 
-            if (string.Equals(key, "wmin", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "wmin", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -555,7 +556,7 @@
                 return DimensionResult(value, "min-width");
             }
 
-            if (string.Equals(key, "wmax", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(processedKey, "wmax", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
