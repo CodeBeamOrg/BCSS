@@ -1,15 +1,13 @@
 ﻿@page "/"
 @inject BCSSService BC
 
-<BlazorCssProvider />
-
 <MudText>BCSS</MudText>
 
 <MudPaper Class="@BC.Add(_cssString)" Width="200px" Height="200px" Style="background-color: blue" tabindex="1">
 
 </MudPaper>
 
-<MudTextField @bind-Value="_cssString" Immediate="false" />
+<MudTextField @bind-Value="_cssString" Immediate="true" />
 
 <MudButton OnClick="StateHasChanged">Refresh</MudButton>
 

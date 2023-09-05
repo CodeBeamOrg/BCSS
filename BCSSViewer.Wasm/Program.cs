@@ -1,4 +1,4 @@
-using BCSS;
+using BCSS.Services;
 using BCSSViewer.Wasm;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -12,6 +12,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddMudServices();
 builder.Services.AddMudExtensions();
-builder.Services.AddScoped<BCSSService>();
+builder.Services.AddBCSS();
 
 await builder.Build().RunAsync();

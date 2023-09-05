@@ -1,4 +1,4 @@
-using BCSS;
+using BCSS.Services;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +8,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddMudServices();
-builder.Services.AddScoped<BCSSService>();
+builder.Services.AddBCSS();
 
 var app = builder.Build();
 
