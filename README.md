@@ -11,7 +11,7 @@
 3. Inject the service and place the component in the page that you want to use BCSS
 ```razor
 @inject BCSSService BC
-<BlazorCSSProvider />
+<BlazorCssProvider />
 ```
 
 ## Usage
