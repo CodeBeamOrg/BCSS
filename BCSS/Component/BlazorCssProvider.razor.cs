@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace BCSS
 {
     public partial class BlazorCssProvider : ComponentBase
     {
+        [Inject] IJSRuntime JSRuntime { get; set; }
+
         protected List<BCSSInfo> _bcssInfos = new();
 
         /// <summary>
@@ -33,7 +36,19 @@ namespace BCSS
             BCSSService.Attach(this);
         }
 
-        protected internal void AddInfo(BCSSInfo info)
+        bool _firstRendered;
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await CheckAllValues();
+                _firstRendered = true;
+                StateHasChanged();
+            }
+        }
+
+        string? _isValidResult;
+        protected internal async Task AddInfo(BCSSInfo info)
         {
             if (string.IsNullOrEmpty(info.Key) || string.IsNullOrEmpty(info.Value))
             {
@@ -44,11 +59,73 @@ namespace BCSS
                 return;
             }
 
-            if (KeepSingleValue)
+            bool isValid = true;
+            string[] definition = info.Value.Split(':');
+            if (definition.Length > 1)
             {
-                Clear(info.Key);
+                isValid = await IsValid(definition[0], definition[1]);
+                _isValidResult = "Is Valid" + isValid.ToString();
             }
-            _bcssInfos.Add(info);
+
+            if (isValid == true)
+            {
+                if (KeepSingleValue)
+                {
+                    Clear(info.Key);
+                }
+
+
+                _bcssInfos.Add(info);
+            }
+            StateHasChanged();
+        }
+
+        protected internal async Task<bool> IsValid(string propName, string propValue, bool force = false)
+        {
+            object[] parameters = new object[] { propName, propValue };
+            if (_firstRendered || force == true)
+            {
+                try
+                {
+                    bool result = await JSRuntime.InvokeAsync<bool>("checkcss", parameters);
+                    return result;
+                }
+                catch
+                {
+                    
+                }
+                
+            }
+            return true;
+        }
+
+        public async Task CheckAllValues()
+        {
+            List<BCSSInfo> toBeDeletedInfos = new();
+            foreach (var item in _bcssInfos)
+            {
+                if (await CheckValueIsValid(item, true) == false)
+                {
+                    toBeDeletedInfos.Add(item);
+                }
+            }
+            _bcssInfos.RemoveAll(x => toBeDeletedInfos.Select(y => y.Key).Contains(x.Key));
+        }
+
+        protected async Task<bool> CheckValueIsValid(BCSSInfo? bcssInfo, bool force = false)
+        {
+            if (bcssInfo == null || bcssInfo.Value == null)
+            {
+                return false;
+            }
+            
+            string[] definition = bcssInfo.Value.Split(':');
+            if (definition.Length > 1)
+            {
+                bool result = await IsValid(definition[0], definition[1], force);
+                return result;
+            }
+            return false;
         }
 
         protected internal bool CheckDuplicate(string value) 
