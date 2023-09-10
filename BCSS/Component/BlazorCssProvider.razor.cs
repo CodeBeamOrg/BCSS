@@ -37,6 +37,7 @@ namespace BCSS
         }
 
         bool _firstRendered;
+        //int _renderCount;
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -45,6 +46,13 @@ namespace BCSS
                 _firstRendered = true;
                 StateHasChanged();
             }
+            //_renderCount++;
+        }
+
+        private bool _shouldRender = false;
+        protected override bool ShouldRender()
+        {
+            return _shouldRender;
         }
 
         string? _isValidResult;
@@ -77,7 +85,9 @@ namespace BCSS
 
                 _bcssInfos.Add(info);
             }
+            _shouldRender = true;
             StateHasChanged();
+            _shouldRender = false;
         }
 
         protected internal async Task<bool> IsValid(string propName, string propValue, bool force = false)
