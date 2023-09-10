@@ -35,10 +35,16 @@
             string? key = processedString.First().Split(':').Last().Replace('/', '-');
             string? value = processedString.Length < 2 ? string.Empty : className.Substring(processedString.First().Length + 1);
             string? processedKey = key.Replace("-", null);
+            string? processedValue = value;
 
             if (string.IsNullOrEmpty(value))
             {
                 return string.Empty;
+            }
+
+            if (processedValue.Contains('*'))
+            {
+                return $"{key?.ToLower()}:{processedValue.ToLower()}";
             }
 
             if (string.Equals(key, "aspect", StringComparison.InvariantCultureIgnoreCase))
@@ -52,7 +58,7 @@
                     case "auto":
                         return "aspect-ratio:auto";
                     default:
-                        return $"aspect-ratio:{value}";
+                        return $"aspect-ratio:{processedValue}";
                 }
             }
 
@@ -119,7 +125,7 @@
                     case "none":
                         return "background-image:none";
                 }
-                return $"background:{value}";
+                return $"background:{processedValue}";
             }
 
             if (string.Equals(key, "border", StringComparison.InvariantCultureIgnoreCase))
@@ -139,7 +145,7 @@
                     case "none":
                         return "border-style:none";
                 }
-                return DimensionResult(value, "border-width");
+                return DimensionResult(processedValue, "border-width");
             }
 
             if (string.Equals(processedKey, "borderb", StringComparison.InvariantCultureIgnoreCase))
@@ -171,7 +177,7 @@
                     case "content":
                         return "box-sizing:content-box";
                     default:
-                        return $"box-sizing:{value}";
+                        return $"box-sizing:{processedValue}";
                 }
             }
 
@@ -188,7 +194,7 @@
                     case "none":
                         return "clear:none";
                     default:
-                        return $"clear:{value}";
+                        return $"clear:{processedValue}";
                 }
             }
 
@@ -201,13 +207,13 @@
                     case "block":
                         return "display:block";
                     default:
-                        return $"display:{value}";
+                        return $"display:{processedValue}";
                 }
             }
 
             if (string.Equals(key, "float", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "left":
                         return "float:left";
@@ -216,13 +222,13 @@
                     case "none":
                         return "float:none";
                     default:
-                        return $"float:{value}";
+                        return $"float:{processedValue}";
                 }
             }
 
             if (string.Equals(key, "h", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "min":
                         return "height:min-content";
@@ -231,12 +237,12 @@
                     case "fit":
                         return "height:fit-content";
                 }
-                return DimensionResult(value, "height");
+                return DimensionResult(processedValue, "height");
             }
 
             if (string.Equals(processedKey, "hmin", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "min":
                         return "min-height:min-content";
@@ -245,12 +251,12 @@
                     case "fit":
                         return "min-height:fit-content";
                 }
-                return DimensionResult(value, "min-height");
+                return DimensionResult(processedValue, "min-height");
             }
 
             if (string.Equals(processedKey, "hmax", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "min":
                         return "max-height:min-content";
@@ -259,57 +265,57 @@
                     case "fit":
                         return "max-height:fit-content";
                 }
-                return DimensionResult(value, "max-height");
+                return DimensionResult(processedValue, "max-height");
             }
 
             if (string.Equals(key, "m", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value?.Replace('n', '-'), "margin");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin");
             }
 
             if (string.Equals(key, "mt", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value?.Replace('n', '-'), "margin-top");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-top");
             }
 
             if (string.Equals(key, "mb", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value?.Replace('n', '-'), "margin-bottom");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-bottom");
             }
 
             if (string.Equals(key, "ml", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value?.Replace('n', '-'), "margin-left");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-left");
             }
 
             if (string.Equals(key, "mr", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value?.Replace('n', '-'), "margin-right");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-right");
             }
 
             if (string.Equals(key, "mx", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value?.Replace('n', '-'), "margin-left") + " " + DimensionResult(value, "margin-right");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-left") + " " + DimensionResult(processedValue, "margin-right");
             }
 
             if (string.Equals(key, "my", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value?.Replace('n', '-'), "margin-top") + " " + DimensionResult(value, "margin-bottom");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-top") + " " + DimensionResult(processedValue, "margin-bottom");
             }
 
             if (string.Equals(key, "ms", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value?.Replace('n', '-'), "margin-inline-start");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-inline-start");
             }
 
             if (string.Equals(key, "me", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value?.Replace('n', '-'), "margin-inline-end");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-inline-end");
             }
 
             if (string.Equals(key, "object", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "contain":
                         return "object-fit:contain";
@@ -345,71 +351,71 @@
             if (string.Equals(key, "opacity", StringComparison.InvariantCultureIgnoreCase))
             {
                 double dividedNum;
-                if (double.TryParse(value, out dividedNum))
+                if (double.TryParse(processedValue, out dividedNum))
                 {
                     return $"opacity:{(dividedNum / 100d).ToString().Replace(',', '.')}";
                 }
-                return $"opacity:{value}";
+                return $"opacity:{processedValue}";
             }
 
             if (string.Equals(processedKey, "overflowx", StringComparison.InvariantCultureIgnoreCase))
             {
-                return $"overflow-x:{value}";
+                return $"overflow-x:{processedValue}";
             }
 
             if (string.Equals(processedKey, "overflowy", StringComparison.InvariantCultureIgnoreCase))
             {
-                return $"overflow-y:{value}";
+                return $"overflow-y:{processedValue}";
             }
 
             if (string.Equals(key, "p", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "padding");
+                return DimensionResult(processedValue, "padding");
             }
 
             if (string.Equals(key, "pt", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "padding-top");
+                return DimensionResult(processedValue, "padding-top");
             }
 
             if (string.Equals(key, "pb", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "padding-bottom");
+                return DimensionResult(processedValue, "padding-bottom");
             }
 
             if (string.Equals(key, "pl", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "padding-left");
+                return DimensionResult(processedValue, "padding-left");
             }
 
             if (string.Equals(key, "pr", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "padding-right");
+                return DimensionResult(processedValue, "padding-right");
             }
 
             if (string.Equals(key, "px", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "padding-left") + " " + DimensionResult(value, "padding-right");
+                return DimensionResult(processedValue, "padding-left") + " " + DimensionResult(processedValue, "padding-right");
             }
 
             if (string.Equals(key, "py", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "padding-top") + " " + DimensionResult(value, "padding-bottom");
+                return DimensionResult(processedValue, "padding-top") + " " + DimensionResult(processedValue, "padding-bottom");
             }
 
             if (string.Equals(key, "ps", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "padding-inline-start");
+                return DimensionResult(processedValue, "padding-inline-start");
             }
 
             if (string.Equals(key, "pe", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "padding-inline-end");
+                return DimensionResult(processedValue, "padding-inline-end");
             }
 
             if (string.Equals(key, "pos", StringComparison.InvariantCultureIgnoreCase) || string.Equals(key, "position", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "static":
                         return "position:static";
@@ -422,68 +428,68 @@
                     case "sticky":
                         return "position:sticky";
                     default:
-                        return $"position:{value}";
+                        return $"position:{processedValue}";
                 }
             }
 
             if (string.Equals(key, "r", StringComparison.InvariantCultureIgnoreCase) || string.Equals(key, "rounded", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-radius");
+                return DimensionResult(processedValue, "border-radius");
             }
 
             if (string.Equals(key, "rlt", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-top-left-radius");
+                return DimensionResult(processedValue, "border-top-left-radius");
             }
 
             if (string.Equals(key, "rlb", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-bottom-left-radius");
+                return DimensionResult(processedValue, "border-bottom-left-radius");
             }
 
             if (string.Equals(key, "rrt", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-top-right-radius");
+                return DimensionResult(processedValue, "border-top-right-radius");
             }
 
             if (string.Equals(key, "rrb", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-bottom-right-radius");
+                return DimensionResult(processedValue, "border-bottom-right-radius");
             }
 
             if (string.Equals(key, "rt", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-top-left-radius") + " " + DimensionResult(value, "border-top-right-radius");
+                return DimensionResult(processedValue, "border-top-left-radius") + " " + DimensionResult(processedValue, "border-top-right-radius");
             }
 
             if (string.Equals(key, "rb", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-bottom-left-radius") + " " + DimensionResult(value, "border-bottom-right-radius");
+                return DimensionResult(processedValue, "border-bottom-left-radius") + " " + DimensionResult(processedValue, "border-bottom-right-radius");
             }
 
             if (string.Equals(key, "rl", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-top-left-radius") + " " + DimensionResult(value, "border-bottom-left-radius");
+                return DimensionResult(processedValue, "border-top-left-radius") + " " + DimensionResult(processedValue, "border-bottom-left-radius");
             }
 
             if (string.Equals(key, "rr", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-top-right-radius") + " " + DimensionResult(value, "border-bottom-right-radius");
+                return DimensionResult(processedValue, "border-top-right-radius") + " " + DimensionResult(processedValue, "border-bottom-right-radius");
             }
 
             if (string.Equals(key, "rs", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-start-start-radius") + " " + DimensionResult(value, "border-end-start-radius");
+                return DimensionResult(processedValue, "border-start-start-radius") + " " + DimensionResult(processedValue, "border-end-start-radius");
             }
 
             if (string.Equals(key, "re", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(value, "border-end-end-radius") + " " + DimensionResult(value, "border-start-end-radius");
+                return DimensionResult(processedValue, "border-end-end-radius") + " " + DimensionResult(processedValue, "border-start-end-radius");
             }
 
             if (string.Equals(key, "resize", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "x":
                         return "resize:horizontal";
@@ -493,44 +499,44 @@
                     case null:
                         return "resize:both";
                 }
-                return $"resize:{value}";
+                return $"resize:{processedValue}";
             }
 
             if (string.Equals(key, "scroll", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "auto":
                         return "scroll-behavior:auto";
                     case "smooth":
                         return "scroll-behavior:smooth";
                 }
-                return $"scroll-behavior:{value}";
+                return $"scroll-behavior:{processedValue}";
             }
 
             if (string.Equals(key, "select", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "none":
                         return "user-select:none";
                 }
-                return $"user-select:{value}";
+                return $"user-select:{processedValue}";
             }
 
             if (string.Equals(key, "touch", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "auto":
                         return "touch-action:auto";
                 }
-                return $"touch-action:{value}";
+                return $"touch-action:{processedValue}";
             }
 
             if (string.Equals(key, "w", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "min":
                         return "width:min-content";
@@ -539,12 +545,12 @@
                     case "fit":
                         return "width:fit-content";
                 }
-                return DimensionResult(value, "width");
+                return DimensionResult(processedValue, "width");
             }
 
             if (string.Equals(processedKey, "wmin", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "min":
                         return "min-width:min-content";
@@ -553,12 +559,12 @@
                     case "fit":
                         return "min-width:fit-content";
                 }
-                return DimensionResult(value, "min-width");
+                return DimensionResult(processedValue, "min-width");
             }
 
             if (string.Equals(processedKey, "wmax", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (value)
+                switch (processedValue)
                 {
                     case "min":
                         return "max-width:min-content";
@@ -567,21 +573,21 @@
                     case "fit":
                         return "max-width:fit-content";
                 }
-                return DimensionResult(value, "max-width");
+                return DimensionResult(processedValue, "max-width");
             }
 
             if (string.Equals(key, "z", StringComparison.InvariantCultureIgnoreCase))
             {
-                if (value == "auto")
+                if (processedValue == "auto")
                 {
                     return "z-index:auto";
                 }
-                return $"z-index:{value}";
+                return $"z-index:{processedValue}";
             }
 
             // Support all kinds of basic CSS statements.
             // Like appearance, cursor.
-            return $"{key?.ToLower()}:{value.ToLower()}";
+            return $"{key?.ToLower()}:{processedValue.ToLower()}";
         }
 
         public static string DimensionResult(string? value, string cssName)

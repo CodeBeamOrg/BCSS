@@ -68,7 +68,7 @@ namespace BCSS
             }
 
             bool isValid = true;
-            string[] definition = info.Value.Split(':');
+            string[] definition = info.Value.Replace('*', ' ').Replace('/', '-').Split(':');
             if (definition.Length > 1)
             {
                 isValid = await IsValid(definition[0], definition[1]);
@@ -81,7 +81,6 @@ namespace BCSS
                 {
                     Clear(info.Key);
                 }
-
 
                 _bcssInfos.Add(info);
             }
@@ -129,7 +128,7 @@ namespace BCSS
                 return false;
             }
             
-            string[] definition = bcssInfo.Value.Split(':');
+            string[] definition = bcssInfo.Value.Replace('*', ' ').Split(':');
             if (definition.Length > 1)
             {
                 bool result = await IsValid(definition[0], definition[1], force);
