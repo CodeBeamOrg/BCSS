@@ -3,16 +3,19 @@
 
 ## Installation
 1. Install CodeBeam.BCSS Nuget package
-
 2. Add the following to `_Imports.razor`
 ```razor
 @using BCSS
 ```
-3. Add the following to`App.razor`
+3. Add the following to your HTML **body** section, it's either `index.html` or `_Layout.cshtml`/`_Host.cshtml` depending on whether you're running Server-Side or WASM.
+```html
+<script src="_content/CodeBeam.BCSS/Bcss.js"></script>
+```
+4. Add the following to`App.razor`
 ```razor
 <BlazorCssProvider />
 ```
-4. Inject the service and place the component in the page that you want to use BCSS
+5. Inject the service and place the component in the page that you want to use BCSS
 ```razor
 @inject BCSSService Bc
 ```
