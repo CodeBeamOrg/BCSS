@@ -8,15 +8,18 @@
 ```razor
 @using BCSS
 ```
-3. Inject the service and place the component in the page that you want to use BCSS
+3. Add the following to`App.razor`
 ```razor
-@inject BCSSService BC
 <BlazorCssProvider />
+```
+4. Inject the service and place the component in the page that you want to use BCSS
+```razor
+@inject BCSSService Bc
 ```
 
 ## Usage
 Add the BCSS class into a class
 ```razor
-<div class="@BC.Add("w-200 h-100 r-20")" />
+<div class="@Bc.Add("w-200 h-100 r-20")" />
 //This line adds width: 200px height: 100px and border-radius: 20
 ```
