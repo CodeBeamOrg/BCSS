@@ -2,7 +2,7 @@
 
 namespace BCSS
 {
-    public class BCSSService
+    public class BcssService
     {
         public BlazorCssProvider? Provider { get; set; }
 
@@ -30,7 +30,7 @@ namespace BCSS
 
                 string? result = BlazorCssConverter.Convert(val);
 
-                BCSSInfo info = new BCSSInfo();
+                BcssInfo info = new BcssInfo();
                 info.Suffixes = BlazorCssConverter.GetSuffixes(val);
                 info.Key = Decode(val);
                 info.Value = result;

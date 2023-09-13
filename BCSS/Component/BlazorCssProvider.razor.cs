@@ -7,7 +7,7 @@ namespace BCSS
     {
         [Inject] IJSRuntime JSRuntime { get; set; }
 
-        protected List<BCSSInfo> _bcssInfos = new();
+        protected List<BcssInfo> _bcssInfos = new();
 
         /// <summary>
         /// If true, deletes and overrides all other same CSS properties when new value is added. Default is false.
@@ -33,7 +33,7 @@ namespace BCSS
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            BCSSService.Attach(this);
+            BcssService.Attach(this);
         }
 
         bool _firstRendered;
@@ -56,7 +56,7 @@ namespace BCSS
         }
 
         string? _isValidResult;
-        protected internal async Task AddInfo(BCSSInfo info)
+        protected internal async Task AddInfo(BcssInfo info)
         {
             if (string.IsNullOrEmpty(info.Key) || string.IsNullOrEmpty(info.Value))
             {
@@ -110,7 +110,7 @@ namespace BCSS
 
         public async Task CheckAllValues()
         {
-            List<BCSSInfo> toBeDeletedInfos = new();
+            List<BcssInfo> toBeDeletedInfos = new();
             foreach (var item in _bcssInfos)
             {
                 if (await CheckValueIsValid(item, true) == false)
@@ -121,7 +121,7 @@ namespace BCSS
             _bcssInfos.RemoveAll(x => toBeDeletedInfos.Select(y => y.Key).Contains(x.Key));
         }
 
-        protected async Task<bool> CheckValueIsValid(BCSSInfo? bcssInfo, bool force = false)
+        protected async Task<bool> CheckValueIsValid(BcssInfo? bcssInfo, bool force = false)
         {
             if (bcssInfo == null || bcssInfo.Value == null)
             {

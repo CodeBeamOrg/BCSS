@@ -8,7 +8,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddMudServices();
-builder.Services.AddBCSS();
+builder.Services.AddBcss();
 
 var app = builder.Build();
 

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BCSS
+﻿namespace BCSS
 {
-    public class BCSSInfo
+    public class BcssInfo
     {
         public List<string> Suffixes { get; set; } = new List<string>();
         public string? Key { get; set; }
