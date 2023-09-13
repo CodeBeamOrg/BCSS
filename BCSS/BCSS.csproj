@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>0.6.0-beta</Version>
+		<Version>0.7.0-beta</Version>
 		<Authors>CodeBeam</Authors>
 		<Copyright>CodeBeam OpenSource MIT</Copyright>
 		<PackageTags>Blazor; CSS; Style</PackageTags>
