@@ -41,6 +41,11 @@ namespace BCSS
             return Decode(value);
         }
 
+        public string this[string key]
+        {
+            get => Add(key);
+        }
+
         protected string Decode(string value)
         {
             return value.Replace("%", "--").Replace(".", "_-").Replace(":", "_1").Replace("/", "_2").Replace("*", "_3");
