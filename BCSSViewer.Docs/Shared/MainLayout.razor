@@ -1,12 +1,43 @@
-﻿@inherits LayoutComponentBase
+﻿@using Microsoft.AspNetCore.Components.Routing;
+@inherits LayoutComponentBase
+@inject BcssService Bc
 
-<PageTitle>BCSSViewer</PageTitle>
+<MudLayout>
+    <MudAppBar Style="background: var(--mud-palette-background) !important;" Dense="true" Elevation="0">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@(() => _open = !_open)" />
+        <MudText Style="color: var(--mud-palette-text-primary)">BCSS</MudText>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary" Href="https://github.com/CodeBeamOrg/BCSS" Target="_blank" />
+    </MudAppBar>
 
-<div class="page">
-    <main>
+    <MudDrawer @bind-Open="@_open" Elevation="1" Variant="@DrawerVariant.Responsive" ClipMode="DrawerClipMode.Always">
+        <MudNavMenu Bordered="true" Rounded="true">
+            <MudNavGroup Title="Getting Started">
+                <MudNavLink Match="NavLinkMatch.All" Href="/what">What is BCSS</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/what">Installation</MudNavLink>
+            </MudNavGroup>
+            <MudNavGroup Title="Syntax">
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/basics">Basics</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/dash">Dash and Double Dash</MudNavLink>
+            </MudNavGroup>
+            <MudNavGroup Title="Usage">
+                <MudNavLink Match="NavLinkMatch.All" Href="/usage/dimension">Dimensions</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/usage/spacing">Spacing</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/usage/position">Position & Flex</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/usage/border">Borders</MudNavLink>
+            </MudNavGroup>
+        </MudNavMenu>
+    </MudDrawer>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+    <MudMainContent>
+        @Body
+        <MudContainer Class="@Bc["mt-24"]">
+            <MudDivider Class="mb-4" />
+            <MudText Class="mb-4"><MudLink Href="https://codebeam.org" Target="_blank" Underline="Underline.Hover"><b>CodeBeam</b></MudLink> OpenSource @DateTime.Now.Year.</MudText>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private bool _open;
+}

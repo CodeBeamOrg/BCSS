@@ -1,0 +1,23 @@
+﻿@namespace BCSSViewer
+@inject BcssService Bc
+
+<MudCard Elevation="1">
+    <MudCardHeader Class="mud-theme-primary">
+        <MudIcon Icon="@Icon" />
+        <MudText Class="ml-4" Typo="Typo.h6">@Header</MudText>
+    </MudCardHeader>
+    <MudCardContent Class="@Bc["hmin-120 hmax-120"]">
+        <MudText>@Description</MudText>
+    </MudCardContent>
+</MudCard>
+
+@code {
+    [Parameter]
+    public string? Icon { get; set; }
+
+    [Parameter]
+    public string? Header { get; set; }
+
+    [Parameter]
+    public string? Description { get; set; }
+}

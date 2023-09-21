@@ -2,27 +2,88 @@
 @inject BcssService Bc
 @inject NavigationManager NavigationManager
 
-<MudText>BCSS</MudText>
+<MudContainer Class="@Bc["h-40vh d-flex flex-column justify-center align-center"]">
+    <MudText Style="font-weight:700" Typo="Typo.h3" Color="Color.Primary"><b>BCSS</b></MudText>
+    <MudText Typo="Typo.h6" Color="Color.Primary">by CodeBeam</MudText>
+    <MudText Class="mt-4" Align="Align.Center" Color="Color.Primary">Revolutionary runtime CSS generator for Blazor.</MudText>
+    <MudButton Class="mt-8" Variant="Variant.Outlined" Color="Color.Primary" Href="/gettingstarted">GET STARTED</MudButton>
+</MudContainer>
 
-<MudPaper Class="@Bc[_cssString]" Width="200px" Height="200px" tabindex="1">
+<MudContainer Class="@Bc["hmin-60vh"]">
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="4">
+            <BcssCard Icon="@Icons.Material.Filled.Public" Header="OpenSource" Description="BCSS is open source and free forever with MIT license." />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <BcssCard Icon="@Icons.Material.Filled.Assistant" Header="Dynamic" Description="All content can be created and changed on runtime." />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <BcssCard Icon="@Icons.Material.Filled.Pages" Header="Optimized" Description="Not allowed any repeated values and unnecessary render cycles for the best performance." />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <BcssCard Icon="@Icons.Material.Filled.AutoStories" Header="Smart Usage" Description="Easy to learn and use. Does not require advanced CSS knowledge." />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <BcssCard Icon="@Icons.Material.Filled.MobileFriendly" Header="Mobile Friendly" Description="Suits for responsive design." />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <BcssCard Icon="@Icons.Material.Filled.Code" Header="C#" Description="Not needed to work any css or scss content files. Possible to work with C# variables." />
+        </MudItem>
+    </MudGrid>
+    
+</MudContainer>
 
-</MudPaper>
+<MudContainer Class="@Bc["hmin-80vh mt-32"]">
+    <MudText Typo="Typo.h4" Color="Color.Primary">PlayGround</MudText>
+    <MudText Typo="Typo.body1">Try the BCSS abilities and re-style the box.</MudText>
 
 
-    <MudPaper Class="w-500" Width="200px" Height="200px" tabindex="1">
+        <MudGrid Class="@Bc["mud-width-full mud-height-full mt-32"]">
+            <MudItem xs="12" sm="8" Class="d-flex align-center justify-center">
+                <MudPaper Class="@Bc[_cssString]" Width="200px" Height="200px" tabindex="1" />
+            </MudItem>
 
-    </MudPaper>
+            <MudItem xs="12" sm="4">
+                <MudTextFieldExtended @bind-Value="_cssString" Lines="4" Variant="Variant.Outlined" Label="Bcss Class" Immediate="true">
+                    <AdornmentEnd>
+                        <MudTooltip Text="Generate" Delay="300">
+                        <MudIconButton Icon="@Icons.Material.Filled.Loop" OnClick="Generate" />
+                        </MudTooltip>
+                    </AdornmentEnd>
+                </MudTextFieldExtended>
+            </MudItem>
+        </MudGrid>
+</MudContainer>
 
-
-<MudTextField @bind-Value="_cssString" Immediate="true" />
-
-<MudButton OnClick="StateHasChanged">Refresh</MudButton>
-<MudButton OnClick="@(() => NavigationManager.NavigateTo("/testpage"))">Go To Second Page</MudButton>
+<MudContainer Class="@Bc["hmin-60vh d-flex flex-column align-center justify-start"]">
+    <MudText Typo="Typo.h3" Align="Align.Center">Like It?</MudText>
+    <MudText>Learn the Fundamentals</MudText>
+    <div class="mud-width-full d-flex flex-wrap justify-center gap-4 mt-8">
+        <MudButton Variant="Variant.Outlined">Syntax</MudButton>
+        <MudButton Variant="Variant.Outlined">Usage</MudButton>
+    </div>
+</MudContainer>
 
 @code {
-    string _cssString = "bg-blue w-400";
-    protected override void OnInitialized()
+    string _cssString = "";
+    string[] _possibleWidth = new string[] { "w-100", "w-125", "w-150", "w-175", "w-200", "w-225", "w-250", "w-275", "w-300" };
+    string[] _possibleHeight = new string[] { "h-100", "h-125", "h-150", "h-175", "h-200", "h-225", "h-250", "h-275", "h-300" };
+    string[] _possibleColors = new string[] { "bg-purple", "bg-blue", "bg-red", "bg-green", "bg-[#123456]", "bg-[#efefef]" };
+    string[] _possibleRounded = new string[] { "r-0", "r-10", "r-20", "r-30", "r-40", "r-50" };
+    string[] _possibleBorders = new string[] { "", "b--8px-solid-yellow", "b--8px-dotted-yellow", "b--4px-dashed-yellow" };
+
+    private void Generate()
     {
-        Bc.Add("w-500");
+        Random rnd = new();
+        int val = rnd.Next(0, 9);
+        _cssString = _possibleWidth[val];
+        val = rnd.Next(0, 9);
+        _cssString += $" {_possibleHeight[val]}";
+        val = rnd.Next(0, 5);
+        _cssString += $" {_possibleColors[val]}";
+        val = rnd.Next(0, 6);
+        _cssString += $" {_possibleRounded[val]}";
+        val = rnd.Next(0, 4);
+        _cssString += $" {_possibleBorders[val]}";
     }
 }
