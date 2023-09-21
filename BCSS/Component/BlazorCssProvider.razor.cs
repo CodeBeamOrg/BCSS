@@ -68,7 +68,7 @@ namespace BCSS
             }
 
             bool isValid = true;
-            string[] definition = info.Value.Replace('*', ' ').Replace('/', '-').Split(':');
+            string[] definition = info.Value.Replace('*', ' ').Replace('+', '-').Split(':');
             if (definition.Length > 1)
             {
                 isValid = await IsValid(definition[0], definition[1]);
@@ -148,7 +148,7 @@ namespace BCSS
             foreach (var info in _bcssInfos.Where(x => x.Suffixes.Contains(breakpoint)))
             {
                 var processedValue = info.Value?.Split(' ') ?? new string[0];
-                result += $".{info.Key}{(info.Suffixes.Contains("hover") ? ":hover" : null)}{(info.Suffixes.Contains("focus") ? ":focus" : null)} {{ {string.Join("!important;", processedValue) + "!important;"}}} ";
+                result += $".{info.Key}{GetSuffixString(info.Suffixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}";
             }
             return result;
         }

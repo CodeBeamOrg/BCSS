@@ -48,7 +48,7 @@ namespace BCSS
 
         protected string Decode(string value)
         {
-            return value.Replace("%", "--").Replace(".", "_-").Replace(":", "_1").Replace("/", "_2").Replace("*", "_3");
+            return value.Replace(":", "_1").Replace("/", "_2").Replace("*", "_3").Replace("#", "_4").Replace(",", "_5").Replace("+", "_6").Replace("%", "_7").Replace(".", "_8").Replace("[", null).Replace("]", null);
         }
          
 

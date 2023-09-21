@@ -13,7 +13,7 @@
         List<string> processedValue = new();
         foreach (var s in listedValue)
         {
-            processedValue.Add(s.Replace('*', ' ').Replace('/', '-'));
+            processedValue.Add(s.Replace('*', ' ').Replace('+', '-'));
         }
         @($".{info.Key}{GetSuffixString(info.Suffixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
     }
