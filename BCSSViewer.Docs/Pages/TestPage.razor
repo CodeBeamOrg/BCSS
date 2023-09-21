@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/testpage"
 @inject BcssService Bc
 @inject NavigationManager NavigationManager
 
@@ -9,20 +9,17 @@
 </MudPaper>
 
 
-    <MudPaper Class="w-500" Width="200px" Height="200px" tabindex="1">
+<MudPaper Class="w-500" Width="200px" Height="200px" tabindex="1">
 
-    </MudPaper>
+</MudPaper>
 
 
 <MudTextField @bind-Value="_cssString" Immediate="true" />
 
 <MudButton OnClick="StateHasChanged">Refresh</MudButton>
-<MudButton OnClick="@(() => NavigationManager.NavigateTo("/testpage"))">Go To Second Page</MudButton>
+<MudButton OnClick="@(() => Bc.Clear())">Clear</MudButton>
+<MudButton OnClick="@(() => NavigationManager.NavigateTo("/"))">Go To First Page</MudButton>
 
 @code {
     string _cssString = "bg-blue w-400";
-    protected override void OnInitialized()
-    {
-        Bc.Add("w-500");
-    }
 }

@@ -12,7 +12,16 @@ namespace BCSS.Services
                 return suffixes;
             }
 
-            string key = className.Split('-').First();
+            string key = string.Empty;
+            if (className.Contains("--"))
+            {
+                key = className.Split("--").First();
+            }
+            else
+            {
+                key = className.Split('-').First();
+            }
+
             if (key.Contains(':') == false)
             {
                 return suffixes;
@@ -26,7 +35,7 @@ namespace BCSS.Services
             return suffixes;
         }
 
-        public static string Convert (string className)
+        public static string Convert(string className)
         {
             if (string.IsNullOrWhiteSpace(className))
             {
@@ -35,14 +44,12 @@ namespace BCSS.Services
 
             string? key = null;
             string? value = null;
-            bool hasDoubleDash = false;
             string[] splittedString = className.Split("--");
-
             string[] processedString = className.Split('-');
 
             if (splittedString.Length == 2)
             {
-                key = splittedString[0];
+                key = splittedString[0].Split(':').Last();
                 value = splittedString[1];
             }
             else
@@ -52,7 +59,6 @@ namespace BCSS.Services
             }
 
             string? fullKey = GetFullKeyName(key.Replace("+", null).ToLower());
-            string? processedKey = key.Replace("-", null);
             string? processedValue = value;
 
             if (string.IsNullOrEmpty(value))
@@ -76,8 +82,6 @@ namespace BCSS.Services
                         return "aspect-ratio:16/9";
                     case "square":
                         return "aspect-ratio:1/1";
-                    case "auto":
-                        return "aspect-ratio:auto";
                     default:
                         return $"aspect-ratio:{processedValue}";
                 }
@@ -149,7 +153,7 @@ namespace BCSS.Services
                 return $"background:{processedValue}";
             }
 
-            if (string.Equals(key, "border", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(fullKey, "border", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -191,7 +195,7 @@ namespace BCSS.Services
                 return SpacedResult(value, "border-right");
             }
 
-            if (string.Equals(key, "box", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(fullKey, "box", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
                 {
@@ -461,7 +465,7 @@ namespace BCSS.Services
                 return $"resize:{processedValue}";
             }
 
-            if (string.Equals(key, "w", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(fullKey, "width", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (processedValue)
                 {
@@ -475,7 +479,7 @@ namespace BCSS.Services
                 return DimensionResult(processedValue, "width");
             }
 
-            if (string.Equals(processedKey, "wmin", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(fullKey, "min-width", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (processedValue)
                 {
@@ -489,7 +493,7 @@ namespace BCSS.Services
                 return DimensionResult(processedValue, "min-width");
             }
 
-            if (string.Equals(processedKey, "wmax", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(fullKey, "max-width", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (processedValue)
                 {

@@ -94,16 +94,8 @@ namespace BCSS
             object[] parameters = new object[] { propName, propValue };
             if (_firstRendered || force == true)
             {
-                try
-                {
-                    bool result = await JSRuntime.InvokeAsync<bool>("checkcss", parameters);
-                    return result;
-                }
-                catch
-                {
-                    
-                }
-                
+                bool result = await JSRuntime.InvokeAsync<bool>("checkcss", parameters);
+                return result;
             }
             return true;
         }
@@ -176,7 +168,7 @@ namespace BCSS
             StateHasChanged();
         }
 
-        public void ClearAll()
+        public void Clear()
         {
             _bcssInfos.Clear();
             StateHasChanged();

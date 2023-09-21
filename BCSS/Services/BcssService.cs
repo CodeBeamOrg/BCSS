@@ -41,6 +41,12 @@ namespace BCSS
             return Decode(value);
         }
 
+        public void Clear()
+        {
+            Provider?.Clear();
+            Provider?.Update();
+        }
+
         public string this[string key]
         {
             get => Add(key);
