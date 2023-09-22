@@ -65,4 +65,126 @@ a, .btn-link {
 
     .blazor-error-boundary::after {
         content: "An error has occurred."
+ 
     }
+
+.tracking-in-expand {
+    animation: tracking-in-expand 8s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+
+@keyframes tracking-in-expand {
+    0% {
+        letter-spacing: -0.5em;
+        opacity: 1;
+    }
+
+    100% {
+        letter-spacing: 0;
+        opacity: 1;
+    }
+}
+
+.animate-character {
+    text-transform: uppercase;
+    background-image: linear-gradient( -225deg, #231557 0%, #44107a 19%, #ff1361 67%, #fff800 100% );
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 8s ease infinite;
+}
+
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.css-selector {
+    background-image: linear-gradient(143deg, #313b72, #f45b69, #eef4d4);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    background-size: 600% 600%;
+    animation: AnimationName 9s ease infinite;
+}
+
+.text-move {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: TextWidth 12s ease-in-out infinite;
+}
+
+.text-wrap {
+    animation: TextWrap 12s linear infinite;
+}
+
+@keyframes TextWidth {
+    0% {
+        width: 28px;
+        color: var(--mud-palette-primary);
+    }
+
+    25% {
+        width: 28px;
+        color: var(--mud-palette-primary);
+    }
+
+    45% {
+        width: 156px;
+        color: var(--mud-palette-text-primary);
+    }
+
+    55% {
+        width: 156px;
+        color: var(--mud-palette-text-primary);
+    }
+
+    75% {
+        width: 28px;
+        color: var(--mud-palette-primary);
+    }
+
+    100% {
+        width: 28px;
+        color: var(--mud-palette-primary);
+    }
+}
+
+@keyframes TextWrap {
+    0% {
+        letter-spacing: -4px;
+        color: var(--mud-palette-secondary);
+    }
+
+    25% {
+        letter-spacing: -4px;
+        color: var(--mud-palette-secondary);
+    }
+
+    45% {
+        letter-spacing: 4px;
+        color: var(--mud-palette-text-primary);
+    }
+
+    55% {
+        letter-spacing: 4px;
+        color: var(--mud-palette-text-primary);
+    }
+
+    75% {
+        letter-spacing: -4px;
+        color: var(--mud-palette-secondary);
+    }
+
+    100% {
+        letter-spacing: -4px;
+        color: var(--mud-palette-secondary);
+    }
+}
+
+.monaco-editor-container {
+    height: 60px;
+}

@@ -2,19 +2,22 @@
 @inherits LayoutComponentBase
 @inject BcssService Bc
 
+<MudScrollbar Color="var(--mud-palette-primary)" BorderRadius="20" Width="4" />
+
 <MudLayout>
     <MudAppBar Style="background: var(--mud-palette-background) !important;" Dense="true" Elevation="0">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@(() => _open = !_open)" />
-        <MudText Style="color: var(--mud-palette-text-primary)">BCSS</MudText>
+        <MudLink Style="color: var(--mud-palette-text-primary); user-select: none; cursor: pointer" Href="/" Underline="Underline.None"><b>BCSS</b></MudLink>
         <MudSpacer />
         <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary" Href="https://github.com/CodeBeamOrg/BCSS" Target="_blank" />
+        <MudToggleIconButton @bind-Toggled="_darkMode" Icon="@Icons.Material.Filled.DarkMode" ToggledIcon="@Icons.Material.Filled.LightMode" Color="Color.Primary" ToggledColor="Color.Primary" />
     </MudAppBar>
 
     <MudDrawer @bind-Open="@_open" Elevation="1" Variant="@DrawerVariant.Responsive" ClipMode="DrawerClipMode.Always">
         <MudNavMenu Bordered="true" Rounded="true">
             <MudNavGroup Title="Getting Started">
-                <MudNavLink Match="NavLinkMatch.All" Href="/what">What is BCSS</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/what">Installation</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/what">What is BCSS</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/installation">Installation</MudNavLink>
             </MudNavGroup>
             <MudNavGroup Title="Syntax">
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/basics">Basics</MudNavLink>
@@ -38,6 +41,40 @@
     </MudMainContent>
 </MudLayout>
 
+<MudThemeProvider @ref="_mudThemeProvider" Theme="_bcssTheme" @bind-IsDarkMode="_darkMode" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<BlazorCssProvider />
+
 @code {
+    MudTheme _bcssTheme = new MudTheme()
+        {
+            Palette = new PaletteLight()
+            {
+                Primary = "#313B72",
+                Secondary = "#F45B69",
+                Tertiary = "#EEF4D4",
+                TertiaryContrastText = "#000000",
+            },
+
+            PaletteDark = new PaletteDark()
+            {
+                Secondary = "#F45B69",
+                Tertiary = "#EEF4D4",
+                TertiaryContrastText = "#000000",
+            },
+        };
+
+    MudThemeProvider? _mudThemeProvider;
     private bool _open;
+    private bool _darkMode = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _darkMode = await _mudThemeProvider?.GetSystemPreference();
+            StateHasChanged();
+        }
+    }
 }

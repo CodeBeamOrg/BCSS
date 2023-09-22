@@ -2,10 +2,19 @@
 @inject BcssService Bc
 @inject NavigationManager NavigationManager
 
-<MudContainer Class="@Bc["h-40vh d-flex flex-column justify-center align-center"]">
-    <MudText Style="font-weight:700" Typo="Typo.h3" Color="Color.Primary"><b>BCSS</b></MudText>
-    <MudText Typo="Typo.h6" Color="Color.Primary">by CodeBeam</MudText>
-    <MudText Class="mt-4" Align="Align.Center" Color="Color.Primary">Revolutionary runtime CSS generator for Blazor.</MudText>
+<MudContainer Class="@Bc["h-93vh d-flex flex-column justify-center align-center"]">
+    <div class="d-flex justify-center">
+        <MudText Class="text-move" Style="font-weight:900" Typo="Typo.h3" Color="Color.Default">Blazor-</MudText>
+        <MudText Class="text-wrap" Style="font-weight:900" Inline="true" Typo="Typo.h3" Color="Color.Default">CSS</MudText>
+    </div>
+    
+    <MudText Class="mt-8" Align="Align.Center" Typo="Typo.h3" Color="Color.Secondary"
+             Style="font-weight:900; stroke-width: 2px; background-image: linear-gradient(143deg, var(--mud-palette-primary),  #f45b69, #eef4d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Revolutionary Runtime</MudText>
+    <MudText Class="" Typo="Typo.h3" Color="Color.Primary" Style="font-weight:900;">CSS Generator</MudText>
+    
+    <MudText Typo="Typo.h6">by CodeBeam</MudText>
+    
+    
     <MudButton Class="mt-8" Variant="Variant.Outlined" Color="Color.Primary" Href="/gettingstarted">GET STARTED</MudButton>
 </MudContainer>
 

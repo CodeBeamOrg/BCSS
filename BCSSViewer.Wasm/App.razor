@@ -10,20 +10,3 @@
         </LayoutView>
     </NotFound>
 </Router>
-
-<MudThemeProvider Theme="_bcssTheme" />
-<MudDialogProvider />
-<MudSnackbarProvider />
-<BlazorCssProvider />
-
-@code {
-    MudTheme _bcssTheme = new MudTheme()
-        {
-            Palette = new PaletteLight()
-            {
-                Primary = "#313B72",
-                Secondary = "#F45B69",
-                Tertiary = "#EEF4D4",
-            },
-        };
-}

@@ -99,3 +99,77 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+.text-move {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: TextWidth 12s ease-in-out infinite;
+}
+
+.text-wrap {
+    animation: TextWrap 12s linear infinite;
+}
+
+@keyframes TextWidth {
+    0% {
+        width: 28px;
+        color: var(--mud-palette-primary);
+    }
+
+    25% {
+        width: 28px;
+        color: var(--mud-palette-primary);
+    }
+
+    45% {
+        width: 156px;
+        color: var(--mud-palette-text-primary);
+    }
+
+    55% {
+        width: 156px;
+        color: var(--mud-palette-text-primary);
+    }
+
+    75% {
+        width: 28px;
+        color: var(--mud-palette-primary);
+    }
+
+    100% {
+        width: 28px;
+        color: var(--mud-palette-primary);
+    }
+}
+
+@keyframes TextWrap {
+    0% {
+        letter-spacing: -4px;
+        color: var(--mud-palette-secondary);
+    }
+
+    25% {
+        letter-spacing: -4px;
+        color: var(--mud-palette-secondary);
+    }
+
+    45% {
+        letter-spacing: 4px;
+        color: var(--mud-palette-text-primary);
+    }
+
+    55% {
+        letter-spacing: 4px;
+        color: var(--mud-palette-text-primary);
+    }
+
+    75% {
+        letter-spacing: -4px;
+        color: var(--mud-palette-secondary);
+    }
+
+    100% {
+        letter-spacing: -4px;
+        color: var(--mud-palette-secondary);
+    }
+}
