@@ -1,0 +1,20 @@
+﻿@namespace BCSSViewer.Docs
+
+<div class="mt-4 d-flex justify-center gap-4">
+    <MudButton StartIcon="@Icons.Material.Filled.ArrowLeft" Variant="Variant.Outlined" Color="Color.Primary" Href="@PreviousHref">Previous: @PreviousText</MudButton>
+    <MudButton EndIcon="@Icons.Material.Filled.ArrowRight" Variant="Variant.Outlined" Color="Color.Primary" Href="@NextHref">Next: @NextText</MudButton>
+</div>
+
+@code {
+    [Parameter]
+    public string? PreviousText { get; set; }
+    
+    [Parameter]
+    public string? NextText { get; set; }
+
+    [Parameter]
+    public string? PreviousHref { get; set; }
+
+    [Parameter]
+    public string? NextHref { get; set; }
+}

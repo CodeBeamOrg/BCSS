@@ -1,0 +1,19 @@
+﻿@page "/syntax/basics"
+@inject BcssService Bc
+
+<MudContainer>
+    <MudText Typo="Typo.h4">Basic Syntax</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Description="BCSS has a simple syntax that seperate name and value with a dash." Code="@("w-200 //means width: 200px\nh-120 //means height: 120px")" />
+        <CodeBlock Description="Some properties have multiple definitions, both are valid." Code="@("r-20 //means border-radius: 20px\nrounded-20 //means border-radius: 20px")" />
+        <MudAlert Severity="Severity.Info">All full names of CSS properties are allowed for left side of the dash. However there are lots of abbreviated BCSS names for easier usage. For all BCSS definitions, please look at Content section.</MudAlert>
+        <CodeBlock Title="Usage" Description="BCSS classnames should be add via BcssService. Classnames should be in square brackets." Code="@("@inject BcssService Bc\n<div class=\"@Bc[\"w-200\"]\" />")" />
+        <CodeBlock Description="For adding multiple classnames, seperate with space character." Code="@("<div class=\"@Bc[\"w-200 h-120 r-20\"]\" />\n//Adds width: 200px; height: 120px; border-radius: 20px;")" />
+        <MudAlert Severity="Severity.Warning">If you add a BCSS class once, it also works in simple class. However this kind of usage is not recommended and not a best practice.</MudAlert>
+        <CodeBlock Class="mt-n3" Code="@("<div class=\"@Bc[\"w-200 h-120\"]\" /> //works, standard BCSS usage\n<div class=\"w-200\" /> //works because w-200 already defined in first div\n<div class=\"h-200\" /> //doesn't work because h-200 never defined in a BCSS class")" />
+    </MudStack>
+    
+
+    <PageBottomRouting PreviousHref="/gettingstarted/installation" PreviousText="Installation" NextHref="/syntax/doubledash" NextText="Double Dash" />
+</MudContainer>

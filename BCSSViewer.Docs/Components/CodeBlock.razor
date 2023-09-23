@@ -1,0 +1,22 @@
+﻿@namespace BCSSViewer.Docs
+@inherits MudComponentBase
+@inject BcssService Bc
+
+<div class="@Class" style="@Style">
+    <MudText Class="@Class" Typo="Typo.h6">@Title</MudText>
+    <MudText>@Description</MudText>
+    <div class="mt-1 pa-4 @Bc["flow-auto"]" style="background: var(--mud-palette-background-grey);">
+        <pre><code>@Code</code></pre>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public string? Description { get; set; }
+
+    [Parameter]
+    public string? Code { get; set; }
+}

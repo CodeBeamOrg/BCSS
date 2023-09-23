@@ -601,7 +601,11 @@ namespace BCSS.Services
             }
             if (value?.Contains('.') == true)
             {
-                return $"{cssName}:{value}rem";
+                return $"{cssName}:{value}0rem";
+            }
+            if (value?.Contains(',') == true)
+            {
+                return $"{cssName}:{value.Replace(',', '.')}0em";
             }
             return $"{cssName}:{value}px";
         }

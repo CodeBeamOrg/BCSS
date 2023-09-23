@@ -3,61 +3,16 @@
 
 <MudContainer>
     <MudText Typo="Typo.h4">Installation</MudText>
-    <MudText>Install the NuGet package</MudText>
-    <div class="mud-theme-primary">
-        <pre><code>
-            dotnet add CodeBeam.BCSS <MudListItem Text="@("<script src=\"_content/CodeBeam.BCSS/Bcss.min.js\"></script>")"></MudListItem>
-        </code></pre>
-    </div>
 
-    <MudText>Add the following to Imports.razor</MudText>
-    <StandaloneCodeEditor ConstructionOptions="EditorConstructionOptions" CssClass="@Bc["h-24"]" />
+    <MudStack Spacing="4">
+        <CodeBlock Description="1. Install the CodeBeam.BCSS NuGet package" Code="dotnet add package CodeBeam.BCSS" />
+        <CodeBlock Description="2. Add the following to _Imports.razor" Code="@("@using BCSS")" />
+        <CodeBlock Description="3. Add the following to your HTML body section, it's either index.html or _Layout.cshtml/_Host.cshtml depending on whether you're running Server-Side or WASM." Code="@("<script src=\"_content/CodeBeam.BCSS/Bcss.min.js\"></script>")" />
+        <CodeBlock Description="4. Add the following to the relevant sections of Program.cs" Code="@("@using Bcss.Services;\nbuilder.Services.AddBcss();")" />
+        <CodeBlock Description="5. Add the following to App.razor" Code="@("<BlazorCssProvider />")" />
+        <CodeBlock Description="6. Inject the service in each page that you want to use BCSS" Code="@("@inject BcssService Bc")" />
+    </MudStack>
+    
 
-    <MudText>Add the following to Imports.razor</MudText>
-    <StandaloneCodeEditor ConstructionOptions="EditorConstructionOptions2" CssClass="@Bc["h-24"]" />
-
-    <MudText>Install the NuGet package</MudText>
-    <div class="mud-theme-primary">
-        <pre><code>
-    using Bcss.Services;
-    builder.Services.AddBcss();
-        </code></pre>
-    </div>
-
+    <PageBottomRouting PreviousHref="/gettingstarted/what" PreviousText="What is BCSS" NextHref="/syntax/basics" NextText="Basic Syntax" />
 </MudContainer>
-
-@code {
-    private StandaloneEditorConstructionOptions EditorConstructionOptions(StandaloneCodeEditor editor)
-    {
-        return new StandaloneEditorConstructionOptions
-            {
-                AutomaticLayout = true,
-                Language = "csharp",
-                Value = "@using BCSS" + "\n",
-                ReadOnly = true,
-                Scrollbar = new EditorScrollbarOptions() { VerticalScrollbarSize = 0, VerticalSliderSize = 0 },
-                ColumnSelection = false,
-                DisableLayerHinting = true,
-                FontSize = 16,
-                Minimap = new EditorMinimapOptions() { Enabled = false },
-                ScrollBeyondLastLine = false,
-            };
-    }
-
-    private StandaloneEditorConstructionOptions EditorConstructionOptions2(StandaloneCodeEditor editor)
-    {
-        return new StandaloneEditorConstructionOptions
-            {
-                AutomaticLayout = true,
-                Language = "csharp",
-                Value = "<script src=\"_content/CodeBeam.BCSS/Bcss.min.js\"></script>",
-                ReadOnly = true,
-                Scrollbar = new EditorScrollbarOptions() { VerticalScrollbarSize = 0, VerticalSliderSize = 0 },
-                ColumnSelection = false,
-                DisableLayerHinting = true,
-                FontSize = 16,
-                Minimap = new EditorMinimapOptions() { Enabled = false },
-                ScrollBeyondLastLine = false,
-            };
-    }
-}

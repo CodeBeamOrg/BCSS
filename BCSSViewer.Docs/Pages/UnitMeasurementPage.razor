@@ -1,0 +1,18 @@
+﻿@page "/syntax/unitmeasurement"
+@inject BcssService Bc
+
+<MudContainer>
+    <MudText Typo="Typo.h4">Unit Measurement</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Description="Numeric values are measured in pixels by default." Code="@("w-80\th-50\tr-20\n//width: 80px; height: 50px; border-radius: 20px;")" />
+        <CodeBlock Description="For percentage, add % character same as CSS syntax." Code="@("w-80%\th-50%\tr-20%\n//width: 80%; height: 50%; border-radius: 20%")" />
+        <CodeBlock Description="For rem values, add dot character or place rem keyword directly." Code="@("w-8.0\th-50.\tr-20rem\n//width: 8rem; height: 50rem; border-radius: 20rem;")" />
+        <CodeBlock Description="For em values, add comma character or place em keyword directly." Code="@("w-8,0\th-50,\tr-20em\n//width: 8em; height: 50em; border-radius: 20em;")" />
+        <CodeBlock Description="For viewport values, place vh or vw keyword directly." Code="@("w-8vw\th-50vh\n//width: 8vw; height: 50vh;")" />
+
+    </MudStack>
+    
+
+    <PageBottomRouting PreviousHref="/syntax/doubledash" PreviousText="Double Dash" NextHref="/syntax/unitmeasurement" NextText="Unit Measurement" />
+</MudContainer>
