@@ -1,15 +1,15 @@
 ﻿@page "/configuration/breakpoints"
-@inject BcssService Bc
+@namespace BCSSViewer.Docs.Pages
 
 <MudContainer>
-    <MudText Typo="Typo.h4">Breakpoints</MudText>
+    <MudText Class="mb-4" Typo="Typo.h4">Breakpoints</MudText>
 
     <MudStack Class="mt-4" Spacing="4">
         <MudText>BCSS currently supports 5 breakpoints: xs, sm, md, lg and xl.</MudText>
         <CodeBlock Description="Breakpoint defaults:" Code="@("xs: 0-599\nsm: 600-959\nmd: 960-1279\nlg: 1280-1919\nxl: >1920")" />
-        <CodeBlock Description="There is two way to change breakpoints dynamically. First, in BlazorCssProvider component you can set different breakpoint values individually." Code="@("<BlazorCssProvider xs=\"360\" lg=\"1720\" />")" />
+        <CodeBlock Description="There are two ways to change breakpoints dynamically. First, in BlazorCssProvider component you can set different breakpoint values individually." Code="@("<BlazorCssProvider xs=\"360\" lg=\"1720\" />")" />
         <CodeBlock Description="And the second is with using BcssService's ChangeBreakpoints method." Code="@("@inject BcssService Bc\nBc.ChangeBreakpoints(sm: 620, xl: 2440)")" />
     </MudStack>
 
-    <PageBottomRouting PreviousHref="/gettingstarted/installation" PreviousText="Installation" NextHref="/syntax/doubledash" NextText="Double Dash" />
+    <PageBottomRouting PreviousHref="/gettingstarted/installation" PreviousText="Installation" NextHref="/configuration/spacing" NextText="Spacing" />
 </MudContainer>

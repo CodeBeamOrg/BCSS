@@ -2,12 +2,12 @@
 @namespace BCSSViewer.Docs.Pages
 
 <MudContainer>
-    <MudText Typo="Typo.h4">How It Works</MudText>
+    <MudText Class="mb-4" Typo="Typo.h4">How It Works</MudText>
 
     <MudStack Spacing="4">
         <MudText>BCSS works through two basic and key parts: BlazorCssProvider and BcssService.</MudText>
         <MudText>
-            BlazorCssProvider is a blazor component. The component automatically converts the BCSS class names passed to it into css styles.
+            BlazorCssProvider is a razor component. The component automatically converts the BCSS class names passed to it into css styles.
             Works on the principle of set-it-and-forget-it component.
             It is placed in App.razor in the root layer of the application and initial values ​​are determined.
             Once in place, no referencing or modification required.
