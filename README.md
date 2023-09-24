@@ -1,5 +1,11 @@
 # BCSS
-### Runtime CSS Generator for Blazor
+### Revolutionary Runtime CSS Generator for Blazor
+
+[![GitHub Repo stars](https://img.shields.io/github/stars/codebeamorg/bcss?color=594ae2&style=flat-square&logo=github)](https://github.com/codebeamorg/bcss/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/codebeamorg/bcss?color=594ae2&style=flat-square&logo=github)](https://github.com/codebeamorg/bcss)
+[![Contributors](https://img.shields.io/github/contributors/codebeamorg/bcss?color=594ae2&style=flat-square&logo=github)](https://github.com/codebeamorg/bcss/graphs/contributors)
+[![NuGet version](https://img.shields.io/nuget/v/CodeBeam.bcss?color=ff4081&label=nuget%20version&logo=nuget&style=flat-square)](https://www.nuget.org/packages/CodeBeam.bcss)
+[![NuGet downloads](https://img.shields.io/nuget/dt/CodeBeam.bcss?color=ff4081&label=nuget%20downloads&logo=nuget&style=flat-square)](https://www.nuget.org/packages/CodeBeam.bcss)
 
 ## Installation
 1. Install CodeBeam.BCSS Nuget package
@@ -31,3 +37,5 @@ Add the BCSS class into a class
 <div class="@Bc["w-200 h-100 r-20"]" />
 //This line adds width: 200px height: 100px and border-radius: 20
 ```
+## Docs
+Complete docs are preparing.
