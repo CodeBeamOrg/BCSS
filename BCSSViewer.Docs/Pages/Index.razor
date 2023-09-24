@@ -19,7 +19,7 @@
 </MudContainer>
 
 <MudContainer Class="@Bc["hmin-60vh"]">
-    <MudGrid>
+    <MudGrid Class="justify-center">
         <MudItem xs="12" sm="6" md="4">
             <BcssCard Icon="@Icons.Material.Filled.Public" Header="OpenSource" Description="BCSS is open source and free forever with MIT license." />
         </MudItem>
@@ -27,7 +27,7 @@
             <BcssCard Icon="@Icons.Material.Filled.Assistant" Header="Dynamic" Description="All content can be created and changed on runtime." />
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
-            <BcssCard Icon="@Icons.Material.Filled.Pages" Header="Optimized" Description="Not allowed any repeated values and unnecessary render cycles for the best performance." />
+            <BcssCard Icon="@Icons.Material.Filled.Pages" Header="Lightweight & Optimized" Description="Not allowed any repeated values and unnecessary render cycles for the best performance." />
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
             <BcssCard Icon="@Icons.Material.Filled.AutoStories" Header="Smart Usage" Description="Easy to learn and use. Does not require advanced CSS knowledge." />
@@ -37,6 +37,9 @@
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
             <BcssCard Icon="@Icons.Material.Filled.Code" Header="C#" Description="Not needed to work any css or scss content files. Possible to work with C# variables." />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <BcssCard Icon="@Icons.Material.Filled.Speed" Header="Rapidly Build" Description="One of the best ways to make and stabile your application quickly." />
         </MudItem>
     </MudGrid>
     
@@ -65,11 +68,11 @@
 </MudContainer>
 
 <MudContainer Class="@Bc["hmin-60vh d-flex flex-column align-center justify-start"]">
-    <MudText Typo="Typo.h3" Align="Align.Center">Like It?</MudText>
+    <MudText Typo="Typo.h3" Align="Align.Center" Color="Color.Primary">Like <MudText Inline="true" Typo="Typo.h3" Align="Align.Center" Color="Color.Secondary">It?</MudText></MudText>
     <MudText>Learn the Fundamentals</MudText>
     <div class="mud-width-full d-flex flex-wrap justify-center gap-4 mt-8">
-        <MudButton Variant="Variant.Outlined">Syntax</MudButton>
-        <MudButton Variant="Variant.Outlined">Usage</MudButton>
+        <MudButton Href="/syntax/basics" Variant="Variant.Outlined">Syntax</MudButton>
+        <MudButton Href="/content" Variant="Variant.Outlined">Content</MudButton>
     </div>
 </MudContainer>
 

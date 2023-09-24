@@ -507,8 +507,6 @@ namespace BCSS.Services
                 return DimensionResult(processedValue, "max-width");
             }
 
-            // Support all kinds of basic CSS statements.
-            // Like appearance, cursor.
             return $"{fullKey?.ToLower()}:{processedValue.ToLower()}";
         }
 
@@ -543,8 +541,12 @@ namespace BCSS.Services
                 case "box":
                 case "boxsizing":
                     return "box-sizing";
+                case "c":
+                    return "cursor";
                 case "d":
                     return "display";
+                case "f":
+                    return "font";
                 case "h":
                     return "height";
                 case "hmin":
@@ -572,6 +574,9 @@ namespace BCSS.Services
                     return "user-select";
                 case "touch":
                     return "touch-action";
+                case "v":
+                case "vis":
+                    return "visibility";
                 case "w":
                     return "width";
                 case "wmin":
@@ -580,6 +585,8 @@ namespace BCSS.Services
                 case "wmax":
                 case "w-max":
                     return "max-width";
+                case "ws":
+                    return "white-space";
                 case "z":
                 case "zindex":
                     return "z-index";
@@ -608,24 +615,6 @@ namespace BCSS.Services
                 return $"{cssName}:{value.Replace(',', '.')}0em";
             }
             return $"{cssName}:{value}px";
-        }
-
-        public static string DimensionResultShort(string? value)
-        {
-            if (value == null)
-            {
-                return string.Empty;
-            }
-
-            if (value?.Contains("rem") == true || value?.Contains('%') == true)
-            {
-                return $"{value}";
-            }
-            if (value?.Contains('.') == true)
-            {
-                return $"{value}rem";
-            }
-            return $"{value}px";
         }
 
         public static string SpacedResult(string? value, string? name = null)

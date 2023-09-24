@@ -154,12 +154,12 @@ a, .btn-link {
     }
 
     45% {
-        letter-spacing: 4px;
+        letter-spacing: 2px;
         color: var(--mud-palette-text-primary);
     }
 
     55% {
-        letter-spacing: 4px;
+        letter-spacing: 2px;
         color: var(--mud-palette-text-primary);
     }
 

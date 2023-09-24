@@ -1,0 +1,99 @@
+﻿@page "/content"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Class="mb-4" Typo="Typo.h4">Contents</MudText>
+
+    <MudAlert Severity="Severity.Info">All CSS property names are directly accepted as Bcss classnames. In this table, only shorthanded values are shown.</MudAlert>
+    <MudDataGrid T="BcssContent" Items="_contents" Dense="true" QuickFilter="_quickFilter">
+        <ToolBarContent>
+            <MudText>Content</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Variant="Variant.Outlined" Adornment="Adornment.Start" Immediate="true"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" Margin="Margin.Dense"></MudTextField>
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.OriginalName" Title="CSS Property" />
+            <PropertyColumn Property="x => x.ShortName" Title="Bcss Classname(s)" />
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="BcssContent" PageSizeOptions="new int[] { 20, 50, 100 }" />
+        </PagerContent>
+    </MudDataGrid>
+
+    <PageBottomRouting PreviousHref="/gettingstarted/installation" PreviousText="Installation" NextHref="/configuration/spacing" NextText="Spacing" />
+</MudContainer>
+
+@code {
+    private List<BcssContent> _contents = new();
+    private string? _searchString;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _contents.Add(new() { ShortName = "ar, aspect", OriginalName = "aspect-ratio"});
+        _contents.Add(new() { ShortName = "b", OriginalName = "border" });
+        _contents.Add(new() { ShortName = "bb, b-b, borderb, border-b", OriginalName = "border-bottom" });
+        _contents.Add(new() { ShortName = "bl, b-l, borderl, border-l", OriginalName = "border-left" });
+        _contents.Add(new() { ShortName = "br, b-r, borderr, border-r", OriginalName = "border-right" });
+        _contents.Add(new() { ShortName = "bt, b-t, bordert, border-t", OriginalName = "border-top" });
+        _contents.Add(new() { ShortName = "bg", OriginalName = "background" });
+        _contents.Add(new() { ShortName = "box, boxsizing", OriginalName = "box-sizing" });
+        _contents.Add(new() { ShortName = "c", OriginalName = "cursor" });
+        _contents.Add(new() { ShortName = "d", OriginalName = "display" });
+        _contents.Add(new() { ShortName = "f", OriginalName = "font" });
+        _contents.Add(new() { ShortName = "h", OriginalName = "height" });
+        _contents.Add(new() { ShortName = "hmin, h-min", OriginalName = "min-height" });
+        _contents.Add(new() { ShortName = "hmax, h-max", OriginalName = "max-height" });
+        _contents.Add(new() { ShortName = "m", OriginalName = "margin" });
+        _contents.Add(new() { ShortName = "mb", OriginalName = "margin-bottom" });
+        _contents.Add(new() { ShortName = "ml", OriginalName = "margin-left" });
+        _contents.Add(new() { ShortName = "mr", OriginalName = "margin-right" });
+        _contents.Add(new() { ShortName = "mt", OriginalName = "margin-top" });
+        _contents.Add(new() { ShortName = "ms", OriginalName = "margin-inline-start" });
+        _contents.Add(new() { ShortName = "me", OriginalName = "margin-inline-end" });
+        _contents.Add(new() { ShortName = "o", OriginalName = "opacity" });
+        _contents.Add(new() { ShortName = "of", OriginalName = "overflow" });
+        _contents.Add(new() { ShortName = "flow", OriginalName = "overflow" });
+        _contents.Add(new() { ShortName = "ofx, of-x, flowx, flow-x", OriginalName = "overflow-x" });
+        _contents.Add(new() { ShortName = "ofy, of-y, flowy, flow-y", OriginalName = "overflow-y" });
+        _contents.Add(new() { ShortName = "p", OriginalName = "padding" });
+        _contents.Add(new() { ShortName = "pb", OriginalName = "padding-bottom" });
+        _contents.Add(new() { ShortName = "pl", OriginalName = "padding-left" });
+        _contents.Add(new() { ShortName = "pr", OriginalName = "padding-right" });
+        _contents.Add(new() { ShortName = "pt", OriginalName = "padding-top" });
+        _contents.Add(new() { ShortName = "ps", OriginalName = "padding-inline-start" });
+        _contents.Add(new() { ShortName = "pe", OriginalName = "padding-inline-end" });
+        _contents.Add(new() { ShortName = "pos", OriginalName = "position" });
+        _contents.Add(new() { ShortName = "r, rounded", OriginalName = "border-radius" });
+        _contents.Add(new() { ShortName = "scroll", OriginalName = "scroll-behavior" });
+        _contents.Add(new() { ShortName = "select", OriginalName = "user-select" });
+        _contents.Add(new() { ShortName = "touch", OriginalName = "touch-action" });
+        _contents.Add(new() { ShortName = "v, vis", OriginalName = "visibility" });
+        _contents.Add(new() { ShortName = "w", OriginalName = "width" });
+        _contents.Add(new() { ShortName = "wmin, w-min", OriginalName = "min-width" });
+        _contents.Add(new() { ShortName = "wmax, w-max", OriginalName = "max-width" });
+        _contents.Add(new() { ShortName = "ws", OriginalName = "white-space" });
+        _contents.Add(new() { ShortName = "z, zindex", OriginalName = "z-index" });
+    }
+
+    private Func<BcssContent, bool> _quickFilter => x =>
+    {
+        if (string.IsNullOrWhiteSpace(_searchString))
+            return true;
+
+        if (x.OriginalName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            return true;
+
+        if (x.ShortName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            return true;
+
+        return false;
+    };
+
+    private class BcssContent
+    {
+        public string? ShortName { get; set; }
+        public string? OriginalName { get; set; }
+    }
+}

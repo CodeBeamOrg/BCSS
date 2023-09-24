@@ -33,19 +33,23 @@
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/caseinsensitive">Case Insensitive</MudNavLink>
             </MudNavGroup>
             <MudNavGroup Title="Content">
-                <MudNavLink Match="NavLinkMatch.All" Href="/usage/border">Borders</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/usage/dimension">Dimensions</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/usage/position">Position & Flex</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/usage/spacing">Spacing</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/content">General</MudNavLink>
+                <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/border">Borders</MudNavLink>
+                <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/dimension">Dimensions</MudNavLink>
+                <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/position">Position & Flex</MudNavLink>
+                <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/spacing">Spacing</MudNavLink>
+                <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/text">Text</MudNavLink>
             </MudNavGroup>
         </MudNavMenu>
     </MudDrawer>
 
-    <MudMainContent>
+    <MudMainContent Class="@Bc["hmin-100vh d-flex flex-column justify-space-between"]">
         @Body
-        <MudContainer Class="@Bc["mt-24"]">
-            <MudDivider Class="mb-4" />
-            <MudText Class="mb-4"><MudLink Href="https://codebeam.org" Target="_blank" Underline="Underline.Hover"><b>CodeBeam</b></MudLink> OpenSource @DateTime.Now.Year.</MudText>
+        @* <MudDivider Class="my-4" /> *@
+        <MudContainer Class="@Bc["margin-bottom--4px d-flex align-center"]">
+            <MudText><MudLink Href="https://codebeam.org" Target="_blank" Underline="Underline.Hover"><b>CodeBeam</b></MudLink> OpenSource @DateTime.Now.Year.</MudText>
+            <MudSpacer />
+            <MudButton Href="https://github.com/sponsors/CodeBeamOrg" Size="Size.Small" Target="_blank" StartIcon="@Icons.Material.Filled.VolunteerActivism" Variant="Variant.Outlined" Color="Color.Secondary">Donate</MudButton>
         </MudContainer>
     </MudMainContent>
 </MudLayout>
