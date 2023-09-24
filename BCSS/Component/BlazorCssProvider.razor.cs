@@ -137,21 +137,30 @@ namespace BCSS
         protected string GetMediaString(string breakpoint)
         {
             string result = string.Empty;
-            foreach (var info in _bcssInfos.Where(x => x.Suffixes.Contains(breakpoint)))
+            foreach (var info in _bcssInfos.Where(x => x.Prefixes.Contains(breakpoint)))
             {
                 var processedValue = info.Value?.Split(' ') ?? new string[0];
-                result += $".{info.Key}{GetSuffixString(info.Suffixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}";
+                result += $".{info.Key}{GetPrefixString(info.Prefixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}";
             }
             return result;
         }
 
-        protected string GetSuffixString(List<string> suffixes)
+        protected string GetPrefixString(List<string> prefixes)
         {
             var result = string.Empty;
-            List<string> match = _suffixes.Intersect(suffixes).ToList();
+            List<string> match = _prefixes.Intersect(prefixes).ToList();
             if (match.Any())
             {
                 result = $":{match.First()}";
+            }
+
+            if (result == ":h")
+            {
+                return ":hover";
+            }
+            if (result == ":f")
+            {
+                return ":focus";
             }
             
             return result;
@@ -181,14 +190,16 @@ namespace BCSS
         }
 
         private readonly List<string> _breakpoints = new List<string>() { "xs", "sm", "md", "lg", "xl" };
-        private readonly List<string> _suffixes = new List<string>() 
+        private readonly List<string> _prefixes = new List<string>() 
         { 
             "active",
             "checked",
             "disabled",
             "empty",
             "enabled",
-            "hover", 
+            "h",
+            "hover",
+            "f",
             "focus",
             "focus-visible",
             "focus-within", 

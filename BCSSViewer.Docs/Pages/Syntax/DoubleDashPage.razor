@@ -1,5 +1,5 @@
 ﻿@page "/syntax/doubledash"
-@inject BcssService Bc
+@namespace BCSSViewer.Docs.Pages
 
 <MudContainer>
     <MudText Typo="Typo.h4">Dash and Double Dash Technique</MudText>
@@ -9,7 +9,6 @@
         <CodeBlock Description="If name or value already have dash, double dash is essential as seperator." Code="@("box-sizing--border-box //box-border is also valid\nd--inline-flex //means display: inline-flex;")" />
         <CodeBlock Description="If value is shorthanded and has space, use dash as space, while double dash remains essential." Code="@("border--5px-solid-yellow // means border: 5px solid yellow;")" />
     </MudStack>
-    
 
     <PageBottomRouting PreviousHref="/syntax/basics" PreviousText="Basic Syntax" NextHref="/syntax/unitmeasurement" NextText="Unit Measurement" />
 </MudContainer>

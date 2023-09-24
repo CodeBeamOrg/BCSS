@@ -5,7 +5,7 @@
 <style>
     @foreach (var info in _bcssInfos)
     {
-        if (_breakpoints.Intersect(info.Suffixes).Any())
+        if (_breakpoints.Intersect(info.Prefixes).Any())
         {
             continue;
         }
@@ -15,7 +15,7 @@
         {
             processedValue.Add(s.Replace('*', ' ').Replace('+', '-'));
         }
-        @($".{info.Key}{GetSuffixString(info.Suffixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
+        @($".{info.Key}{GetPrefixString(info.Prefixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
     }
 </style>
 

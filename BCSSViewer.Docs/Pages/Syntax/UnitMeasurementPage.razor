@@ -1,5 +1,5 @@
 ﻿@page "/syntax/unitmeasurement"
-@inject BcssService Bc
+@namespace BCSSViewer.Docs.Pages
 
 <MudContainer>
     <MudText Typo="Typo.h4">Unit Measurement</MudText>
@@ -10,9 +10,7 @@
         <CodeBlock Description="For rem values, add dot character or place rem keyword directly." Code="@("w-8.0\th-50.\tr-20rem\n//width: 8rem; height: 50rem; border-radius: 20rem;")" />
         <CodeBlock Description="For em values, add comma character or place em keyword directly." Code="@("w-8,0\th-50,\tr-20em\n//width: 8em; height: 50em; border-radius: 20em;")" />
         <CodeBlock Description="For viewport values, place vh or vw keyword directly." Code="@("w-8vw\th-50vh\n//width: 8vw; height: 50vh;")" />
-
     </MudStack>
-    
 
-    <PageBottomRouting PreviousHref="/syntax/doubledash" PreviousText="Double Dash" NextHref="/syntax/unitmeasurement" NextText="Unit Measurement" />
+    <PageBottomRouting PreviousHref="/syntax/doubledash" PreviousText="Double Dash" NextHref="/syntax/prefixes" NextText="Prefixes (Breakpoint, Hover, Focus etc.)" />
 </MudContainer>

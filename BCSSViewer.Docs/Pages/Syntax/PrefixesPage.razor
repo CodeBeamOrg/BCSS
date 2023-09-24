@@ -1,0 +1,15 @@
+﻿@page "/syntax/prefixes"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Typo="Typo.h4">Prefixes</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Description="Prefixes are keywords that placed start of BCSS classnames and seperated with colon (:). All breakpoints and known psuedo names are supported." Code="@("sm:w-80\nfocus:h-50\nhover:r-20")" />
+        <CodeBlock Description="If prefix has dash character, double dash (as seperator) usage is essential." Code="@("focus-within:r--20")" />
+        <CodeBlock Description="Multiple prefix usage is possible and prefix order is not important." Code="@("sm:hover:r-20\nhover:sm:r-20")" />
+        <CodeBlock Description="Full keywords have better readability. But if you want to shorten the BCSS class length, 'h' is shorthand for 'hover' and 'f' is for 'focus'" Code="@("h:r-20\thover:r-20\nf:w-80\tfocus:w-80")" />
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/syntax/unitmeasurement" PreviousText="Unit Measurement (Px, Rem etc.)" NextHref="/syntax/prefixes" NextText="Prefixes (Breakpoint, Hover, Focus etc.)" />
+</MudContainer>

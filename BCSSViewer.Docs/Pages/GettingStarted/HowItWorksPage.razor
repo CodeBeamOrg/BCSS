@@ -1,0 +1,25 @@
+﻿@page "/gettingstarted/howitworks"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Typo="Typo.h4">How It Works</MudText>
+
+    <MudStack Spacing="4">
+        <MudText>BCSS works through two basic and key parts: BlazorCssProvider and BcssService.</MudText>
+        <MudText>
+            BlazorCssProvider is a blazor component. The component automatically converts the BCSS class names passed to it into css styles.
+            Works on the principle of set-it-and-forget-it component.
+            It is placed in App.razor in the root layer of the application and initial values ​​are determined.
+            Once in place, no referencing or modification required.
+        </MudText>
+        <MudText>
+            BcssService is a classic service that can be used with Dependency Injection (DI).
+            This service communicates with the Blazor CSS Provider component, controls it and performs all optimization operations.
+            Unlike the BlazorCssProvider component, it can be injected on multiple pages or layouts.
+            Operations such as cleaning, updating and configuring can be called manually by this service.
+        </MudText>
+    </MudStack>
+    
+
+    <PageBottomRouting PreviousHref="/gettingstarted/what" PreviousText="What is BCSS" NextHref="/gettingstarted/installation" NextText="Installation" />
+</MudContainer>

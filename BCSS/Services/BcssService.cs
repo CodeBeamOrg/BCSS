@@ -31,7 +31,7 @@ namespace BCSS
                 string? result = BlazorCssConverter.Convert(val);
 
                 BcssInfo info = new BcssInfo();
-                info.Suffixes = BlazorCssConverter.GetSuffixes(val);
+                info.Prefixes = BlazorCssConverter.GetSuffixes(val);
                 info.Key = Decode(val);
                 info.Value = result;
                 Provider.AddInfo(info);
@@ -47,7 +47,7 @@ namespace BCSS
             Provider?.Update();
         }
 
-        public string this[string key]
+        public string? this[string key]
         {
             get => Add(key);
         }
@@ -56,7 +56,21 @@ namespace BCSS
         {
             return value.Replace(":", "_1").Replace("/", "_2").Replace("*", "_3").Replace("#", "_4").Replace(",", "_5").Replace("+", "_6").Replace("%", "_7").Replace(".", "_8").Replace("[", null).Replace("]", null);
         }
-         
+
+        public void ChangeBreakpoints(int xs = 0, int sm = 600, int md = 960, int lg = 1280, int xl = 1920)
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+#pragma warning disable BL0005
+            Provider.Xs = xs;
+            Provider.Sm = sm;
+            Provider.Md = md;
+            Provider.Lg = lg;
+            Provider.Xl = xl;
+#pragma warning restore BL0005
+        }
 
     }
 }

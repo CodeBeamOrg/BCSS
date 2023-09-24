@@ -1,5 +1,5 @@
 ﻿@page "/syntax/basics"
-@inject BcssService Bc
+@namespace BCSSViewer.Docs.Pages
 
 <MudContainer>
     <MudText Typo="Typo.h4">Basic Syntax</MudText>
@@ -13,7 +13,6 @@
         <MudAlert Severity="Severity.Warning">If you add a BCSS class once, it also works in simple class. However this kind of usage is not recommended and not a best practice.</MudAlert>
         <CodeBlock Class="mt-n3" Code="@("<div class=\"@Bc[\"w-200 h-120\"]\" /> //works, standard BCSS usage\n<div class=\"w-200\" /> //works because w-200 already defined in first div\n<div class=\"h-200\" /> //doesn't work because h-200 never defined in a BCSS class")" />
     </MudStack>
-    
 
     <PageBottomRouting PreviousHref="/gettingstarted/installation" PreviousText="Installation" NextHref="/syntax/doubledash" NextText="Double Dash" />
 </MudContainer>
