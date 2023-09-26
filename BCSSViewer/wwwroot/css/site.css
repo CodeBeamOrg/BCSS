@@ -108,17 +108,16 @@ a, .btn-link {
     background-clip: border-box;
     -webkit-background-clip: text;
     background-size: 600% 600%;
-    animation: AnimationName 9s ease infinite;
 }
 
 .text-move {
     overflow: hidden;
     white-space: nowrap;
-    animation: TextWidth 12s ease-in-out infinite;
+    animation: TextWidth 8s ease-in-out infinite;
 }
 
 .text-wrap {
-    animation: TextWrap 12s linear infinite;
+    animation: TextWrap 8s linear infinite;
 }
 
 @keyframes TextWidth {
@@ -127,7 +126,7 @@ a, .btn-link {
         color: var(--mud-palette-primary);
     }
 
-    25% {
+    15% {
         width: 28px;
         color: var(--mud-palette-primary);
     }
@@ -142,7 +141,7 @@ a, .btn-link {
         color: var(--mud-palette-text-primary);
     }
 
-    75% {
+    80% {
         width: 28px;
         color: var(--mud-palette-primary);
     }
@@ -159,7 +158,7 @@ a, .btn-link {
         color: var(--mud-palette-secondary);
     }
 
-    25% {
+    15% {
         letter-spacing: -4px;
         color: var(--mud-palette-secondary);
     }
@@ -174,7 +173,7 @@ a, .btn-link {
         color: var(--mud-palette-text-primary);
     }
 
-    75% {
+    80% {
         letter-spacing: -4px;
         color: var(--mud-palette-secondary);
     }
@@ -183,8 +182,4 @@ a, .btn-link {
         letter-spacing: -4px;
         color: var(--mud-palette-secondary);
     }
-}
-
-.monaco-editor-container {
-    height: 60px;
 }

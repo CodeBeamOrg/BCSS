@@ -103,11 +103,11 @@ a, .btn-link {
 .text-move {
     overflow: hidden;
     white-space: nowrap;
-    animation: TextWidth 12s ease-in-out infinite;
+    animation: TextWidth 8s ease-in-out infinite;
 }
 
 .text-wrap {
-    animation: TextWrap 12s linear infinite;
+    animation: TextWrap 8s linear infinite;
 }
 
 @keyframes TextWidth {
@@ -116,7 +116,7 @@ a, .btn-link {
         color: var(--mud-palette-primary);
     }
 
-    25% {
+    15% {
         width: 28px;
         color: var(--mud-palette-primary);
     }
@@ -148,7 +148,7 @@ a, .btn-link {
         color: var(--mud-palette-secondary);
     }
 
-    25% {
+    15% {
         letter-spacing: -4px;
         color: var(--mud-palette-secondary);
     }

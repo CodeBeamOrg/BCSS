@@ -58,8 +58,8 @@
             <MudItem xs="12" sm="4">
                 <MudTextFieldExtended @bind-Value="_cssString" Lines="4" Variant="Variant.Outlined" Label="Bcss Class" Immediate="true" spellcheck="false">
                     <AdornmentEnd>
-                        <MudTooltip Text="Generate" Delay="300">
-                        <MudIconButton Icon="@Icons.Material.Filled.Loop" OnClick="Generate" />
+                        <MudTooltip Text="Generate" Delay="300" ShowOnFocus="false" ShowOnClick="false">
+                            <MudIconButton Icon="@Icons.Material.Filled.Loop" OnClick="Generate" />
                         </MudTooltip>
                     </AdornmentEnd>
                 </MudTextFieldExtended>
