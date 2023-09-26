@@ -45,6 +45,11 @@ namespace BCSS.Services
 
             className = className.ToLower();
 
+            if (className.Contains('-') == false)
+            {
+                return GetOneWordResult(className);
+            }
+
             string? key = null;
             string? value = null;
             string[] splittedString = className.Split("--", 2);
@@ -176,13 +181,11 @@ namespace BCSS.Services
                     case "none":
                         return "border-style:none";
                 }
-                //return DimensionResult(processedValue, "border-width");
                 return SpacedResult(value, "border");
             }
 
             if (string.Equals(fullKey, "border-bottom", StringComparison.InvariantCultureIgnoreCase))
             {
-                //return DimensionResult(value, "border-bottom-width");
                 return SpacedResult(value, "border-bottom");
             }
 
@@ -216,44 +219,17 @@ namespace BCSS.Services
 
             if (string.Equals(fullKey, "height", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (processedValue)
-                {
-                    case "min":
-                        return "height:min-content";
-                    case "max":
-                        return "height:max-content";
-                    case "fit":
-                        return "height:fit-content";
-                }
-                return DimensionResult(processedValue, "height");
+                return GetHeightWidthKeywordResult(processedValue, fullKey);
             }
 
             if (string.Equals(fullKey, "min-height", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (processedValue)
-                {
-                    case "min":
-                        return "min-height:min-content";
-                    case "max":
-                        return "min-height:max-content";
-                    case "fit":
-                        return "min-height:fit-content";
-                }
-                return DimensionResult(processedValue, "min-height");
+                return GetHeightWidthKeywordResult(processedValue, fullKey);
             }
 
             if (string.Equals(fullKey, "max-height", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (processedValue)
-                {
-                    case "min":
-                        return "max-height:min-content";
-                    case "max":
-                        return "max-height:max-content";
-                    case "fit":
-                        return "max-height:fit-content";
-                }
-                return DimensionResult(processedValue, "max-height");
+                return GetHeightWidthKeywordResult(processedValue, fullKey);
             }
 
             if (string.Equals(key, "m", StringComparison.InvariantCultureIgnoreCase))
@@ -473,44 +449,17 @@ namespace BCSS.Services
 
             if (string.Equals(fullKey, "width", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (processedValue)
-                {
-                    case "min":
-                        return "width:min-content";
-                    case "max":
-                        return "width:max-content";
-                    case "fit":
-                        return "width:fit-content";
-                }
-                return DimensionResult(processedValue, "width");
+                return GetHeightWidthKeywordResult(processedValue, fullKey);
             }
 
             if (string.Equals(fullKey, "min-width", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (processedValue)
-                {
-                    case "min":
-                        return "min-width:min-content";
-                    case "max":
-                        return "min-width:max-content";
-                    case "fit":
-                        return "min-width:fit-content";
-                }
-                return DimensionResult(processedValue, "min-width");
+                return GetHeightWidthKeywordResult(processedValue, fullKey);
             }
 
             if (string.Equals(fullKey, "max-width", StringComparison.InvariantCultureIgnoreCase))
             {
-                switch (processedValue)
-                {
-                    case "min":
-                        return "max-width:min-content";
-                    case "max":
-                        return "max-width:max-content";
-                    case "fit":
-                        return "max-width:fit-content";
-                }
-                return DimensionResult(processedValue, "max-width");
+                return GetHeightWidthKeywordResult(processedValue, fullKey);
             }
 
             return $"{fullKey}:{processedValue}";
@@ -675,6 +624,24 @@ namespace BCSS.Services
             return val;
         }
 
+        public static string GetHeightWidthKeywordResult(string value, string cssProp)
+        {
+            switch (value)
+            {
+                case "full":
+                    return $"{cssProp}:100%";
+                case "screen":
+                    return $"{cssProp}:100{(cssProp.Contains("width") ? "vw" : "vh")}";
+                case "min":
+                    return $"{cssProp}:min-content";
+                case "max":
+                    return $"{cssProp}:max-content";
+                case "fit":
+                    return $"{cssProp}:fit-content";
+            }
+            return DimensionResult(value, cssProp);
+        }
+
         public static string GetCustomValue(string? val)
         {
             if (string.IsNullOrWhiteSpace(val))
@@ -689,6 +656,38 @@ namespace BCSS.Services
                 return subString;
             }
             return val;
+        }
+
+        public static string GetOneWordResult(string? className)
+        {
+            if (string.IsNullOrEmpty(className))
+            {
+                return string.Empty;
+            }
+
+            switch (className)
+            {
+                case "absolute":
+                    return "position:absolute";
+                case "fill":
+                    return "height:100% width:100%";
+                case "fixed":
+                    return "position:fixed";
+                case "hidden":
+                    return "display:none";
+                case "invisible":
+                    return "visibility:hidden";
+                case "relative":
+                    return "position:relative";
+                case "static":
+                    return "position:static";
+                case "sticky":
+                    return "position:sticky";
+                case "visible":
+                    return "visibility:visible";
+            }
+
+            return className;
         }
 
     }

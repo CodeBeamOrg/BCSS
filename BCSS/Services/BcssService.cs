@@ -30,7 +30,7 @@ namespace BCSS
 
                 string? result = BlazorCssConverter.Convert(val);
 
-                BcssInfo info = new BcssInfo();
+                BcssInfo info = new();
                 info.Prefixes = BlazorCssConverter.GetSuffixes(val);
                 info.Key = Decode(val);
                 info.Value = result;

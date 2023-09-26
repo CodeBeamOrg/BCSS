@@ -55,7 +55,7 @@ namespace BCSS
             return _shouldRender;
         }
 
-        string? _isValidResult;
+        //string? _isValidResult;
         protected internal async Task AddInfo(BcssInfo info)
         {
             if (string.IsNullOrEmpty(info.Key) || string.IsNullOrEmpty(info.Value))
@@ -67,12 +67,21 @@ namespace BCSS
                 return;
             }
 
+            List<string> splittedValue = info.Value.Split(' ').ToList();
+
             bool isValid = true;
-            string[] definition = info.Value.Replace('*', ' ').Replace('+', '-').Split(':');
-            if (definition.Length > 1)
+            foreach (var v in splittedValue)
             {
-                isValid = await IsValid(definition[0], definition[1]);
-                _isValidResult = "Is Valid" + isValid.ToString();
+                string[] definition = v.Replace('*', ' ').Replace('+', '-').Split(':');
+                if (definition.Length > 1)
+                {
+                    isValid = await IsValid(definition[0], definition[1]);
+                    //_isValidResult = "Is Valid" + isValid.ToString();
+                }
+                if (isValid == false)
+                {
+                    break;
+                }
             }
 
             if (isValid == true)

@@ -31,6 +31,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        _contents.Add(new() { ShortName = "absolute", OriginalName = "position:absolute" });
         _contents.Add(new() { ShortName = "ar, aspect", OriginalName = "aspect-ratio"});
         _contents.Add(new() { ShortName = "b", OriginalName = "border" });
         _contents.Add(new() { ShortName = "bb, b-b, borderb, border-b", OriginalName = "border-bottom" });
@@ -44,9 +45,12 @@
         _contents.Add(new() { ShortName = "c", OriginalName = "cursor" });
         _contents.Add(new() { ShortName = "d", OriginalName = "display" });
         _contents.Add(new() { ShortName = "f", OriginalName = "font" });
+        _contents.Add(new() { ShortName = "fill", OriginalName = "height:100% width:100%" });
+        _contents.Add(new() { ShortName = "fixed", OriginalName = "position:fixed" });
         _contents.Add(new() { ShortName = "h", OriginalName = "height" });
         _contents.Add(new() { ShortName = "hmin, h-min", OriginalName = "min-height" });
         _contents.Add(new() { ShortName = "hmax, h-max", OriginalName = "max-height" });
+        _contents.Add(new() { ShortName = "hidden", OriginalName = "display:none" });
         _contents.Add(new() { ShortName = "m", OriginalName = "margin" });
         _contents.Add(new() { ShortName = "mb", OriginalName = "margin-bottom" });
         _contents.Add(new() { ShortName = "ml", OriginalName = "margin-left" });
@@ -68,10 +72,15 @@
         _contents.Add(new() { ShortName = "pe", OriginalName = "padding-inline-end" });
         _contents.Add(new() { ShortName = "pos", OriginalName = "position" });
         _contents.Add(new() { ShortName = "r, rounded", OriginalName = "border-radius" });
+        _contents.Add(new() { ShortName = "relative", OriginalName = "position:relative" });
         _contents.Add(new() { ShortName = "scroll", OriginalName = "scroll-behavior" });
         _contents.Add(new() { ShortName = "select", OriginalName = "user-select" });
+        _contents.Add(new() { ShortName = "static", OriginalName = "position:static" });
+        _contents.Add(new() { ShortName = "sticky", OriginalName = "position:sticky" });
         _contents.Add(new() { ShortName = "touch", OriginalName = "touch-action" });
         _contents.Add(new() { ShortName = "v, vis", OriginalName = "visibility" });
+        _contents.Add(new() { ShortName = "visible", OriginalName = "visibility:visible" });
+        _contents.Add(new() { ShortName = "invisible", OriginalName = "visibility:hidden" });
         _contents.Add(new() { ShortName = "w", OriginalName = "width" });
         _contents.Add(new() { ShortName = "wmin, w-min", OriginalName = "min-width" });
         _contents.Add(new() { ShortName = "wmax, w-max", OriginalName = "max-width" });
