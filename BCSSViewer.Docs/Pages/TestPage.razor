@@ -1,25 +1,27 @@
 ﻿@page "/testpage"
+@using BCSS.Services;
 @inject BcssService Bc
 @inject NavigationManager NavigationManager
 
-<MudText>BCSS</MudText>
+<MudContainer>
+    <MudText>BCSS</MudText>
 
-<MudPaper Class="@Bc[_cssString]" Width="200px" Height="200px" tabindex="1">
+    <MudTextField @bind-Value="_cssString" />
 
-</MudPaper>
+    Name: @_name
+    Value: @_value
 
-
-<MudPaper Class="w-500" Width="200px" Height="200px" tabindex="1">
-
-</MudPaper>
-
-
-<MudTextField @bind-Value="_cssString" Immediate="true" />
-
-<MudButton OnClick="StateHasChanged">Refresh</MudButton>
-<MudButton OnClick="@(() => Bc.Clear())">Clear</MudButton>
-<MudButton OnClick="@(() => NavigationManager.NavigateTo("/"))">Go To First Page</MudButton>
+    <MudButton OnClick="Convert">Convert</MudButton>
+    <MudButton OnClick="@(() => NavigationManager.NavigateTo("/"))">Go To First Page</MudButton>
+</MudContainer>
 
 @code {
-    string _cssString = "bg-blue w-400";
+    string _cssString = "";
+    string _name = "";
+    string _value = "";
+
+    private void Convert()
+    {
+        _value = BlazorCssConverter.Convert(_cssString);
+    }
 }

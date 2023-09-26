@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Data.SqlTypes;
+using System.Drawing;
 
 namespace BCSS.Services
 {
@@ -42,12 +43,14 @@ namespace BCSS.Services
                 return string.Empty;
             }
 
+            className = className.ToLower();
+
             string? key = null;
             string? value = null;
-            string[] splittedString = className.Split("--");
+            string[] splittedString = className.Split("--", 2);
             string[] processedString = className.Split('-');
 
-            if (splittedString.Length == 2)
+            if (splittedString.Length == 2 && (className.Contains('[') == false || (className.Contains('[') && className.IndexOf("--") < className.IndexOf("["))))
             {
                 key = splittedString[0].Split(':').Last();
                 value = splittedString[1];
@@ -58,7 +61,7 @@ namespace BCSS.Services
                 value = processedString.Length < 2 ? string.Empty : className.Substring(processedString.First().Length + 1);
             }
 
-            string? fullKey = GetFullKeyName(key.Replace("+", null).ToLower());
+            string? fullKey = GetFullKeyName(key.Replace("+", null));
             string? processedValue = value;
 
             if (string.IsNullOrEmpty(value))
@@ -66,13 +69,16 @@ namespace BCSS.Services
                 return string.Empty;
             }
 
-            if (processedValue.Contains('[') && processedValue.Contains(']'))
-            {
-                int startPos = processedValue.IndexOf('[');
-                int endPos = processedValue.IndexOf("]");
-                string subString = processedValue.Substring(startPos + 1, endPos - startPos - 1);
-                processedValue = processedValue.Replace("[" + subString + "]", ColorResult(subString));
-            }
+            string subString = GetCustomValue(value);
+            processedValue = processedValue.Replace("[" + subString + "]", CustomValueResult(subString));
+
+            //if (processedValue.Contains('[') && processedValue.Contains(']'))
+            //{
+            //    int startPos = processedValue.IndexOf('[');
+            //    int endPos = processedValue.IndexOf("]");
+            //    string subString = processedValue.Substring(startPos + 1, endPos - startPos - 1);
+            //    processedValue = processedValue.Replace("[" + subString + "]", CustomValueResult(subString));
+            //}
 
             if (string.Equals(fullKey, "aspect-ratio", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -507,7 +513,7 @@ namespace BCSS.Services
                 return DimensionResult(processedValue, "max-width");
             }
 
-            return $"{fullKey?.ToLower()}:{processedValue.ToLower()}";
+            return $"{fullKey}:{processedValue}";
         }
 
         public static string GetFullKeyName(string name)
@@ -623,11 +629,11 @@ namespace BCSS.Services
             {
                 return string.Empty;
             }
-            //string[] processedValue = value.Split('-');
-            return $"{(string.IsNullOrEmpty(name) ? null : name + ":")}{value.Replace('-', '*')}";
+            string subString = GetCustomValue(value);
+            return $"{(string.IsNullOrEmpty(name) ? null : name + ":")}{value.Replace("["+subString+"]", CustomValueResult(subString)).Replace('-', '*')}";
         }
 
-        public static string ColorResult(string? val)
+        public static string CustomValueResult(string? val)
         {
             if (string.IsNullOrWhiteSpace(val))
             {
@@ -648,11 +654,31 @@ namespace BCSS.Services
                 string result = color.R + "," + color.G + "," + color.B + "," + color.A;
                 return $"rgba({result})";
             }
+            if (val.Contains("--"))
+            {
+                return $"var({val})";
+            }
             if (val.Contains(','))
             {
                 return $"rgba({val})";
             }
-            return $"rgba({val})";
+            return val;
+        }
+
+        public static string GetCustomValue(string? val)
+        {
+            if (string.IsNullOrWhiteSpace(val))
+            {
+                return string.Empty;
+            }
+            if (val.Contains('[') && val.Contains(']'))
+            {
+                int startPos = val.IndexOf('[');
+                int endPos = val.IndexOf("]");
+                string subString = val.Substring(startPos + 1, endPos - startPos - 1);
+                return subString;
+            }
+            return val;
         }
 
     }

@@ -1,0 +1,13 @@
+﻿@page "/syntax/caseinsensitive"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Class="mb-4" Typo="Typo.h4">Case Insensitive</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Description="BCSS is completely case insensitive." Code="@("borderb-5px-solid-red\nBORDERB-5px-Solid-RED\nborderB-5PX-Solid-Red")" />
+        <MudAlert Severity="Severity.Info">BCSS also supports dotted i (i, İ, ı, I) case insensitive. (Known in Turkic languages like Turkish.)</MudAlert>
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/syntax/customvalues" PreviousText="Custom Values (Colors, Variables etc.)" NextHref="/content" NextText="Content Overview" />
+</MudContainer>
