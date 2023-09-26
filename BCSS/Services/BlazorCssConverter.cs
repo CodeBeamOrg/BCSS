@@ -544,6 +544,12 @@ namespace BCSS.Services
                     return "border-right";
                 case "bg":
                     return "background";
+                case "bgc":
+                case "bgcolor":
+                    return "background-color";
+                case "bgi":
+                case "bgimage":
+                    return "background-image";
                 case "box":
                 case "boxsizing":
                     return "box-sizing";
@@ -661,6 +667,10 @@ namespace BCSS.Services
             if (val.Contains(','))
             {
                 return $"rgba({val})";
+            }
+            if (val.StartsWith('/'))
+            {
+                return $"url({val.Substring(1)})";
             }
             return val;
         }
