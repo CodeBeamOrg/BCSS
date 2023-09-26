@@ -5,12 +5,12 @@ namespace BCSS.Services
 {
     public static class BlazorCssConverter
     {
-        public static List<string> GetSuffixes(string className)
+        public static List<string> GetPrefixes(string className)
         {
-            var suffixes = new List<string>();
+            var prefixes = new List<string>();
             if (string.IsNullOrWhiteSpace(className))
             {
-                return suffixes;
+                return prefixes;
             }
 
             string key = string.Empty;
@@ -25,15 +25,15 @@ namespace BCSS.Services
 
             if (key.Contains(':') == false)
             {
-                return suffixes;
+                return prefixes;
             }
 
             string[] partials = key.Replace('/', '-').Split(':');
             for (int i = 0; i < partials.Length - 1; i++)
             {
-                suffixes.Add(partials[i]);
+                prefixes.Add(partials[i]);
             }
-            return suffixes;
+            return prefixes;
         }
 
         public static string Convert(string className)
@@ -663,6 +663,11 @@ namespace BCSS.Services
             if (string.IsNullOrEmpty(className))
             {
                 return string.Empty;
+            }
+
+            if (className.Contains(':'))
+            {
+                className = className.Split(':').Last();
             }
 
             switch (className)

@@ -8,6 +8,7 @@
 
     <MudTextField @bind-Value="_cssString" />
 
+    Suffixes: @string.Join(", ", _prefixes)
     Name: @_name
     Value: @_value
 
@@ -17,11 +18,13 @@
 
 @code {
     string _cssString = "";
+    List<string> _prefixes = new();
     string _name = "";
     string _value = "";
 
     private void Convert()
     {
+        _prefixes = BlazorCssConverter.GetPrefixes(_cssString);
         _value = BlazorCssConverter.Convert(_cssString);
     }
 }
