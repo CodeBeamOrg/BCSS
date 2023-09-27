@@ -80,9 +80,10 @@
     string _cssString = "";
     string[] _possibleWidth = new string[] { "w-100", "w-125", "w-150", "w-175", "w-200", "w-225", "w-250", "w-275", "w-300" };
     string[] _possibleHeight = new string[] { "h-100", "h-125", "h-150", "h-175", "h-200", "h-225", "h-250", "h-275", "h-300" };
-    string[] _possibleColors = new string[] { "bg-purple", "bg-blue", "bg-red", "bg-green", "bg-[#123456]", "bg-[#efefef]" };
+    string[] _possibleColors = new string[] { "bg-purple", "bg-blue", "bg-red", "bg-green", "bg-purple", "bg-[#123456]", "bg-[#efefef]" };
     string[] _possibleRounded = new string[] { "r-0", "r-10", "r-20", "r-30", "r-40", "r-50" };
     string[] _possibleBorders = new string[] { "", "b--8px-solid-yellow", "b--8px-dotted-yellow", "b--4px-dashed-yellow" };
+    string[] _possibleCursor = new string[] { "cursor-default", "cursor-pointer", "cursor-progress", "cursor--not-allowed", "cursor-move", "cursor-help" };
 
     private void Generate()
     {
@@ -91,11 +92,13 @@
         _cssString = _possibleWidth[val];
         val = rnd.Next(0, 9);
         _cssString += $" {_possibleHeight[val]}";
-        val = rnd.Next(0, 5);
+        val = rnd.Next(0, 7);
         _cssString += $" {_possibleColors[val]}";
         val = rnd.Next(0, 6);
         _cssString += $" {_possibleRounded[val]}";
         val = rnd.Next(0, 4);
         _cssString += $" {_possibleBorders[val]}";
+        val = rnd.Next(0, 6);
+        _cssString += $" {_possibleCursor[val]}";
     }
 }

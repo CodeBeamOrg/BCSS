@@ -321,6 +321,11 @@ namespace BCSS.Services
                 return $"opacity:{processedValue}";
             }
 
+            if (string.Equals(fullKey, "origin", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return SpacedResult(value, "transform-origin");
+            }
+
             if (string.Equals(fullKey, "overflow-x", StringComparison.InvariantCultureIgnoreCase))
             {
                 return $"overflow-x:{processedValue}";
@@ -444,6 +449,97 @@ namespace BCSS.Services
                         return "resize:both";
                 }
                 return $"resize:{processedValue}";
+            }
+
+            if (string.Equals(fullKey, "rotate", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:rotate({processedValue.Replace('n', '-')}deg)";
+            }
+
+            if (string.Equals(fullKey, "rotatex", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:rotateX({processedValue.Replace('n', '-')}deg)";
+            }
+
+            if (string.Equals(fullKey, "rotatey", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:rotateY({processedValue.Replace('n', '-')}deg)";
+            }
+
+            if (string.Equals(fullKey, "rotatez", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:rotateZ({processedValue.Replace('n', '-')}deg)";
+            }
+
+            if (string.Equals(fullKey, "scale", StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (double.TryParse(processedValue, out double result))
+                {
+                    return $"transform:scale({(result / 100d).ToString().Replace(',', '.')})";
+                }
+                else
+                {
+                    return $"transform:scale({processedValue})";
+                }
+            }
+
+            if (string.Equals(fullKey, "scalex", StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (double.TryParse(processedValue, out double result))
+                {
+                    return $"transform:scaleX({(result / 100d).ToString().Replace(',', '.')})";
+                }
+                else
+                {
+                    return $"transform:scaleX({processedValue})";
+                }
+            }
+
+            if (string.Equals(fullKey, "scaley", StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (double.TryParse(processedValue, out double result))
+                {
+                    return $"transform:scaleY({(result / 100d).ToString().Replace(',', '.')})";
+                }
+                else
+                {
+                    return $"transform:scaleY({processedValue})";
+                }
+            }
+
+            if (string.Equals(fullKey, "skew", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:skew({processedValue}deg,{processedValue}deg)";
+            }
+
+            if (string.Equals(fullKey, "skewx", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:skewX({processedValue}deg)";
+            }
+
+            if (string.Equals(fullKey, "skewy", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:skewY({processedValue}deg)";
+            }
+
+            if (string.Equals(fullKey, "translate", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:translate({processedValue}px,{processedValue}px)";
+            }
+
+            if (string.Equals(fullKey, "translatex", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:translateX({processedValue}px)";
+            }
+
+            if (string.Equals(fullKey, "translatey", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:translateY({processedValue}px)";
+            }
+
+            if (string.Equals(fullKey, "translatez", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"transform:translateZ({processedValue}px)";
             }
 
             if (string.Equals(fullKey, "width", StringComparison.InvariantCultureIgnoreCase))

@@ -1,0 +1,16 @@
+﻿@page "/content/transform"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Class="mb-4" Typo="Typo.h4">Transforms</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Title="Scale" Description="Scale transforms are based on 100, not 1." Code="@("scale-99\t//scale(0.99)\nscale-100\t//scale(1)\nscale-150\t//scale(1.5)")" />
+        <CodeBlock Title="Rotate" Code="@("rotate-45\t//rotate(45deg)\nrotate-n45\t//rotate(-45deg)")" />
+        <CodeBlock Title="Translate" Code="@("translate-60\ntranslatex-60\ntranslatey-60\ntranslatez-60")" />
+        <CodeBlock Title="Skew" Code="@("skew-20\nskewx-20\nskewy-20")" />
+        <CodeBlock Title="Origin" Code="@("origin-center\norigin-top origin-bottom origin-left origin-right\norigin-top-left origin-top-right origin-bottom-left origin-bottom-right")" />
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/content/general" PreviousText="Content Overview" NextHref="/content/transform" NextText="Transforms" />
+</MudContainer>
