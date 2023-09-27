@@ -1,0 +1,38 @@
+﻿@page "/quickdebug"
+@using BCSS.Services;
+@using Microsoft.JSInterop;
+@inject BcssService Bc
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<MudContainer>
+    <MudText Typo="Typo.h4">BCSS QuickDebug</MudText>
+    <MudText Class="mt-2">Write the BCSS value and press convert to see results.</MudText>
+
+    <MudTextField Class="mt-4" @bind-Value="_cssString" Variant="Variant.Outlined" Label="BCSS Classname" />
+    <MudButton Class="mt-2" OnClick="Convert" Variant="Variant.Outlined" Color="Color.Primary">Convert</MudButton>
+
+    <MudText Class="mt-4" Color="Color.Primary">Suffixes: <MudText Inline="true" Color="Color.Secondary">@string.Join(", ", _prefixes)</MudText></MudText>
+    <MudText Color="Color.Primary">Value: <MudText Inline="true" Color="Color.Secondary">@_value</MudText></MudText>
+    <MudText Class="d-flex align-center">IsValid: <MudIcon Icon="@(_isValid == true ? Icons.Material.Filled.Done : _isValid == false ? Icons.Material.Filled.Close : null)" Color="@(_isValid == true ? Color.Success : Color.Error)" /></MudText>
+</MudContainer>
+
+@code {
+    string _cssString = "";
+    List<string> _prefixes = new();
+    string _value = "";
+    bool? _isValid = null;
+
+    private async Task Convert()
+    {
+        _prefixes = BlazorCssConverter.GetPrefixes(_cssString);
+        _value = BlazorCssConverter.Convert(_cssString).Replace('*', ' ');
+
+        string[] definition = _value.Split(':');
+        if (definition.Length > 1)
+        {
+            object[] parameters = new object[] { definition[0], definition[1] };
+            _isValid = await JSRuntime.InvokeAsync<bool>("checkcss", parameters);
+        }
+    }
+}

@@ -7,14 +7,14 @@
         <MudText Class="text-move" Style="font-weight:900; user-select: none; cursor: default" Typo="Typo.h3" Color="Color.Default">Blazor-</MudText>
         <MudText Class="text-wrap" Style="font-weight:900; user-select: none; cursor: default" Inline="true" Typo="Typo.h3" Color="Color.Default">CSS</MudText>
     </div>
-    
+
     <MudText Class="mt-8" Align="Align.Center" Typo="Typo.h3" Color="Color.Secondary"
              Style="font-weight:900; stroke-width: 2px; background-image: linear-gradient(143deg, var(--mud-palette-primary),  #f45b69, #eef4d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Revolutionary Runtime</MudText>
     <MudText Class="" Typo="Typo.h3" Color="Color.Primary" Style="font-weight:900;">CSS Generator</MudText>
-    
+
     <MudText Typo="Typo.h6">by CodeBeam</MudText>
-    
-    
+
+
     <MudButton Class="mt-8" Variant="Variant.Outlined" Color="Color.Primary" Href="/gettingstarted/what">GET STARTED</MudButton>
 </MudContainer>
 
@@ -36,13 +36,13 @@
             <BcssCard Icon="@Icons.Material.Filled.MobileFriendly" Header="Mobile Friendly" Description="Suits for responsive design." />
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
-            <BcssCard Icon="@Icons.Material.Filled.Code" Header="C#" Description="Not needed to work any css or scss content files. Possible to work with C# variables." />
+            <BcssCard Icon="@Icons.Material.Filled.Code" Header="Complete C#" Description="Not needed to work any js, css or scss content files. Possible to work with C# variables." />
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
             <BcssCard Icon="@Icons.Material.Filled.Speed" Header="Rapid Development" Description="One of the best ways to make and stabile your application quickly." />
         </MudItem>
     </MudGrid>
-    
+
 </MudContainer>
 
 <MudContainer Class="@Bc["hmin-80vh mt-32"]">
@@ -50,21 +50,20 @@
     <MudText Typo="Typo.body1">Try the BCSS abilities and re-style the box.</MudText>
 
 
-        <MudGrid Class="@Bc["mud-width-full mud-height-full mt-32"]">
-            <MudItem xs="12" sm="8" Class="d-flex align-center justify-center">
-                <MudPaper Class="@Bc[_cssString]" Width="200px" Height="200px" tabindex="1" />
-            </MudItem>
-
-            <MudItem xs="12" sm="4">
-                <MudTextFieldExtended @bind-Value="_cssString" Lines="4" Variant="Variant.Outlined" Label="Bcss Class" Immediate="true" spellcheck="false">
-                    <AdornmentEnd>
-                        <MudTooltip Text="Generate" Delay="300" ShowOnFocus="false" ShowOnClick="false">
-                            <MudIconButton Icon="@Icons.Material.Filled.Loop" OnClick="Generate" />
-                        </MudTooltip>
-                    </AdornmentEnd>
-                </MudTextFieldExtended>
-            </MudItem>
-        </MudGrid>
+    <MudGrid Class="@Bc["mud-width-full mud-height-full mt-32"]">
+        <MudItem xs="12" sm="12">
+            <MudTextFieldExtended @bind-Value="_cssString" Lines="2" Variant="Variant.Outlined" Label="Bcss Class" Immediate="true" spellcheck="false">
+                <AdornmentEnd>
+                    <MudTooltip Text="Generate" Delay="300" ShowOnFocus="false" ShowOnClick="false">
+                        <MudIconButton Icon="@Icons.Material.Filled.Loop" OnClick="Generate" />
+                    </MudTooltip>
+                </AdornmentEnd>
+            </MudTextFieldExtended>
+        </MudItem>
+        <MudItem xs="12" sm="12" Class="d-flex align-center justify-center">
+            <MudPaper Class="@Bc[_cssString]" Width="200px" Height="200px" tabindex="1" />
+        </MudItem>
+    </MudGrid>
 </MudContainer>
 
 <MudContainer Class="@Bc["hmin-60vh d-flex flex-column align-center justify-start"]">

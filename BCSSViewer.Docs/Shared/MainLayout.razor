@@ -15,16 +15,16 @@
 
     <MudDrawer @bind-Open="@_open" Elevation="1" Variant="@DrawerVariant.Responsive" ClipMode="DrawerClipMode.Always">
         <MudNavMenu Bordered="true" Rounded="true">
-            <MudNavGroup Title="Getting Started">
+            <MudNavGroup Title="Getting Started" Icon="@Icons.Material.Filled.Css" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/what">What is BCSS</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/howitworks">How It Works</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/installation">Installation</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Configuration">
+            <MudNavGroup Title="Configuration" Icon="@Icons.Material.Filled.SettingsSuggest" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="configuration/breakpoints">Breakpoints</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="configuration/spacing">Spacing</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Syntax">
+            <MudNavGroup Title="Syntax" Icon="@Icons.Material.Filled.EditNote" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/basics">Basics and Usage</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/doubledash">Dash and Double Dash</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/unitmeasurement">Unit Measurement (Px, Rem)</MudNavLink>
@@ -32,7 +32,7 @@
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/customvalues">Custom Values & Colors</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/caseinsensitive">Case Insensitive</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Content">
+            <MudNavGroup Title="Content" Icon="@Icons.Material.Filled.Dashboard" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="/content">General</MudNavLink>
                 <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/border">Borders</MudNavLink>
                 <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/dimension">Dimensions</MudNavLink>
@@ -40,8 +40,11 @@
                 <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/spacing">Spacing</MudNavLink>
                 <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/text">Text</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Special Content">
+            <MudNavGroup Title="Special Content" Icon="@Icons.Material.Filled.DashboardCustomize" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="/content/transform">Transforms</MudNavLink>
+            </MudNavGroup>
+            <MudNavGroup Title="Dev Tools" Icon="@Icons.Material.Filled.DeveloperBoard" IconColor="Color.Primary">
+                <MudNavLink Match="NavLinkMatch.All" Href="/quickdebug">QuickDebug</MudNavLink>
             </MudNavGroup>
         </MudNavMenu>
     </MudDrawer>
