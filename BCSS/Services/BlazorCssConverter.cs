@@ -1,5 +1,4 @@
-﻿using System.Data.SqlTypes;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace BCSS.Services
 {
@@ -36,7 +35,7 @@ namespace BCSS.Services
             return prefixes;
         }
 
-        public static string Convert(string className)
+        public static string Convert(string className, BlazorCssProvider? provider = null)
         {
             if (string.IsNullOrWhiteSpace(className))
             {
@@ -232,49 +231,49 @@ namespace BCSS.Services
                 return GetHeightWidthKeywordResult(processedValue, fullKey);
             }
 
-            if (string.Equals(key, "m", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(key, "ma", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue?.Replace('n', '-'), "margin");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin", provider);
             }
 
             if (string.Equals(key, "mt", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue?.Replace('n', '-'), "margin-top");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-top", provider);
             }
 
             if (string.Equals(key, "mb", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue?.Replace('n', '-'), "margin-bottom");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-bottom", provider);
             }
 
             if (string.Equals(key, "ml", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue?.Replace('n', '-'), "margin-left");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-left", provider);
             }
 
             if (string.Equals(key, "mr", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue?.Replace('n', '-'), "margin-right");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-right", provider);
             }
 
             if (string.Equals(key, "mx", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue?.Replace('n', '-'), "margin-left") + " " + DimensionResult(processedValue, "margin-right");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-left", provider) + " " + DimensionResult(processedValue, "margin-right", provider);
             }
 
             if (string.Equals(key, "my", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue?.Replace('n', '-'), "margin-top") + " " + DimensionResult(processedValue, "margin-bottom");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-top", provider) + " " + DimensionResult(processedValue, "margin-bottom", provider);
             }
 
             if (string.Equals(key, "ms", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue?.Replace('n', '-'), "margin-inline-start");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-inline-start", provider);
             }
 
             if (string.Equals(key, "me", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue?.Replace('n', '-'), "margin-inline-end");
+                return DimensionResult(processedValue?.Replace('n', '-'), "margin-inline-end", provider);
             }
 
             if (string.Equals(key, "object", StringComparison.InvariantCultureIgnoreCase))
@@ -332,49 +331,49 @@ namespace BCSS.Services
                 return $"overflow-y:{processedValue}";
             }
 
-            if (string.Equals(key, "p", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(key, "pa", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, "padding");
+                return DimensionResult(processedValue, "padding", provider);
             }
 
             if (string.Equals(key, "pt", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, "padding-top");
+                return DimensionResult(processedValue, "padding-top", provider);
             }
 
             if (string.Equals(key, "pb", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, "padding-bottom");
+                return DimensionResult(processedValue, "padding-bottom", provider);
             }
 
             if (string.Equals(key, "pl", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, "padding-left");
+                return DimensionResult(processedValue, "padding-left", provider);
             }
 
             if (string.Equals(key, "pr", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, "padding-right");
+                return DimensionResult(processedValue, "padding-right", provider);
             }
 
             if (string.Equals(key, "px", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, "padding-left") + " " + DimensionResult(processedValue, "padding-right");
+                return DimensionResult(processedValue, "padding-left", provider) + " " + DimensionResult(processedValue, "padding-right", provider);
             }
 
             if (string.Equals(key, "py", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, "padding-top") + " " + DimensionResult(processedValue, "padding-bottom");
+                return DimensionResult(processedValue, "padding-top", provider) + " " + DimensionResult(processedValue, "padding-bottom", provider);
             }
 
             if (string.Equals(key, "ps", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, "padding-inline-start");
+                return DimensionResult(processedValue, "padding-inline-start", provider);
             }
 
             if (string.Equals(key, "pe", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, "padding-inline-end");
+                return DimensionResult(processedValue, "padding-inline-end", provider);
             }
 
             if (string.Equals(key, "r", StringComparison.InvariantCultureIgnoreCase) || string.Equals(key, "rounded", StringComparison.InvariantCultureIgnoreCase))
@@ -527,6 +526,7 @@ namespace BCSS.Services
                 case "overflowy":
                 case "flowy":
                     return "overflow-y";
+                case "p":
                 case "pos":
                     return "position";
                 case "scroll":
@@ -556,7 +556,7 @@ namespace BCSS.Services
             }
         }
 
-        public static string DimensionResult(string? value, string cssName)
+        public static string DimensionResult(string? value, string cssName, BlazorCssProvider? provider = null)
         {
             if (value == null)
             {
@@ -574,6 +574,10 @@ namespace BCSS.Services
             if (value?.Contains(',') == true)
             {
                 return $"{cssName}:{value.Replace(',', '.')}0em";
+            }
+            if (provider != null && int.TryParse(value, out int result))
+            {
+                return $"{cssName}:{result * provider?.Spacing}px";
             }
             return $"{cssName}:{value}px";
         }

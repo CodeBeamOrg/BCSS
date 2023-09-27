@@ -28,7 +28,7 @@ namespace BCSS
                     continue;
                 }
 
-                string? result = BlazorCssConverter.Convert(val);
+                string? result = BlazorCssConverter.Convert(val, Provider);
 
                 BcssInfo info = new();
                 info.Prefixes = BlazorCssConverter.GetPrefixes(val);
@@ -69,6 +69,17 @@ namespace BCSS
             Provider.Md = md;
             Provider.Lg = lg;
             Provider.Xl = xl;
+#pragma warning restore BL0005
+        }
+
+        public void ChangeSpacing(int value)
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+#pragma warning disable BL0005
+            Provider.Spacing = value;
 #pragma warning restore BL0005
         }
 

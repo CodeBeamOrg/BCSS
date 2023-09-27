@@ -4,14 +4,13 @@
 <MudContainer>
     <MudText Class="mb-4" Typo="Typo.h4">Spacing</MudText>
 
-    <MudText>The page is not ready.</MudText>
-
-@*     <MudStack Class="mt-4" Spacing="4">
-        <MudText>BCSS currently supports 5 breakpoints: xs, sm, md, lg and xl.</MudText>
-        <CodeBlock Description="Breakpoint defaults:" Code="@("xs: 0-599\nsm: 600-959\nmd: 960-1279\nlg: 1280-1919\nxl: >1920")" />
-        <CodeBlock Description="There is two way to change breakpoints dynamically. First, in BlazorCssProvider component you can set different breakpoint values individually." Code="@("<BlazorCssProvider xs=\"360\" lg=\"1720\" />")" />
-        <CodeBlock Description="And the second is with using BcssService's ChangeBreakpoints method." Code="@("@inject BcssService Bc\nBc.ChangeBreakpoints(sm: 620, xl: 2440)")" />
-    </MudStack> *@
+    <MudStack Class="mt-4" Spacing="4">
+        <MudText>BlazorCssProvider has Spacing parameter that controls the pixel multiplier. With this way you can control all your application's density with one parameter. Default is 1.</MudText>
+        <CodeBlock Description="Spacing works with padding and margin." Code="@("ma-4\t//4*1 with spacing 1 (by default).\n\t//4*2 with spacing 2\nma-n4\t//-4*1 (by default).")" />
+        <CodeBlock Description="There are two ways to change spacing dynamically (similar to breakpoint). First, in BlazorCssProvider component you can set spacing value." Code="@("<BlazorCssProvider Spacing=\"4\" />")" />
+        <CodeBlock Description="And the second is with using BcssService's ChangeSpacing method." Code="@("@inject BcssService Bc\nBc.ChangeSpacing(4)")" />
+        <MudAlert Severity="Severity.Info">Set spacing to 4 has familiar results like MudBlazor, Tailwind etc. Keep spacing 1 for full flexibility.</MudAlert>
+    </MudStack>
 
     <PageBottomRouting PreviousHref="/configuration/breakpoints" PreviousText="Breakpoints" NextHref="/syntax/basics" NextText="Basic Syntax" />
 </MudContainer>

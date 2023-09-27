@@ -16,6 +16,9 @@ namespace BCSS
         public bool KeepSingleValue { get; set; }
 
         [Parameter]
+        public int Spacing { get; set; } = 1;
+
+        [Parameter]
         public int Xs { get; set; } = 0;
 
         [Parameter]
