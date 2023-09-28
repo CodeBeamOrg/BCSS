@@ -1,0 +1,15 @@
+﻿@page "/content/filter"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Class="mb-4" Typo="Typo.h4">Filter & BackdropFilter</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Title="General Usage" Description="The syntax is 'filter-{something}-{value}'" Code="@("filter-blur-4px\nfilter-brightness-50%\nfilter-grayscale-100%")" />
+        <CodeBlock Title="Shorthand Usage" Description="The syntax is '{something}-{value}'" Code="@("blur-4\nbrightness-50%\ncontrast-50%\ninvert-50%\ngrayscale-50%\nsaturate-50%\nsepia-50%")" />
+        <CodeBlock Title="BackdropFilter General" Description="The syntax is 'bdfilter-{something}-{value}'" Code="@("bdfilter-blur-4px\nbd-filter--blur-4px")" />
+        <CodeBlock Title="BackdropFilter Shorthand" Description="The syntax is 'bd{something}-{value}'" Code="@("bdblur-4\nbdbrightness-50%\nbdcontrast-50%\nbdinvert-50%\nbdgrayscale-50%\nbdsaturate-50%\nbdsepia-50%")" />
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/content/general" PreviousText="Content Overview" NextHref="/content/flexbox" NextText="Flexbox" />
+</MudContainer>

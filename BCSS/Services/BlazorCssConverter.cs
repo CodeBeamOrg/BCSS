@@ -155,6 +155,16 @@ namespace BCSS.Services
                 return $"background:{processedValue}";
             }
 
+            if (string.Equals(fullKey, "backdrop-filter", StringComparison.InvariantCultureIgnoreCase))
+            {
+                string[] splitVal = processedValue.Split('-');
+                if (2 <= splitVal.Length)
+                {
+                    return $"backdrop-filter:{splitVal[0]}({splitVal[1]})";
+                }
+                return $"backdrop-filter:{processedValue})";
+            }
+
             if (string.Equals(fullKey, "border", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
@@ -211,6 +221,16 @@ namespace BCSS.Services
                     default:
                         return $"box-sizing:{processedValue}";
                 }
+            }
+
+            if (string.Equals(fullKey, "filter", StringComparison.InvariantCultureIgnoreCase))
+            {
+                string[] splitVal = processedValue.Split('-');
+                if (2 <= splitVal.Length)
+                {
+                    return $"filter:{splitVal[0]}({splitVal[1]})";
+                }
+                return $"filter:{processedValue})";
             }
 
             if (string.Equals(fullKey, "flex", StringComparison.InvariantCultureIgnoreCase))
@@ -596,6 +616,16 @@ namespace BCSS.Services
                 return GetHeightWidthKeywordResult(processedValue, fullKey);
             }
 
+            List<string> filterValues = new() { "blur", "brightness", "contrast", "grayscale", "invert", "saturate", "sepia" };
+            if (filterValues.Contains(fullKey))
+            {
+                return  $"filter:{fullKey}({DimensionResult(processedValue)})";
+            }
+            if (fullKey.StartsWith("bd") && filterValues.Contains(fullKey.Substring(2)))
+            {
+                return $"backdrop-filter:{fullKey.Substring(2)}({DimensionResult(processedValue)})";
+            }
+
             return $"{fullKey}:{processedValue}";
         }
 
@@ -627,6 +657,8 @@ namespace BCSS.Services
                     return "border-right";
                 case "bg":
                     return "background";
+                case "bdfilter":
+                    return "backdrop-filter";
                 case "bgc":
                 case "bgcolor":
                     return "background-color";
@@ -691,30 +723,31 @@ namespace BCSS.Services
             }
         }
 
-        public static string DimensionResult(string? value, string cssName, BlazorCssProvider? provider = null)
+        public static string DimensionResult(string? value, string? cssName = null, BlazorCssProvider? provider = null)
         {
             if (value == null)
             {
                 return string.Empty;
             }
+            bool isNameNull = string.IsNullOrEmpty(cssName);
 
-            if (value?.Contains("rem") == true || value?.Contains('%') == true || value?.Contains("vw") == true || value?.Contains("vh") == true || value?.Contains("em") == true)
+            if (value?.Contains("rem") == true || value?.Contains('%') == true || value?.Contains("vw") == true || value?.Contains("vh") == true || value?.Contains("em") == true || value?.Contains("deg") == true)
             {
-                return $"{cssName}:{value}";
+                return $"{(isNameNull ? null : cssName + ":")}{value}";
             }
             if (value?.Contains('.') == true)
             {
-                return $"{cssName}:{value}0rem";
+                return $"{(isNameNull ? null : cssName + ":")}{value}0rem";
             }
             if (value?.Contains(',') == true)
             {
-                return $"{cssName}:{value.Replace(',', '.')}0em";
+                return $"{(isNameNull ? null : cssName + ":")}{value.Replace(',', '.')}0em";
             }
             if (provider != null && int.TryParse(value, out int result))
             {
-                return $"{cssName}:{result * provider?.Spacing}px";
+                return $"{(isNameNull ? null : cssName + ":")}{result * provider?.Spacing}px";
             }
-            return $"{cssName}:{value}px";
+            return $"{(isNameNull ? null : cssName + ":")}{value}px";
         }
 
         public static string SpacedResult(string? value, string? name = null)
