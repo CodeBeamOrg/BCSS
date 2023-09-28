@@ -216,6 +216,33 @@ namespace BCSS.Services
                 }
             }
 
+            if (string.Equals(fullKey, "flex", StringComparison.InvariantCultureIgnoreCase))
+            {
+                switch (processedValue)
+                {
+                    case "center":
+                        return "justify-content:center align-items:center";
+                    case "col":
+                        return "flex-direction:column";
+                    case "col-reverse":
+                        return "flex-direction:column-reverse";
+                    case "row":
+                        return "flex-direction:row";
+                    case "row-reverse":
+                        return "flex-direction:row-reverse";
+                    case "wrap":
+                        return "flex-wrap:wrap";
+                    case "wrap-reverse":
+                        return "flex-wrap:wrap-reverse";
+                }
+                return SpacedResult(processedValue, fullKey);
+            }
+
+            if (string.Equals(fullKey, "gap", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(processedValue, fullKey, provider);
+            }
+
             if (string.Equals(fullKey, "height", StringComparison.InvariantCultureIgnoreCase))
             {
                 return GetHeightWidthKeywordResult(processedValue, fullKey);
