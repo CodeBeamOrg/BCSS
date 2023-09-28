@@ -8,12 +8,13 @@
 		<Version>0.9.0-rc</Version>
 		<Authors>CodeBeam</Authors>
 		<Copyright>CodeBeam OpenSource MIT</Copyright>
-		<PackageTags>Blazor; CSS; Style</PackageTags>
+		<PackageTags>Blazor; CSS; Style; Generate</PackageTags>
 		<Description>Runtime CSS generator for Blazor.</Description>
 		<Title>CodeBeam.BCSS</Title>
 		<PackageIcon>BCSS.jpg</PackageIcon>
 		<RepositoryUrl>https://github.com/CodeBeamOrg/BCSS</RepositoryUrl>
 		<PackageId>CodeBeam.BCSS</PackageId>
+		<PackageProjectUrl>http://bcss.codebeam.org</PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>

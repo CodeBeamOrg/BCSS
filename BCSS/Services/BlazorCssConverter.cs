@@ -76,14 +76,6 @@ namespace BCSS.Services
             string subString = GetCustomValue(value);
             processedValue = processedValue.Replace("[" + subString + "]", CustomValueResult(subString));
 
-            //if (processedValue.Contains('[') && processedValue.Contains(']'))
-            //{
-            //    int startPos = processedValue.IndexOf('[');
-            //    int endPos = processedValue.IndexOf("]");
-            //    string subString = processedValue.Substring(startPos + 1, endPos - startPos - 1);
-            //    processedValue = processedValue.Replace("[" + subString + "]", CustomValueResult(subString));
-            //}
-
             if (string.Equals(fullKey, "aspect-ratio", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
@@ -203,6 +195,11 @@ namespace BCSS.Services
                 return SpacedResult(value, "border-right");
             }
 
+            if (string.Equals(fullKey, "bottom", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(processedValue, fullKey);
+            }
+
             if (string.Equals(fullKey, "box", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
@@ -246,6 +243,11 @@ namespace BCSS.Services
             if (string.Equals(fullKey, "height", StringComparison.InvariantCultureIgnoreCase))
             {
                 return GetHeightWidthKeywordResult(processedValue, fullKey);
+            }
+
+            if (string.Equals(fullKey, "left", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(processedValue, fullKey);
             }
 
             if (string.Equals(fullKey, "min-height", StringComparison.InvariantCultureIgnoreCase))
@@ -478,6 +480,11 @@ namespace BCSS.Services
                 return $"resize:{processedValue}";
             }
 
+            if (string.Equals(fullKey, "right", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(processedValue, fullKey);
+            }
+
             if (string.Equals(fullKey, "rotate", StringComparison.InvariantCultureIgnoreCase))
             {
                 return $"transform:rotate({processedValue.Replace('n', '-')}deg)";
@@ -547,6 +554,11 @@ namespace BCSS.Services
             if (string.Equals(fullKey, "skewy", StringComparison.InvariantCultureIgnoreCase))
             {
                 return $"transform:skewY({processedValue}deg)";
+            }
+
+            if (string.Equals(fullKey, "top", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DimensionResult(processedValue, fullKey);
             }
 
             if (string.Equals(fullKey, "translate", StringComparison.InvariantCultureIgnoreCase))
