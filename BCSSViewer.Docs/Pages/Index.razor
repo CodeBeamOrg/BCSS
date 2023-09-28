@@ -47,12 +47,12 @@
 
 <MudContainer Class="@Bc["hmin-80vh mt-32"]">
     <MudText Typo="Typo.h4" Color="Color.Primary">PlayGround</MudText>
-    <MudText Typo="Typo.body1">Try the BCSS abilities and re-style the box.</MudText>
+    <MudText Typo="Typo.body1">Try the BCSS abilities and re-style the box. Don't be shy to click!</MudText>
 
 
     <MudGrid Class="@Bc["mud-width-full mud-height-full mt-32"]">
-        <MudItem xs="12" sm="12">
-            <MudTextFieldExtended @bind-Value="_cssString" Lines="2" Variant="Variant.Outlined" Label="Bcss Class" Immediate="true" spellcheck="false">
+        <MudItem xs="12" sm="12" Class="d-flex flex-column align-center justify-center mud-width-full">
+            <MudTextFieldExtended Class="@Bc["w-full"]" @bind-Value="_cssString" Lines="2" Variant="Variant.Outlined" Label="Bcss Class" Immediate="true" spellcheck="false">
                 <AdornmentEnd>
                     <MudTooltip Text="Generate" Delay="300" ShowOnFocus="false" ShowOnClick="false">
                         <MudIconButton Icon="@Icons.Material.Filled.Loop" OnClick="Generate" />
@@ -61,7 +61,9 @@
             </MudTextFieldExtended>
         </MudItem>
         <MudItem xs="12" sm="12" Class="d-flex align-center justify-center">
-            <MudPaper Class="@Bc[_cssString]" Width="200px" Height="200px" tabindex="1" />
+            <MudPaper Class="@Bc[_cssString + " d-flex align-center justify-center pa-4 transition--all*1s"]" Width="200px" Height="200px" tabindex="1" @onclick="Generate">
+                <MudText Align="Align.Center"><b>@_playgroundText</b></MudText>
+            </MudPaper>
         </MudItem>
     </MudGrid>
 </MudContainer>
@@ -79,10 +81,12 @@
     string _cssString = "";
     string[] _possibleWidth = new string[] { "w-100", "w-125", "w-150", "w-175", "w-200", "w-225", "w-250", "w-275", "w-300" };
     string[] _possibleHeight = new string[] { "h-100", "h-125", "h-150", "h-175", "h-200", "h-225", "h-250", "h-275", "h-300" };
-    string[] _possibleColors = new string[] { "bg-purple", "bg-blue", "bg-red", "bg-green", "bg-purple", "bg-[#123456]", "bg-[#efefef]" };
-    string[] _possibleRounded = new string[] { "r-0", "r-10", "r-20", "r-30", "r-40", "r-50" };
-    string[] _possibleBorders = new string[] { "", "b--8px-solid-yellow", "b--8px-dotted-yellow", "b--4px-dashed-yellow" };
+    string[] _possibleColors = new string[] { "bg-purple", "bg-blue", "bg-red", "bg-green", "bg-purple", "bg-pink", "bg-teal", "bg-orange", "bg-[#123456]", "bg-[#efefef]" };
+    string[] _possibleRounded = new string[] { "r-0", "r-20", "r-50", "r-50%", "r-100%" };
+    string[] _possibleBorders = new string[] { "", "b--8px-solid-yellow", "b--8px-dotted-yellow", "b--4px-dashed-yellow", "b--8px-solid-cyan", "b--8px-dotted-cyan" };
     string[] _possibleCursor = new string[] { "cursor-default", "cursor-pointer", "cursor-progress", "cursor--not-allowed", "cursor-move", "cursor-help" };
+    string[] _possibleShadow = new string[] { "", "box-shadow--5px*5px*5px*black", "box-shadow--5px*-5px*10px*black", "box-shadow---5px*5px*20px*black" };
+    string _playgroundText = "Click On Me!";
 
     private void Generate()
     {
@@ -91,13 +95,24 @@
         _cssString = _possibleWidth[val];
         val = rnd.Next(0, 9);
         _cssString += $" {_possibleHeight[val]}";
-        val = rnd.Next(0, 7);
+        val = rnd.Next(0, 10);
         _cssString += $" {_possibleColors[val]}";
-        val = rnd.Next(0, 6);
+        if (val == 9 || val == 10)
+        {
+            _cssString += " color-black";
+        }
+        else
+        {
+            _cssString += " color-white";
+        }
+        val = rnd.Next(0, 5);
         _cssString += $" {_possibleRounded[val]}";
-        val = rnd.Next(0, 4);
+        val = rnd.Next(0, 6);
         _cssString += $" {_possibleBorders[val]}";
         val = rnd.Next(0, 6);
         _cssString += $" {_possibleCursor[val]}";
+        val = rnd.Next(0, 4);
+        _cssString += $" {_possibleShadow[val]}";
+        _playgroundText = "One More Lucky Click!";
     }
 }
