@@ -1,0 +1,13 @@
+﻿@page "/content/shadow"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Class="mb-4" Typo="Typo.h4">Shadow</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Title="Outer" Description="BCSS calculates it's own shadow algorithm with shadow keyword and value. Accepts all integer values." Code="@("shadow-0\t//no shadow, equals shadow-none\nshadow-1\t//very slight shadow\nshadow-2\t//slight shadow\nshadow-6\t//regular shadow\n...\nshadow-24\n...\nshadow-123456789")" />
+        <CodeBlock Title="Inset" Description="For inset shadow, add inset keyword. Supports both dash and double dash technique." Code="@("shadow-inset-2\nshadow-inset--2")" />
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/content/flexbox" PreviousText="FlexBox" NextHref="/content/transform" NextText="Transforms" />
+</MudContainer>

@@ -1,8 +1,9 @@
 ﻿@namespace BCSSViewer.Docs
+@inject BcssService Bc
 
 <div class="my-12 d-flex justify-space-between gap-4">
-    <MudButton StartIcon="@Icons.Material.Filled.ArrowLeft" Variant="Variant.Outlined" Color="Color.Primary" Href="@PreviousHref">Previous: @PreviousText</MudButton>
-    <MudButton EndIcon="@Icons.Material.Filled.ArrowRight" Variant="Variant.Outlined" Color="Color.Primary" Href="@NextHref">Next: @NextText</MudButton>
+    <MudButton Class="@Bc["text-transform--none"]" StartIcon="@Icons.Material.Filled.ArrowLeft" Variant="Variant.Outlined" Color="Color.Primary" Href="@PreviousHref">Previous: @PreviousText</MudButton>
+    <MudButton Class="@Bc["text-transform--none"]" EndIcon="@Icons.Material.Filled.ArrowRight" Variant="Variant.Outlined" Color="Color.Primary" Href="@NextHref">Next: @NextText</MudButton>
 </div>
 
 @code {

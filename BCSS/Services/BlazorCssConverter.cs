@@ -561,6 +561,52 @@ namespace BCSS.Services
                 }
             }
 
+            if (string.Equals(fullKey, "shadow", StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (processedValue.Contains("inset"))
+                {
+                    string[] splitVal = processedValue.Split("-");
+                    if (int.TryParse(splitVal.Last(), out int splitResult))
+                    {
+                        if (splitResult == 0)
+                        {
+                            return "box-shadow:none";
+                        }
+                        return $"box-shadow:inset*0px*-{1 + (splitResult / 2)}px*{2 + (splitResult / 2) + (splitResult / 10)}px*{splitResult / 3}px*rgba(0,0,0,0.15),inset*0px*{1 + (splitResult / 2)}px*{2 + (splitResult / 2) + (splitResult / 10)}px*{splitResult / 3}px*rgba(0,0,0,0.15)";
+                    }
+                }
+                if (int.TryParse(processedValue, out int result))
+                {
+                    if (result == 0)
+                    {
+                        return "box-shadow:none";
+                    }
+                    return $"box-shadow:0px*{1 + (result / 2)}px*{2 + (result / 2) + (result / 10)}px*{result / 3}px*rgba(0,0,0,0.15)";
+                }
+                else
+                {
+                    return $"box-shadow:{processedValue}";
+                }
+                
+            }
+
+            if (string.Equals(fullKey, "shadow-inset", StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (int.TryParse(processedValue, out int result))
+                {
+                    if (result == 0)
+                    {
+                        return "box-shadow:none";
+                    }
+                    return $"box-shadow:inset*0px*-{1 + (result / 2)}px*{2 + (result / 2) + (result / 10)}px*{result / 3}px*rgba(0,0,0,0.15),inset*0px*{1 + (result / 2)}px*{2 + (result / 2) + (result / 10)}px*{result / 3}px*rgba(0,0,0,0.15)";
+                }
+                else
+                {
+                    return $"box-shadow:{processedValue}";
+                }
+
+            }
+
             if (string.Equals(fullKey, "skew", StringComparison.InvariantCultureIgnoreCase))
             {
                 return $"transform:skew({processedValue}deg,{processedValue}deg)";

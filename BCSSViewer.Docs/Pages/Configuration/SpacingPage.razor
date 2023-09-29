@@ -6,7 +6,7 @@
 
     <MudStack Class="mt-4" Spacing="4">
         <MudText>BlazorCssProvider has Spacing parameter that controls the pixel multiplier. With this way you can control all your application's density with one parameter. Default is 1.</MudText>
-        <CodeBlock Description="Spacing works with padding and margin." Code="@("ma-4\t//4*1 with spacing 1 (by default).\n\t//4*2 with spacing 2\nma-n4\t//-4*1 (by default).")" />
+        <CodeBlock Description="Spacing works with padding, margin, left, right, top, bottom and gap properties." Code="@("ma-4\t//4*1 with spacing 1 (by default).\n\t//4*2 with spacing 2\nma-n4\t//-4*1 (by default).")" />
         <CodeBlock Description="There are two ways to change spacing dynamically (similar to breakpoint). First, in BlazorCssProvider component you can set spacing value." Code="@("<BlazorCssProvider Spacing=\"4\" />")" />
         <CodeBlock Description="And the second is with using BcssService's ChangeSpacing method." Code="@("@inject BcssService Bc\nBc.ChangeSpacing(4)")" />
         <MudAlert Severity="Severity.Info">Set spacing to 4 has familiar results like MudBlazor, Tailwind etc. Keep spacing 1 for full flexibility.</MudAlert>
