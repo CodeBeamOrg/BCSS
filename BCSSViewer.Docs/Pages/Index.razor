@@ -68,6 +68,36 @@
     </MudGrid>
 </MudContainer>
 
+<MudContainer Class="@Bc["hmin-80vh mt-32"]">
+    <MudText Typo="Typo.h4" Color="Color.Primary">Showcase</MudText>
+    <MudText Typo="Typo.body1">Let's make a more real world thing with BCSS.</MudText>
+
+
+    <MudGrid Class="@Bc["mud-width-full mud-height-full mt-32"]">
+        <MudItem xs="12" sm="12" Class="d-flex flex-column align-center justify-center mud-width-full">
+            <MudTooltip Text="Generate" Delay="300" ShowOnFocus="false" ShowOnClick="false">
+                <MudIconButton Icon="@Icons.Material.Filled.Loop" OnClick="GenerateShowcase" Color="Color.Primary" Variant="Variant.Filled" />
+            </MudTooltip>
+        </MudItem>
+        <MudItem xs="12" sm="12" Class="d-flex align-center justify-center">
+            <MudPaper Class="@Bc[_showcaseString + " " + _colorClass + " d-flex flex-column justify-center pa-4 cursor-pointer transition--all*1s"]" Width="320px" Height="400px" tabindex="1" @onclick="GenerateShowcase">
+                <div class="@Bc[_spacingClass + " d-flex flex-column justify-center align-center transition--all*1s"]">
+                    <MudAvatar Class="@Bc[_iconClass + " " + _colorClass + " " + _dimensionClass + _fontClass]" Variant="Variant.Filled">MCK</MudAvatar>
+                    <MudText Class="@Bc[_fontClass]" Typo="Typo.h6">Mehmet Can Karagöz</MudText>
+                    <MudText Class="@Bc[_fontClass]">Creator of BCSS</MudText>
+                    <MudDivider />
+                    <MudText Class="@Bc[_fontClass]">Achievements</MudText>
+                    <div class="@Bc[_spacingClass + " d-flex justify-center transition--all*1s"]">
+                        <MudIcon Class="@Bc[_iconClass]" Icon="@Icons.Material.Filled.Star" Size="Size.Large" />
+                        <MudIcon Class="@Bc[_iconClass]" Icon="@Icons.Material.Filled.Bolt" Size="Size.Large" />
+                        <MudIcon Class="@Bc[_iconClass]" Icon="@Icons.Material.Filled.SettingsSuggest" Size="Size.Large" />
+                    </div>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
 <MudContainer Class="@Bc["hmin-60vh d-flex flex-column align-center justify-start"]">
     <MudText Typo="Typo.h3" Align="Align.Center" Color="Color.Primary">Like <MudText Inline="true" Typo="Typo.h3" Align="Align.Center" Color="Color.Secondary">It?</MudText></MudText>
     <MudText>Learn the Fundamentals</MudText>
@@ -81,9 +111,9 @@
     string _cssString = "";
     string[] _possibleWidth = new string[] { "w-100", "w-125", "w-150", "w-175", "w-200", "w-225", "w-250", "w-275", "w-300" };
     string[] _possibleHeight = new string[] { "h-100", "h-125", "h-150", "h-175", "h-200", "h-225", "h-250", "h-275", "h-300" };
-    string[] _possibleColors = new string[] { "bg-purple", "bg-blue", "bg-red", "bg-green", "bg-purple", "bg-pink", "bg-teal", "bg-orange", "bg-[#123456]", "bg-[#efefef]" };
+    string[] _possibleColors = new string[] { "bg-purple", "bg-midnightblue", "bg-blue", "bg-crimson", "bg-steelblue", "bg-purple", "bg-pink", "bg-teal", "bg-orange", "bg-[#123456]", "bg-[#efefef]", "bg-lightsalmon" };
     string[] _possibleRounded = new string[] { "r-0", "r-20", "r-50", "r-50%", "r-100%" };
-    string[] _possibleBorders = new string[] { "", "b--8px-solid-yellow", "b--8px-dotted-yellow", "b--4px-dashed-yellow", "b--8px-solid-cyan", "b--8px-dotted-cyan" };
+    string[] _possibleBorders = new string[] { "", "b--8px-solid-yellow", "b--8px-dotted-yellow", "b--4px-dashed-yellow", "b--8px-solid-snow", "b--8px-dotted-snow", "b--4px-solid-snow" };
     string[] _possibleCursor = new string[] { "cursor-default", "cursor-pointer", "cursor-progress", "cursor--not-allowed", "cursor-move", "cursor-help" };
     string[] _possibleShadow = new string[] { "", "box-shadow--5px*5px*5px*black", "box-shadow--5px*-5px*10px*black", "box-shadow---5px*5px*20px*black" };
     string _playgroundText = "Click On Me!";
@@ -95,9 +125,9 @@
         _cssString = _possibleWidth[val];
         val = rnd.Next(0, 9);
         _cssString += $" {_possibleHeight[val]}";
-        val = rnd.Next(0, 10);
+        val = rnd.Next(0, 12);
         _cssString += $" {_possibleColors[val]}";
-        if (val == 9 || val == 10)
+        if (10 <= val)
         {
             _cssString += " color-black";
         }
@@ -107,12 +137,56 @@
         }
         val = rnd.Next(0, 5);
         _cssString += $" {_possibleRounded[val]}";
-        val = rnd.Next(0, 6);
+        val = rnd.Next(0, 7);
         _cssString += $" {_possibleBorders[val]}";
         val = rnd.Next(0, 6);
         _cssString += $" {_possibleCursor[val]}";
         val = rnd.Next(0, 4);
         _cssString += $" {_possibleShadow[val]}";
         _playgroundText = "One More Lucky Click!";
+    }
+
+    string[] _possibleSpacing = new string[] { "", "gap-2", "gap-4", "gap-6", "gap-8", "gap-10" };
+    string[] _possibleInsideBorders = new string[] { "", "b--2px-solid-yellow", "b--2px-dotted-yellow", "b--2px-dashed-yellow", "b--2px-solid-snow", "b--2px-dotted-snow", "b--2px-dashed-snow" };
+    string[] _possibleDimensions = new string[] { "w-100 h-100", "w-120 h-120", "w-140 h-140", "w-160 h-160" };
+    string[] _possibleFonts = new string[] { "font-family--Roboto", "font-family--Fuggles", "font-family--Pixelify*Sans", "font-family--Young*Serif" };
+
+    string _showcaseString = "";
+    string _iconClass = "";
+    string _spacingClass = "";
+    string _insideBorderClass = "";
+    string _colorClass = "";
+    string _dimensionClass = "";
+    string _fontClass = "";
+    private void GenerateShowcase()
+    {
+        _showcaseString = "";
+        Random rnd = new();
+        int val = rnd.Next(0, 6);
+        _spacingClass = _possibleSpacing[val];
+        val = rnd.Next(0, 4);
+        _dimensionClass = _possibleDimensions[val];
+        val = rnd.Next(0, 12);
+        _showcaseString += $" {_possibleColors[val]}";
+        _colorClass = $" {_possibleColors[val]}";
+        if (10 <= val)
+        {
+            _showcaseString += " color-black";
+            _colorClass += " color-black";
+        }
+        else
+        {
+            _showcaseString += " color-white";
+            _colorClass += " color-white";
+        }
+        val = rnd.Next(0, 5);
+        _showcaseString += $" {_possibleRounded[val]}";
+        val = rnd.Next(0, 7);
+        _showcaseString += $" {_possibleBorders[val]}";
+        _iconClass = $" {_possibleInsideBorders[val]}";
+        val = rnd.Next(0, 4);
+        _showcaseString += $" {_possibleShadow[val]}";
+        val = rnd.Next(0, 4);
+        _fontClass = $" {_possibleFonts[val]}";
     }
 }
