@@ -1,4 +1,4 @@
-﻿@page "/quickdebug"
+﻿@page "/devtools/quickdebug"
 @using BCSS.Services;
 @using Microsoft.JSInterop;
 @inject BcssService Bc
@@ -10,7 +10,7 @@
     <MudText Class="mt-2">Write the BCSS value and press convert to see results.</MudText>
 
     <MudTextField Class="mt-4" @bind-Value="_cssString" Variant="Variant.Outlined" Label="BCSS Classname" />
-    <MudButton Class="mt-2" OnClick="Convert" Variant="Variant.Outlined" Color="Color.Primary">Convert</MudButton>
+    <MudButton Class="mt-2" OnClick="Convert" Variant="Variant.Filled" Color="Color.Primary">Convert</MudButton>
 
     <MudText Class="mt-4" Color="Color.Primary">Suffixes: <MudText Inline="true" Color="Color.Secondary">@string.Join(", ", _prefixes)</MudText></MudText>
     <MudText Color="Color.Primary">Value: <MudText Inline="true" Color="Color.Secondary">@_value</MudText></MudText>

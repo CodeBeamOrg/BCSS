@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Components.Routing;
 @inherits LayoutComponentBase
 @inject BcssService Bc
+@inject NavigationManager NavigationManager
 
 <MudScrollbar Color="var(--mud-palette-primary)" BorderRadius="20" Width="4" />
 
@@ -15,16 +16,17 @@
 
     <MudDrawer @bind-Open="@_open" Elevation="1" Variant="@DrawerVariant.Responsive" ClipMode="DrawerClipMode.Always">
         <MudNavMenu Bordered="true" Rounded="true">
-            <MudNavGroup Title="Getting Started" Icon="@Icons.Material.Filled.Css" IconColor="Color.Primary">
+            <MudNavGroup Title="Getting Started" Icon="@Icons.Material.Filled.Css" Expanded="@GetExpandedStatus("gettingstarted")" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/what">What is BCSS</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/howitworks">How It Works</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/installation">Installation</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Configuration" Icon="@Icons.Material.Filled.SettingsSuggest" IconColor="Color.Primary">
+            <MudNavGroup Title="Configuration" Icon="@Icons.Material.Filled.SettingsSuggest" Expanded="@GetExpandedStatus("configuration")" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="configuration/breakpoints">Breakpoints</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="configuration/spacing">Spacing</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="configuration/performancemode">Performance Mode</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Syntax" Icon="@Icons.Material.Filled.EditNote" IconColor="Color.Primary">
+            <MudNavGroup Title="Syntax" Icon="@Icons.Material.Filled.EditNote" Expanded="@GetExpandedStatus("syntax")" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/basics">Basics and Usage</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/doubledash">Dash and Double Dash</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/unitmeasurement">Unit Measurement (Px, Rem)</MudNavLink>
@@ -32,30 +34,32 @@
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/customvalues">Custom Values & Colors</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/caseinsensitive">Case Insensitive</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Content" Icon="@Icons.Material.Filled.Dashboard" IconColor="Color.Primary">
+            <MudNavGroup Title="Content" Icon="@Icons.Material.Filled.Dashboard" Expanded="@GetExpandedStatus("content")" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="/content">General</MudNavLink>
                 <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/border">Borders</MudNavLink>
                 <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/dimension">Dimensions</MudNavLink>
                 <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/position">Position</MudNavLink>
                 <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/text">Text</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Special Content" Icon="@Icons.Material.Filled.DashboardCustomize" IconColor="Color.Primary">
-                <MudNavLink Match="NavLinkMatch.All" Href="/content/filter">Filter & Backdrop Filter</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/content/flexbox">Flexbox</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/content/shadow">Shadow</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/content/transform">Transforms</MudNavLink>
+            <MudNavGroup Title="Special Content" Icon="@Icons.Material.Filled.DashboardCustomize" Expanded="@GetExpandedStatus("contentspecial")" IconColor="Color.Primary">
+                <MudNavLink Match="NavLinkMatch.All" Href="/contentspecial/filter">Filter & Backdrop Filter</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/contentspecial/flexbox">Flexbox</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/contentspecial/shadow">Shadow</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/contentspecial/transform">Transforms</MudNavLink>
             </MudNavGroup>
             <MudNavGroup Title="Dev Tools" Icon="@Icons.Material.Filled.DeveloperBoard" IconColor="Color.Primary">
-                <MudNavLink Match="NavLinkMatch.All" Href="/quickdebug">QuickDebug</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/devtools/quickdebug">QuickDebug</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/devtools/benchmark">Benchmark</MudNavLink>
             </MudNavGroup>
         </MudNavMenu>
     </MudDrawer>
 
     <MudMainContent Class="@Bc["hmin-100vh d-flex flex-column justify-space-between"]">
         @Body
-        @* <MudDivider Class="my-4" /> *@
         <MudContainer Class="@Bc["margin-bottom--4px d-flex align-center"]">
             <MudText><MudLink Href="https://codebeam.org" Target="_blank" Underline="Underline.Hover"><b>CodeBeam</b></MudLink> OpenSource @DateTime.Now.Year.</MudText>
+            <MudSpacer />
+            <MudText Class="@Bc["hidden sm:d-block"]" Typo="Typo.subtitle2">BCSS @Version</MudText>
             <MudSpacer />
             <MudButton Href="https://github.com/sponsors/CodeBeamOrg" Size="Size.Small" Target="_blank" StartIcon="@Icons.Material.Filled.VolunteerActivism" Variant="Variant.Outlined" Color="Color.Secondary">Donate</MudButton>
         </MudContainer>
@@ -94,8 +98,33 @@
     {
         if (firstRender)
         {
-            _darkMode = await _mudThemeProvider?.GetSystemPreference();
+            if (_mudThemeProvider != null)
+            {
+                _darkMode = await _mudThemeProvider.GetSystemPreference();
+            }
             StateHasChanged();
+        }
+    }
+
+    private bool GetExpandedStatus(string routeString)
+    {
+        if (NavigationManager.Uri.Contains(routeString))
+        {
+            if (routeString == "content" && NavigationManager.Uri.Contains("contentspecial"))
+            {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private string Version
+    {
+        get
+        {
+            Version v = typeof(BlazorCssProvider).Assembly.GetName().Version ?? new();
+            return $"v {v.Major}.{v.Minor}.{v.Build}";
         }
     }
 }

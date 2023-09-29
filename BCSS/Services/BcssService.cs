@@ -57,7 +57,7 @@ namespace BCSS
             return value.Replace(":", "_1").Replace("/", "_2").Replace("*", "_3").Replace("#", "_4").Replace(",", "_5").Replace("+", "_6").Replace("%", "_7").Replace(".", "_8").Replace("[", null).Replace("]", null);
         }
 
-        public void ChangeBreakpoints(int xs = 0, int sm = 600, int md = 960, int lg = 1280, int xl = 1920)
+        public void SetBreakpoints(int xs = 0, int sm = 600, int md = 960, int lg = 1280, int xl = 1920)
         {
             if (Provider == null)
             {
@@ -72,7 +72,7 @@ namespace BCSS
 #pragma warning restore BL0005
         }
 
-        public void ChangeSpacing(int value)
+        public void SetSpacing(int value)
         {
             if (Provider == null)
             {
@@ -80,6 +80,17 @@ namespace BCSS
             }
 #pragma warning disable BL0005
             Provider.Spacing = value;
+#pragma warning restore BL0005
+        }
+
+        public void SetPerformanceMode(bool value)
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+#pragma warning disable BL0005
+            Provider.PerformanceMode = value;
 #pragma warning restore BL0005
         }
 

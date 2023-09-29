@@ -1,0 +1,104 @@
+﻿@page "/devtools/benchmark"
+@using System.Diagnostics;
+@inject BcssService Bc
+
+<MudContainer>
+    <MudText Typo="Typo.h4">Benchmark</MudText>
+    <MudText Class="@Bc["mt-4"]">Create certain amount of items with or without BCSS and see the benchmark.</MudText>
+
+    <div class="@Bc["d-flex justify-space-between my-16"]">
+        <MudButton OnClick="Create" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@_icon">@_buttonString</MudButton>
+        <MudButton OnClick="SetDefault" Variant="Variant.Outlined" Color="Color.Primary">Return Defaults</MudButton>
+    </div>
+
+    <MudPaper Class="@Bc["pa-12"]" Width="200px" Height="100px">
+        <MudText Typo="Typo.h3" Color="Color.Primary">@_elapsed <MudText Inline="true">ms</MudText></MudText>
+        <MudText>Creation Time</MudText>
+    </MudPaper>
+
+    <div class="@Bc["d-flex my-16 gap-12"]">
+        <MudSwitchM3 @bind-Checked="_bcssRender" Label="Use Bcss" Color="Color.Primary" />
+        <MudSwitchM3 T="bool" CheckedChanged="ChangePerformanceMode" Label="Performance Mode" Color="Color.Primary" />
+    </div>
+    
+    <div class="@Bc["d-flex mt-16 gap-12"]">
+        <MudTextField Class="@Bc["mt-8"]" @bind-Value="_cssString" Variant="Variant.Outlined" Label="BCSS Classname" />
+        <MudNumericField Class="@Bc["mt-8"]" @bind-Value="_itemCount" Variant="Variant.Outlined" Label="Item Count" Min="1" Max="2000" HelperText="Max: 2000" />
+    </div>
+    
+    
+
+    <div class="@Bc["d-flex flex-wrap my-16 gap-8 hmax-300 flow-auto"]">
+        @if (_render)
+        {
+            for (int i = 0; i < _itemCount; i++)
+            {
+                int a = i;
+                if (_bcssRender)
+                {
+                    <MudPaper Class="@Bc[_cssString]" Elevation="1" Width="80px" Height="80px">@a</MudPaper>
+                }
+                else
+                {
+                    <MudPaper Class="@_cssString" Elevation="1" Width="80px" Height="80px">@a</MudPaper>
+                }
+            }
+        }
+    </div>
+</MudContainer>
+
+@code {
+    bool _render;
+    bool _bcssRender;
+    int _itemCount = 100;
+    string _cssString = "bg-yellow";
+    Stopwatch st = new();
+    string _elapsed = "";
+    bool _stopped = false;
+    string _buttonString = "Run Benchmark";
+    string _icon = Icons.Material.Filled.PlayArrow;
+
+    private void Create()
+    {
+        st.Reset();
+        st.Start();
+        if (_render == true)
+        {
+            _render = false;
+            _buttonString = "Run Benchmark";
+            _icon = Icons.Material.Filled.PlayArrow;
+        }
+        else
+        {
+            _stopped = false;
+            _render = true;
+            _buttonString = "Clear";
+            _icon = Icons.Material.Filled.ClearAll;
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (_stopped == false)
+        {
+            _stopped = true;
+            st.Stop();
+            _elapsed = st.ElapsedMilliseconds.ToString();
+            StateHasChanged();
+        }
+    }
+
+    private void ChangePerformanceMode(bool value)
+    {
+        Bc.SetPerformanceMode(value);
+    }
+
+    private void SetDefault()
+    {
+        _buttonString = "Run Benchmark";
+        _cssString = "";
+        Bc.Clear();
+        Bc.Add("hmin-100vh");
+        _cssString = "bg-yellow";
+    }
+}

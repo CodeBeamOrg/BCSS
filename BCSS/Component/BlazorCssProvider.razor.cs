@@ -10,6 +10,12 @@ namespace BCSS
         protected List<BcssInfo> _bcssInfos = new();
 
         /// <summary>
+        /// If true, BCSS skips the validation checks and increase performance.
+        /// </summary>
+        [Parameter]
+        public bool PerformanceMode { get; set; }
+
+        /// <summary>
         /// If true, deletes and overrides all other same CSS properties when new value is added. Default is false.
         /// </summary>
         [Parameter]
@@ -70,8 +76,20 @@ namespace BCSS
                 return;
             }
 
-            List<string> splittedValue = info.Value.Split(' ').ToList();
+            if (PerformanceMode)
+            {
+                if (KeepSingleValue)
+                {
+                    Clear(info.Key);
+                }
+                _bcssInfos.Add(info);
+                _shouldRender = true;
+                StateHasChanged();
+                _shouldRender = false;
+                return;
+            }
 
+            List<string> splittedValue = info.Value.Split(' ').ToList();
             bool isValid = true;
             foreach (var v in splittedValue)
             {
@@ -180,7 +198,9 @@ namespace BCSS
 
         public void Update()
         {
+            _shouldRender = true;
             StateHasChanged();
+            _shouldRender = false;
         }
 
         public void Clear(string key)
