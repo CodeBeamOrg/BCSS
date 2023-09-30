@@ -1,6 +1,8 @@
 ﻿@page "/"
+@using Microsoft.JSInterop;
 @inject BcssService Bc
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <MudContainer Class="@Bc["h-93vh d-flex flex-column justify-center align-center"]">
     <div class="d-flex justify-center">
@@ -45,6 +47,7 @@
 
 </MudContainer>
 
+<MudDivider Class="@Bc["mb-24 invisible"]" id="playground" />
 <MudContainer Class="@Bc["hmin-80vh mt-32"]">
     <MudText Typo="Typo.h4" Color="Color.Primary">PlayGround</MudText>
     <MudText Typo="Typo.body1">Try the BCSS abilities and re-style the box. Don't be shy to write or click!</MudText>
@@ -67,6 +70,7 @@
     </MudGrid>
 </MudContainer>
 
+<MudDivider Class="@Bc["mb-24 invisible"]" id="showcase" />
 <MudContainer Class="@Bc["hmin-90vh mt-32"]">
     <MudText Typo="Typo.h4" Color="Color.Primary">Showcase</MudText>
     <MudText Typo="Typo.body1">Let's make a more real world thing with BCSS.</MudText>
@@ -202,5 +206,35 @@
         _showcaseString += $" {_possibleShadow[val]}";
         val = rnd.Next(0, 4);
         _fontClass = $" {_possibleFonts[val]}";
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ScrollToFragment();
+        }
+    }
+
+    private async Task ScrollToFragment()
+    {
+        var uri = new Uri(NavigationManager.Uri, UriKind.Absolute);
+        var fragment = uri.Fragment;
+        if (fragment.StartsWith('#'))
+        {
+            // Handle text fragment (https://example.org/#test:~:text=foo)
+            // https://github.com/WICG/scroll-to-text-fragment/
+            var elementId = fragment.Substring(1);
+            var index = elementId.IndexOf(":~:", StringComparison.Ordinal);
+            if (index > 0)
+            {
+                elementId = elementId.Substring(0, index);
+            }
+
+            if (!string.IsNullOrEmpty(elementId))
+            {
+                await JSRuntime.InvokeVoidAsync("BlazorScrollToId", elementId);
+            }
+        }
     }
 }
