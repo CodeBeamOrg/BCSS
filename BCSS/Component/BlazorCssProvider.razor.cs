@@ -51,7 +51,10 @@ namespace BCSS
         {
             if (firstRender)
             {
-                await CheckAllValues();
+                if (PerformanceMode == false)
+                {
+                    await CheckAllValues();
+                }
                 _firstRendered = true;
                 StateHasChanged();
             }
@@ -159,9 +162,9 @@ namespace BCSS
             return false;
         }
 
-        protected internal bool CheckDuplicate(string value) 
+        protected internal bool CheckDuplicate(string key) 
         {
-            return _bcssInfos.Any(x => x.Value == value);
+            return _bcssInfos.Any(x => x.Key == key);
         }
 
         protected string GetMediaString(string breakpoint)

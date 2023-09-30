@@ -22,6 +22,7 @@ namespace BCSS
 
             foreach (var val in values)
             {
+                string key = Decode(val);
                 bool isDuplicated = Provider.CheckDuplicate(val);
                 if (isDuplicated)
                 {
@@ -32,11 +33,11 @@ namespace BCSS
 
                 BcssInfo info = new();
                 info.Prefixes = BlazorCssConverter.GetPrefixes(val);
-                info.Key = Decode(val);
+                info.Key = key;
                 info.Value = result;
                 Provider.AddInfo(info);
             }
-            
+
             Provider.Update();
             return Decode(value);
         }
@@ -92,6 +93,15 @@ namespace BCSS
 #pragma warning disable BL0005
             Provider.PerformanceMode = value;
 #pragma warning restore BL0005
+        }
+
+        public async Task CheckValuesIsValid()
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+            await Provider.CheckAllValues();
         }
 
     }
