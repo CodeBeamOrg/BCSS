@@ -18,12 +18,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Remove="bundleconfig.json" />
-	  <Content Remove="wwwroot\Bcss.js" />
+		<Content Remove="bundleconfig.json" />
+		<Content Remove="wwwroot\Bcss.js" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="bundleconfig.json" />
+		<_ContentIncludedByDefault Remove="bundleconfig.json" />
 	</ItemGroup>
 
 
@@ -40,12 +40,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\..\..\Desktop\BCSS.jpg">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Include="bundleconfig.json" />
-	  <None Include="wwwroot\Bcss.js" />
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>BCSS.Test</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\..\..\Desktop\BCSS.jpg">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="bundleconfig.json" />
+		<None Include="wwwroot\Bcss.js" />
 	</ItemGroup>
 
 </Project>

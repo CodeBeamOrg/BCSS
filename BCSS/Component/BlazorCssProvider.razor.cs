@@ -169,7 +169,12 @@ namespace BCSS
             string result = string.Empty;
             foreach (var info in _bcssInfos.Where(x => x.Prefixes.Contains(breakpoint)))
             {
-                var processedValue = info.Value?.Split(' ') ?? new string[0];
+                var listedValue = info.Value?.Split(' ') ?? new string[0];
+                List<string> processedValue = new();
+                foreach (var s in listedValue)
+                {
+                    processedValue.Add(GetWebkitString(info.Prefixes) + s.Replace('*', ' ').Replace('+', '-'));
+                }
                 result += $".{info.Key}{GetPrefixString(info.Prefixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}";
             }
             return result;

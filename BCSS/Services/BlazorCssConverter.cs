@@ -42,7 +42,16 @@ namespace BCSS.Services
                 return string.Empty;
             }
 
-            className = className.ToLower();
+            bool _shouldNotLowercase = false;
+            if (className.Contains("[") && className.Contains("/"))
+            {
+                _shouldNotLowercase = true;
+            }
+
+            if (_shouldNotLowercase == false)
+            {
+                className = className.ToLower();
+            }
 
             if (className.Contains('-') == false)
             {
@@ -65,6 +74,11 @@ namespace BCSS.Services
                 value = processedString.Length < 2 ? string.Empty : className.Substring(processedString.First().Length + 1);
             }
 
+            if (_shouldNotLowercase == true)
+            {
+                key = key.ToLower();
+            }
+            
             string? fullKey = GetFullKeyName(key.Replace("+", null));
             string? processedValue = value;
 

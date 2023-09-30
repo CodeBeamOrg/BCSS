@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCSSViewer.Docs", "BCSSView
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCSSViewer.Wasm", "BCSSViewer.Wasm\BCSSViewer.Wasm.csproj", "{C26FD032-E5A7-45A2-8333-285E9F126BA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSS.Test", "BCSS.Test\BCSS.Test.csproj", "{96483B78-466E-4CCE-B82A-6180888A8D76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{C26FD032-E5A7-45A2-8333-285E9F126BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C26FD032-E5A7-45A2-8333-285E9F126BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C26FD032-E5A7-45A2-8333-285E9F126BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96483B78-466E-4CCE-B82A-6180888A8D76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96483B78-466E-4CCE-B82A-6180888A8D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96483B78-466E-4CCE-B82A-6180888A8D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96483B78-466E-4CCE-B82A-6180888A8D76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
