@@ -192,7 +192,34 @@ namespace BCSS
             {
                 return ":focus";
             }
+            if (result == ":w")
+            {
+
+            }
             
+            return result;
+        }
+
+        protected string GetWebkitString(List<string> prefixes)
+        {
+            var result = string.Empty;
+            if (prefixes.Contains("w"))
+            {
+                return "-webkit-";
+            }
+            if (prefixes.Contains("m"))
+            {
+                return "-moz-";
+            }
+            if (prefixes.Contains("o"))
+            {
+                return "-o-";
+            }
+            if (prefixes.Contains("ms"))
+            {
+                return "-ms-";
+            }
+
             return result;
         }
 

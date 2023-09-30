@@ -1,0 +1,12 @@
+﻿@page "/syntax/vendorprefixes"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Typo="Typo.h4">Vendor Prefixes</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Description="Vendor prefixes implement like other prefixes. (with colon)." Code="@("w:bg-yellow\t//-webkit-background: yellow\nm:bg-yellow\t//-moz-background: yellow\nms:bg-yellow\t//-ms-background: yellow\no:bg-yellow\t//-o-background: yellow")" />
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/syntax/prefixes" PreviousText="Prefixes (Hover, Focus etc.)" NextHref="/syntax/customvalues" NextText="Custom Values" />
+</MudContainer>

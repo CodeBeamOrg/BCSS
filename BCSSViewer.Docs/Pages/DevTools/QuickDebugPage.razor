@@ -15,6 +15,7 @@
     <MudText Class="mt-4" Color="Color.Primary">Suffixes: <MudText Inline="true" Color="Color.Secondary">@string.Join(", ", _prefixes)</MudText></MudText>
     <MudText Color="Color.Primary">Value: <MudText Inline="true" Color="Color.Secondary">@_value</MudText></MudText>
     <MudText Class="d-flex align-center">IsValid: <MudIcon Icon="@(_isValid == true ? Icons.Material.Filled.Done : _isValid == false ? Icons.Material.Filled.Close : null)" Color="@(_isValid == true ? Color.Success : Color.Error)" /></MudText>
+    @($"{string.Join("!important;", _value) + "!important;"}")
 </MudContainer>
 
 @code {
@@ -26,7 +27,7 @@
     private async Task Convert()
     {
         _prefixes = BlazorCssConverter.GetPrefixes(_cssString);
-        _value = BlazorCssConverter.Convert(_cssString).Replace('*', ' ');
+        _value = GetWebkitString(_prefixes) + BlazorCssConverter.Convert(_cssString).Replace('*', ' ');
 
         string[] definition = _value.Split(':');
         if (definition.Length > 1)
@@ -34,5 +35,28 @@
             object[] parameters = new object[] { definition[0], definition[1] };
             _isValid = await JSRuntime.InvokeAsync<bool>("checkcss", parameters);
         }
+    }
+
+    private string GetWebkitString(List<string> prefixes)
+    {
+        var result = string.Empty;
+        if (prefixes.Contains("w"))
+        {
+            return "-webkit-";
+        }
+        if (prefixes.Contains("m"))
+        {
+            return "-moz-";
+        }
+        if (prefixes.Contains("o"))
+        {
+            return "-o-";
+        }
+        if (prefixes.Contains("ms"))
+        {
+            return "-ms-";
+        }
+
+        return result;
     }
 }

@@ -13,7 +13,7 @@
         List<string> processedValue = new();
         foreach (var s in listedValue)
         {
-            processedValue.Add(s.Replace('*', ' ').Replace('+', '-'));
+            processedValue.Add(GetWebkitString(info.Prefixes) + s.Replace('*', ' ').Replace('+', '-'));
         }
         @($".{info.Key}{GetPrefixString(info.Prefixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
     }
@@ -34,13 +34,3 @@
 <style>
     @($"@media screen and (min-width:{Xl}px) {{ {GetMediaString("xl")} }}")
 </style>
-
-@* Suffixes: @string.Join(", ", _bcssInfos.Select(x => x.Suffixes).LastOrDefault() ?? new List<string>()) *@
-@* <br /> *@
-@* Keys: @string.Join(", ", _bcssInfos.Select(x => x.Key)) *@
-@* <br /> *@
-@* Values: @string.Join(", ", _bcssInfos.Select(x => x.Value)) *@
-@* <br /> *@
-@* @_isValidResult *@
-@* <br /> *@
-@* Render Count: @_renderCount *@
