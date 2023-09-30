@@ -1,9 +1,83 @@
 ﻿@page "/gettingstarted/what"
 @namespace BCSSViewer.Docs.Pages
+@inject BcssService Bc
 
 <MudContainer>
     <MudText Class="mb-4" Typo="Typo.h4">What is BCSS</MudText>
     <MudText>BCSS is runtime CSS generator for Blazor.</MudText>
+
+    <MudStack>
+        <MudText Class="@Bc["mt-16"]">
+            BCSS has it's own user-friendly classnames (Called BCSS classnames like 'hidden', 'w-200', 'bg-yellow').
+            In the background these classes successully transformed to valid CSS properties and styled your whole application.
+        </MudText>
+
+        <MudText Typo="Typo.h4">Why BCSS</MudText>
+        <MudText>BCSS has several advantages:</MudText>
+
+        <MudText>
+            <b>Dynamic.</b> 
+            All values completely transform on runtime. 
+            It means users can easily change the CSS properties on runtime instantly.
+        </MudText>
+
+        <MudText>
+            <b>Fast & Optimized.</b>
+            BCSS has a great balance between performance and features.
+            Optimizing the code is always a top priority.
+            There are many performance enhancing features to avoid runtime overhead as much as possible.
+        </MudText>
+
+        <MudText>
+            <b>Flexible.</b>
+            There are other libraries that provides user-friendly classnames like tailwind.
+            BCSS uses the Blazor logic and provides the widest flexible options.
+            It is possible to write all CSS properties with BCSS syntax. No need to use any inline-styles or pre-defined CSS files.
+            BCSS also has shorthand classname syntax to maximize
+        </MudText>
+
+        <MudText>
+            <b>Rapid Development.</b>
+            BCSS also has shorthand classname syntax to maximize the ease of usage.
+            A good looking page can be crated in a single file within couple of minutes.
+            Thousands of CSS code lines can be represent with dozens of BCSS classnames.
+        </MudText>
+
+        <MudText>
+            <b>Lightweight & No Dependency.</b>
+            BCSS has no external dependency. The total NuGet package has below of 100kb size.
+        </MudText>
+
+        <MudText>
+            <b>Fast Learning Progress</b>
+            There is no steep learning curve. For users are familiar with tailwind etc. libraries, takes less than 1 day to start development.
+        </MudText>
+
+        <MudText>
+            <b>BCSS instead of JS and CSS.</b>
+            Users no need to know JS. A basic-level CSS knowledge is sufficient to use BCSS.
+            For users that don't have any experience with CSS, BCSS docs clearly describes the usage.
+            All BCSS statements written in razor files with C# syntax. So even C# variables are valid for store and change CSS properties.
+        </MudText>
+
+        <MudText>
+            <b>Use C# and razor files.</b>
+            All CSS statements written in razor files with C# syntax. So even C# variables are valid for store and change CSS properties.
+        </MudText>
+
+        <MudText>
+            <b>Complete .NET support.</b>
+            BCSS supports all currently supporting .NET frameworks: .NET 6, .NET 7 and .NET 8.
+            As a customized library of Blazor, can easily download with NuGet.
+        </MudText>
+
+        <MudText>
+            <b>OpenSource.</b>
+            BCSS will free forever and continued to implement better BCSS classname syntax and performance improvements.
+        </MudText>
+    </MudStack>
+    
+
 
     <PageBottomRouting PreviousHref="/" PreviousText="Return Home" NextHref="/gettingstarted/howitworks" NextText="How It Works" />
 </MudContainer>
