@@ -9,6 +9,9 @@
 
 ## Installation
 1. Install CodeBeam.BCSS Nuget package
+```razor
+dotnet add package CodeBeam.BCSS
+```   
 2. Add the following to `_Imports.razor`
 ```razor
 @using BCSS
@@ -37,5 +40,7 @@ Add the BCSS class into a class
 <div class="@Bc["w-200 h-100 r-20"]" />
 //This line adds width: 200px height: 100px and border-radius: 20
 ```
-## Docs
-Complete docs are preparing.
+## Related Links
+- [Docs - bcss.codebeam.org](https://bcss.codebeam.org) Debug tools and benchmark are also available on website.
+- [Playground](https://bcss.codebeam.org#playground)
+- [Showcase](https://bcss.codebeam.org#showcase)
