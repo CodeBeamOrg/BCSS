@@ -16,7 +16,6 @@
     <MudText Class="mt-4" Color="Color.Primary">Suffixes: <MudText Inline="true" Color="Color.Secondary">@string.Join(", ", _prefixes)</MudText></MudText>
     <MudText Color="Color.Primary">Value: <MudText Inline="true" Color="Color.Secondary">@_value</MudText></MudText>
     <MudText Class="d-flex align-center">IsValid: <MudIcon Icon="@(_isValid == true ? Icons.Material.Filled.Done : _isValid == false ? Icons.Material.Filled.Close : null)" Color="@(_isValid == true ? Color.Success : Color.Error)" /></MudText>
-    @($"{string.Join("!important;", _value) + "!important;"}")
 </MudContainer>
 
 @code {

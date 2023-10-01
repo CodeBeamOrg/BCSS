@@ -35,7 +35,7 @@ namespace BCSS
                 info.Prefixes = BlazorCssConverter.GetPrefixes(val);
                 info.Key = key;
                 info.Value = result;
-                Provider.AddInfo(info);
+                _ = Provider.AddInfo(info);
             }
 
             Provider.Update();
