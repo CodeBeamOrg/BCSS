@@ -41,6 +41,8 @@ Add the BCSS class into a class
 //This line adds width: 200px height: 100px and border-radius: 20
 ```
 ## Related Links
-- [Docs - bcss.codebeam.org](https://bcss.codebeam.org) Debug tools and benchmark are also available on website.
+- [Docs - bcss.codebeam.org](https://bcss.codebeam.org)
 - [Playground](https://bcss.codebeam.org#playground)
 - [Showcase](https://bcss.codebeam.org#showcase)
+- [QuickDebug](https://bcss.codebeam.org/devtools/quickdebug)
+- [Benchmark](https://bcss.codebeam.org/devtools/benchmark)
