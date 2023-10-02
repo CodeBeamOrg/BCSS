@@ -18,9 +18,9 @@ jobs:
     - name: Publish
       run: dotnet publish /home/runner/work/BCSS/BCSS/BCSSViewer.Wasm/BCSSViewer.Wasm.csproj -c Release -f net7.0 --output ./Release
     - name: index.html base tag
-      run: sed -i 's/<base href="\/" \/>/<base href="\/bcss\/" \/>/g' /home/runner/work/BCSS/BCSS/BCSS/bin/Release/net7.0/publish/wwwroot/index.html
+      run: sed -i 's/<base href="\/" \/>/<base href="\/bcss\/" \/>/g' ./Release/wwwroot/index.html
     - name: 404.html
-      run: sed -i 's/\/?p=\//\/bcss\/?p=\//g' /home/runner/work/BCSS/BCSS/BCSS/bin/Release/net7.0/publish/wwwroot/404.html
+      run: sed -i 's/\/?p=\//\/bcss\/?p=\//g' ./Release/wwwroot/404.html
     
     - name: 📂 Sync files
       if: ${{ github.repository_owner == 'CodeBeamOrg' }}
