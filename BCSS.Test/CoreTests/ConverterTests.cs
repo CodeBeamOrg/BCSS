@@ -105,5 +105,25 @@ namespace BCSS.Test.Core
             BlazorCssConverter.Convert("bgiMage-[/Paper.Png]").Should().Be("background-image:url(Paper.Png)");
         }
 
+        [Test]
+        public void PrefixesTest()
+        {
+            BcssService service = new BcssService();
+            service.Decode("hover:bg-yellow").Should().Be("hover_1bg-yellow");
+            BlazorCssConverter.Convert("hover:bg-yellow").Should().Be("background:yellow");
+
+            service.Decode("h:bg-yellow").Should().Be("h_1bg-yellow");
+            BlazorCssConverter.Convert("h:bg-yellow").Should().Be("background:yellow");
+
+            service.Decode("w:bg-yellow").Should().Be("w_1bg-yellow");
+            BlazorCssConverter.Convert("w:bg-yellow").Should().Be("background:yellow");
+
+            service.Decode("sm:w:bg-yellow").Should().Be("sm_1w_1bg-yellow");
+            BlazorCssConverter.Convert("sm:w:bg-yellow").Should().Be("background:yellow");
+
+            service.Decode("sm:bg-yellow").Should().Be("sm_1bg-yellow");
+            BlazorCssConverter.Convert("sm:bg-yellow").Should().Be("background:yellow");
+        }
+
     }
 }

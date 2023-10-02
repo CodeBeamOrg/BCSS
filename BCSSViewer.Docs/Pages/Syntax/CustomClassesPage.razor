@@ -1,0 +1,14 @@
+﻿@page "/syntax/customclasses"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Typo="Typo.h4">Custom Classes</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Description="Users may have their predefined classes." Code="@("<style>\n\t.user-custom-class {\n\t\tbackground: yellow;\n\t}\n</style>")" />
+        <CodeBlock Description="You can directly use these classes in BCSS." Code="@("<div class=\"@Bc[\"user-custom-class\"]\" />")" />
+        <CodeBlock Description="Or you can use c (custom) prefix for slightly better performance." Code="@("<div class=\"@Bc[\"c:user-custom-class\"]\" />")" />
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/syntax/vendorprefixes" PreviousText="Vendor Prefixes (webkit, moz, ms, o)" NextHref="/syntax/customvalues" NextText="Custom Values" />
+</MudContainer>

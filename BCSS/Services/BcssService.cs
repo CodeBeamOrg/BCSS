@@ -19,10 +19,16 @@ namespace BCSS
             }
 
             string[] values = value.Split(' ');
-
             foreach (var val in values)
             {
                 string key = Decode(val);
+                List<string> prefixes = BlazorCssConverter.GetPrefixes(val);
+
+                if (prefixes.Contains("c"))
+                {
+                    continue;
+                }
+
                 bool isDuplicated = Provider.CheckDuplicate(val);
                 if (isDuplicated)
                 {
@@ -32,7 +38,7 @@ namespace BCSS
                 string? result = BlazorCssConverter.Convert(val, Provider);
 
                 BcssInfo info = new();
-                info.Prefixes = BlazorCssConverter.GetPrefixes(val);
+                info.Prefixes = prefixes;
                 info.Key = key;
                 info.Value = result;
                 _ = Provider.AddInfo(info);
@@ -55,7 +61,12 @@ namespace BCSS
 
         protected internal string Decode(string value)
         {
-            return value.ToLower().Replace(":", "_1").Replace("/", "_2").Replace("*", "_3").Replace("#", "_4").Replace(",", "_5").Replace("+", "_6").Replace("%", "_7").Replace(".", "_8").Replace("[", null).Replace("]", null);
+            string result = value.ToLower();
+            if (result.StartsWith("c:"))
+            {
+                result = result.Substring(2);
+            }
+            return result.ToLower().Replace(":", "_1").Replace("/", "_2").Replace("*", "_3").Replace("#", "_4").Replace(",", "_5").Replace("+", "_6").Replace("%", "_7").Replace(".", "_8").Replace("[", null).Replace("]", null);
         }
 
         public void SetBreakpoints(int xs = 0, int sm = 600, int md = 960, int lg = 1280, int xl = 1920)
