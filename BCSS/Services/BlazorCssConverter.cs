@@ -252,7 +252,27 @@ namespace BCSS.Services
                 switch (processedValue)
                 {
                     case "center":
-                        return "justify-content:center align-items:center";
+                        return "place-content:center place-items:center";
+                    case "start":
+                        return "place-content:start place-items:start";
+                    case "end":
+                        return "place-content:end place-items:end";
+                    case "top-left":
+                        return "place-content:start place-items:start";
+                    case "top-center":
+                        return "place-content:center place-items:start";
+                    case "top-right":
+                        return "place-content:end place-items:start";
+                    case "center-left":
+                        return "place-content:start place-items:center";
+                    case "center-right":
+                        return "place-content:end place-items:center";
+                    case "bottom-right":
+                        return "place-content:end place-items:end";
+                    case "bottom-center":
+                        return "place-content:center place-items:end";
+                    case "bottom-left":
+                        return "place-content:start place-items:end";
                     case "col":
                         return "flex-direction:column";
                     case "col-reverse":
@@ -729,7 +749,7 @@ namespace BCSS.Services
                 case "boxsizing":
                     return "box-sizing";
                 case "c":
-                    return "cursor";
+                    return "color";
                 case "d":
                     return "display";
                 case "f":

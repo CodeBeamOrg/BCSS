@@ -6,9 +6,9 @@
 
     <MudStack Class="mt-4" Spacing="4">
         <CodeBlock Description="Double Dash can always be used instead of dash." Code="@("w-200\trounded-20\nw--200\trounded--20")" />
-        <CodeBlock Description="If name or value already have dash, double dash is essential as seperator." Code="@("box-sizing--border-box //box-border is also valid\nd--inline-flex //means display: inline-flex;")" />
-        <CodeBlock Description="If value is shorthanded and has space, use dash as space, while double dash remains essential." Code="@("border--5px-solid-yellow // means border: 5px solid yellow;")" />
+        <CodeBlock Description="If name already has dash, double dash is essential as seperator. If values already has dash, both usage is valid." Code="@("d-inline-flex d--inline-flex\t//Value has dash, both are valid\naccent-color--red\t\t//Name has dash and double dash seperator is essential\nbox-sizing--border-box\t\t//tip: box-border is also valid")" />
+        <CodeBlock Description="If value is shorthanded and has space, use dash as space, while double dash remains essential." Code="@("border--5px-solid-yellow\t//border: 5px solid yellow;")" />
     </MudStack>
 
-    <PageBottomRouting PreviousHref="/syntax/basics" PreviousText="Basic Syntax" NextHref="/syntax/unitmeasurement" NextText="Unit Measurement" />
+    <PageBottomRouting PreviousHref="/syntax/basics" PreviousText="Basic Syntax" NextHref="/syntax/advancedsyntax" NextText="Advanced Syntax" />
 </MudContainer>

@@ -5,10 +5,12 @@
     <MudText Class="mb-4" Typo="Typo.h4">Flexbox</MudText>
 
     <MudStack Class="mt-4" Spacing="4">
+        <MudAlert Severity="Severity.Info">If you're new to CSS, check out these two great resources on flexbox for better understand this page: (1)<MudLink Href="https://www.w3schools.com/css/css3_flexbox.asp" Target="_blank" Color="Color.Primary" Typo="Typo.body2">W3 Schools</MudLink> (2)<MudLink Href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" Target="_blank" Color="Color.Primary" Typo="Typo.body2">CSS Tricks</MudLink></MudAlert>
         <CodeBlock Description="To enable flexbox, use one of these classes." Code="@("d-flex\nd-inline-flex")" />
         <CodeBlock Description="Can use native CSS values." Code="@("flex-auto\nflex-initial\nflex-inherit")" />
         <CodeBlock Description="Can set grow, shrink and basis values on one BCSS class." Code="@("flex--1-1-auto\nflex--0-2-20px")" />
         <CodeBlock Description="For direction and wrap, use these classes." Code="@("flex-wrap\nflex-wrap-reverse\n\nflex-col\nflex-col-reverse\nflex-row\nflex-row-reverse")" />
+        <CodeBlock Description="For placement in flexbox, use these classes." Code="@("flex-start\t\tflex-center\t\tflex-end\nflex-top-start\t\tflex-top-center\t\tflex-top-right\nflex-center-left\tflex-center-right\nflex-bottom-start\tflex-bottom-center\tflex-bottom-right")" />
     </MudStack>
 
     <PageBottomRouting PreviousHref="/contentspecial/filter" PreviousText="Filter and BackdropFilter" NextHref="/contentspecial/shadow" NextText="Shadow" />

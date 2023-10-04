@@ -1,0 +1,12 @@
+﻿@page "/syntax/advancedsyntax"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Typo="Typo.h4">Advanced Syntax (Manual Typing)</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Description="BCSS has customized options for almost all css properties. However there may also be properties that have not yet been customized or have been newly added. Or the situation may require manual typing. In these cases, the * character is used instead of a space." Code="@("transition--all*1s*ease-in-out\t//transition: all 1s ease-in-out")" />
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/syntax/doubledash" PreviousText="Dash and DoubleDash" NextHref="/syntax/unitmeasurement" NextText="Unit Measurement" />
+</MudContainer>
