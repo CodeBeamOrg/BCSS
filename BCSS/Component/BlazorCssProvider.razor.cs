@@ -256,7 +256,7 @@ namespace BCSS
             StateHasChanged();
         }
 
-        private readonly List<string> _breakpoints = new List<string>() { "xs", "sm", "md", "lg", "xl" };
+        private readonly List<string> _breakpoints = new List<string>() { "xs", "sm", "md", "lg", "xl", "mobile" };
         private readonly List<string> _prefixes = new List<string>() 
         { 
             "active",

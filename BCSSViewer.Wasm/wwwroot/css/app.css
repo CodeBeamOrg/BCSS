@@ -112,12 +112,12 @@ a, .btn-link {
 
 @keyframes TextWidth {
     0% {
-        width: 28px;
+        width: 30px;
         color: var(--mud-palette-primary);
     }
 
     15% {
-        width: 28px;
+        width: 30px;
         color: var(--mud-palette-primary);
     }
 
@@ -132,12 +132,12 @@ a, .btn-link {
     }
 
     75% {
-        width: 28px;
+        width: 30px;
         color: var(--mud-palette-primary);
     }
 
     100% {
-        width: 28px;
+        width: 30px;
         color: var(--mud-palette-primary);
     }
 }
