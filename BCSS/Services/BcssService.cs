@@ -21,9 +21,7 @@ namespace BCSS
             string[] values = value.Split(' ');
             foreach (var val in values)
             {
-                string key = Decode(val);
                 List<string> prefixes = BlazorCssConverter.GetPrefixes(val);
-
                 if (prefixes.Contains("c"))
                 {
                     continue;
@@ -36,7 +34,7 @@ namespace BCSS
                 }
 
                 string? result = BlazorCssConverter.Convert(val, Provider);
-
+                string key = Decode(val);
                 BcssInfo info = new();
                 info.Prefixes = prefixes;
                 info.Key = key;
@@ -66,7 +64,7 @@ namespace BCSS
             {
                 result = result.Substring(2);
             }
-            return result.ToLower().Replace(":", "_1").Replace("/", "_2").Replace("*", "_3").Replace("#", "_4").Replace(",", "_5").Replace("+", "_6").Replace("%", "_7").Replace(".", "_8").Replace("[", null).Replace("]", null);
+            return result.Replace(':', 'q').Replace('/', 'w').Replace('*', 'e').Replace('#', 'r').Replace(',', 't').Replace('+', 'y').Replace('%', 'a').Replace('.', 's').Replace("[", null).Replace("]", null);
         }
 
         public void SetBreakpoints(int xs = 0, int sm = 600, int md = 960, int lg = 1280, int xl = 1920)
