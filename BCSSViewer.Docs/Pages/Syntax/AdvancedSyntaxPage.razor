@@ -2,10 +2,12 @@
 @namespace BCSSViewer.Docs.Pages
 
 <MudContainer>
-    <MudText Typo="Typo.h4">Advanced Syntax (Manual Typing)</MudText>
+    <MudText Class="mb-4" Typo="Typo.h4">Advanced Syntax (Manual Typing)</MudText>
+    <MudText>Normally BCSS classes can be created with dash (-) character. But in advanced scenarios '*' and '+' character are also allowed.</MudText>
 
     <MudStack Class="mt-4" Spacing="4">
-        <CodeBlock Description="BCSS has customized options for almost all css properties. However there may also be properties that have not yet been customized or have been newly added. Or the situation may require manual typing. In these cases, the * character is used instead of a space." Code="@("transition--all*1s*ease-in-out\t//transition: all 1s ease-in-out")" />
+        <CodeBlock Description="'*' character is used instead of a space and '+' character instead of '-'" Code="@("transition-color-2s-ease+in+out\ntransition-color*2s*ease+in+out\ntransition--color-2s-ease+in+out\ntransition--color*2s*ease+in+out\n//transition: color 2s ease-in-out")" />
+        <MudAlert Severity="Severity.Info">With advanced syntax, all CSS statements can be transform into BCSS.</MudAlert>
     </MudStack>
 
     <PageBottomRouting PreviousHref="/syntax/doubledash" PreviousText="Dash and DoubleDash" NextHref="/syntax/unitmeasurement" NextText="Unit Measurement" />

@@ -35,6 +35,17 @@ namespace BCSS.Test.Core
         }
 
         [Test]
+        public void AdvancedConvertTest()
+        {
+            BcssService service = new BcssService();
+            BlazorCssConverter.Convert("transition-color-1s-ease+in+out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:color 1s ease-in-out");
+            BlazorCssConverter.Convert("transition-color*1s*ease+in+out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:color 1s ease-in-out");
+            BlazorCssConverter.Convert("transition--color-1s-ease+in+out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:color 1s ease-in-out");
+            BlazorCssConverter.Convert("transition--color*1s*ease+in+out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:color 1s ease-in-out");
+
+        }
+
+        [Test]
         public void UnitMeasurementTest()
         {
             BcssService service = new BcssService();

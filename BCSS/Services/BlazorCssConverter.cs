@@ -90,6 +90,11 @@ namespace BCSS.Services
             string subString = GetCustomValue(value);
             processedValue = processedValue.Replace("[" + subString + "]", CustomValueResult(subString));
 
+            if (string.Equals(fullKey, "animation", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return SpacedResult(value, "animation");
+            }
+
             if (string.Equals(fullKey, "aspect-ratio", StringComparison.InvariantCultureIgnoreCase))
             {
                 switch (value)
@@ -679,6 +684,11 @@ namespace BCSS.Services
             if (string.Equals(fullKey, "translatez", StringComparison.InvariantCultureIgnoreCase))
             {
                 return $"transform:translateZ({processedValue}px)";
+            }
+
+            if (string.Equals(fullKey, "transition", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return SpacedResult(value, "transition");
             }
 
             if (string.Equals(fullKey, "width", StringComparison.InvariantCultureIgnoreCase))
