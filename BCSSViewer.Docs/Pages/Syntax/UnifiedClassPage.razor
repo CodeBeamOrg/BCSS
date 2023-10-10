@@ -1,0 +1,16 @@
+﻿@page "/syntax/unifiedclass"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Class="mb-4" Typo="Typo.h4">Unified Class (Reusing Classes)</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Description="BCSS is handy, but sometimes it is boring to write same BCSS classes multiple times like in this example:" Code="@("<div class=\"@Bc[\"w-200 h-200 r-20 bg-yellow color-blue\"]\">Element 1</div>\n<div class=\"@Bc[\"w-200 h-200 r-20 bg-yellow color-blue\"]\">Element 2</div>\n<div class=\"@Bc[\"w-200 h-200 r-20 bg-yellow color-blue\"]\">Element 3</div>")" />
+        <CodeBlock Title="Way 1" Description="Simply unify classes into a C# variable." Code="@("@code {string _unifiedClass = \"w-200 h-200 r-20 bg-yellow color-blue\"}\n<div class=\"@Bc[_unifiedClass]\">Element 1</div>")" />
+        <CodeBlock Title="Way 2" Description="BcssService has AddUnifiedClass method to globally define a shortcut. UnifiedClass can not have space or special character." Code="@("@inject BcssService Bc\n@code {\n\tprotected override void OnAfterRender(bool firstRender)\n\t{\n\t\tif (firstRender)\n\t\t{\n\t\t\tBc.AddUnifiedClass(\"unifiedClassname\", \"w-200 h-200 r-20 bg-yellow color-blue\");\n\t\t}\n\t}\n}\n\n<div class=\"@Bc[\"unifiedClassname\"]\">Element 1</div>")" />
+        <MudAlert Severity="Severity.Warning">AddUnifiedClass method can't use in OnInitialized and OnParametersSet methods.</MudAlert>
+        <MudAlert Severity="Severity.Warning">A UnifiedClass should not be same one of the regular BCSS class (like hidden).</MudAlert>
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/syntax/casesensitivity" PreviousText="Case Sensitivity" NextHref="/content" NextText="Content Overview" />
+</MudContainer>

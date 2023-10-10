@@ -11,6 +11,7 @@ namespace BCSS
             Provider = provider;
         }
 
+        //This is the method where we need maximum performance.
         public string? Add(string value)
         {
             if (Provider == null)
@@ -18,19 +19,32 @@ namespace BCSS
                 return null;
             }
 
+            List<string> toBeDecodedValue = new();
+
             string[] values = value.Split(' ');
             foreach (var val in values)
             {
                 List<string> prefixes = BlazorCssConverter.GetPrefixes(val);
                 if (prefixes.Contains("c"))
                 {
+                    toBeDecodedValue.Add(val);
                     continue;
                 }
 
                 bool isDuplicated = Provider.CheckDuplicate(val);
                 if (isDuplicated)
                 {
+                    toBeDecodedValue.Add(val);
                     continue;
+                }
+
+                if (Provider.UnifiedClasses != null)
+                {
+                    if (Provider.UnifiedClasses.ContainsKey(val))
+                    {
+                        toBeDecodedValue.Add(Provider.UnifiedClasses[val]);
+                        continue;
+                    }
                 }
 
                 string? result = BlazorCssConverter.Convert(val, Provider);
@@ -40,16 +54,80 @@ namespace BCSS
                 info.Key = key;
                 info.Value = result;
                 _ = Provider.AddInfo(info);
+                toBeDecodedValue.Add(val);
             }
 
             Provider.Update();
-            return Decode(value);
+            return Decode(string.Join(" ", toBeDecodedValue));
         }
 
-        public void Clear()
+        /// <summary>
+        /// Clears regular BCSS classes.
+        /// </summary>
+        /// <param name="update"></param>
+        public void Clear(bool update = true)
         {
-            Provider?.Clear();
-            Provider?.Update();
+            if (Provider == null)
+            {
+                return;
+            }
+            Provider.Clear();
+            foreach (var item in Provider.UnifiedClasses ?? new Dictionary<string, string>())
+            {
+                AddUnifiedClass(item.Key, item.Value);
+            }
+            if (update == true)
+            {
+                Provider.Update();
+            }
+        }
+
+        /// <summary>
+        /// Clears unified classes.
+        /// </summary>
+        /// <param name="update"></param>
+        public void ClearUnifiedClasses(bool update = true)
+        { 
+            if (Provider == null) 
+            { 
+                return;
+            }
+            Provider.UnifiedClasses = null;
+            if (update == true)
+            {
+                Provider.Update();
+            }
+        }
+
+        /// <summary>
+        /// Clears both Unified Classes and regular BCSS classes.
+        /// </summary>
+        public void Reset()
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+
+            ClearUnifiedClasses(false);
+            Clear(false);
+            Provider.Update();
+        }
+
+        public void AddUnifiedClass(string unifiedName, string value)
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+
+            if (Provider.UnifiedClasses == null)
+            {
+                Provider.UnifiedClasses = new();
+            }
+
+            Add(value);
+            Provider.UnifiedClasses.TryAdd(unifiedName, value);
         }
 
         public string? this[string key]
@@ -74,7 +152,6 @@ namespace BCSS
                 return;
             }
 #pragma warning disable BL0005
-            Provider.Xs = xs;
             Provider.Sm = sm;
             Provider.Md = md;
             Provider.Lg = lg;

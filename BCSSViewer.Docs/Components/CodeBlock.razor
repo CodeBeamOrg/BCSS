@@ -5,9 +5,12 @@
 <div class="@Class" style="@Style">
     <MudText Class="@Class" Typo="Typo.h6">@Title</MudText>
     <MudText>@Description</MudText>
-    <div class="@Bc["flow-auto mt-4 pa-16 line-height--150% bg-[--mud-palette-background-grey]"]">
-        <pre><code>@Code</code></pre>
-    </div>
+    @if (string.IsNullOrEmpty(Code) == false)
+    {
+        <div class="@Bc["flow-auto mt-4 pa-16 line-height--150% bg-[--mud-palette-background-grey]"]">
+            <pre><code>@Code</code></pre>
+        </div>
+    }
 </div>
 
 @code {

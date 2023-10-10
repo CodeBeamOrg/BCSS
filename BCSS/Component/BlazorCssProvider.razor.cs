@@ -9,6 +9,8 @@ namespace BCSS
 
         protected List<BcssInfo> _bcssInfos = new();
 
+        protected internal Dictionary<string, string>? UnifiedClasses { get; set; }
+
         /// <summary>
         /// If true, BCSS skips the validation checks and increase performance.
         /// </summary>
@@ -23,9 +25,6 @@ namespace BCSS
 
         [Parameter]
         public int Spacing { get; set; } = 1;
-
-        [Parameter]
-        public int Xs { get; set; } = 0;
 
         [Parameter]
         public int Sm { get; set; } = 600;
@@ -49,12 +48,9 @@ namespace BCSS
         //int _renderCount;
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                if (PerformanceMode == false)
-                {
-                    await CheckAllValues();
-                }
                 _firstRendered = true;
                 StateHasChanged();
             }
@@ -86,9 +82,10 @@ namespace BCSS
                     Clear(info.Key);
                 }
                 _bcssInfos.Add(info);
-                _shouldRender = true;
-                StateHasChanged();
-                _shouldRender = false;
+                //_shouldRender = true;
+                //StateHasChanged();
+                //_shouldRender = false;
+                Update();
                 return;
             }
 
@@ -117,9 +114,10 @@ namespace BCSS
 
                 _bcssInfos.Add(info);
             }
-            _shouldRender = true;
-            StateHasChanged();
-            _shouldRender = false;
+            //_shouldRender = true;
+            //StateHasChanged();
+            //_shouldRender = false;
+            Update();
         }
 
         protected internal async Task<bool> IsValid(string propName, string propValue, bool force = false)
@@ -200,10 +198,6 @@ namespace BCSS
             {
                 return ":focus";
             }
-            if (result == ":w")
-            {
-
-            }
             
             return result;
         }
@@ -241,19 +235,16 @@ namespace BCSS
         public void Clear(string key)
         {
             _bcssInfos.RemoveAll(x => x.Key?.Split("-").First() == key.Split('-').First());
-            StateHasChanged();
         }
 
         public void Clear()
         {
             _bcssInfos.Clear();
-            StateHasChanged();
         }
 
         public void ClearLast()
         {
             _bcssInfos.Remove(_bcssInfos.Last());
-            StateHasChanged();
         }
 
         private readonly List<string> _breakpoints = new List<string>() { "xs", "sm", "md", "lg", "xl", "mobile" };

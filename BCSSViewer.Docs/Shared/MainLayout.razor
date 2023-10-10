@@ -35,7 +35,8 @@
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/vendorprefixes">Vendor Prefixes (webkit, moz, ms, o)</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/customclasses">Custom Classes</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/customvalues">Custom Values & Colors</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/caseinsensitive">Case Insensitive</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/casesensitivity">Case Sensitivity</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/unifiedclass">Unified Class (Reusing Classes)</MudNavLink>
             </MudNavGroup>
             <MudNavGroup Title="Content" Icon="@Icons.Material.Filled.Dashboard" Expanded="@GetExpandedStatus("content")" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="/content">General</MudNavLink>
@@ -105,6 +106,7 @@
             {
                 _darkMode = await _mudThemeProvider.GetSystemPreference();
             }
+            Bc.AddUnifiedClass("classOfBcss", "bg-yellow color-blue");
             StateHasChanged();
         }
     }
