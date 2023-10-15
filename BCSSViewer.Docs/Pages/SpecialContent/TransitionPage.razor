@@ -1,0 +1,16 @@
+﻿@page "/contentspecial/transition"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Class="mb-4" Typo="Typo.h4">Transitions</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <CodeBlock Description="Set related property, delay, duration and timing function." Code="@("transition-color-1s-2s-ease")" />
+        <MudAlert Severity="Severity.Info">Transition values have no order. However, the first number value represents delay, and other one represents duration.</MudAlert>
+        <CodeBlock Title="Shorten BCSS Usage" Description="Don't need to add 's' suffix to number values. Keep property empty to affect all properties." Code="@("transition-all-1-2-ease\ntransition-1-2-ease\t//Affect all properties.")" />
+        <CodeBlock Title="Multiple Transition Definitions" Description="For multiple transitions, use full name of property and numbers with 's' suffix. Seperate with comma." Code="@("transition-background-color-2 transition-color-2\t//Wrong, only color transition works.\ntransition-background-color-2s,color-2s\t\t//Both properties work.")" />
+        <CodeBlock Title="Advanced" Description="If your transition (with basic syntax) doesn't work, try with advanced syntax. ('+' instead of '-' and '*' instead of ' '). This example shows basic and advanced syntax." Code="@("transition-backdrop-filter-2-ease-in-out\t//Basic syntax.\ntransition-backdrop+filter-2s-ease+in+out\t//Advanced syntax.")" />
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/contentspecial/transform" PreviousText="Transforms" NextHref="/contentspecial/transition" NextText="Transitions" />
+</MudContainer>

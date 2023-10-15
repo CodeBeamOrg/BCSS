@@ -6,8 +6,8 @@
     <MudText>Normally BCSS classes can be created with dash (-) character. But in advanced scenarios '*' and '+' character are also allowed.</MudText>
 
     <MudStack Class="mt-4" Spacing="4">
-        <CodeBlock Description="'*' character is used instead of a space and '+' character instead of '-'" Code="@("transition-color-2s-ease+in+out\ntransition-color*2s*ease+in+out\ntransition--color-2s-ease+in+out\ntransition--color*2s*ease+in+out\n//transition: color 2s ease-in-out")" />
-        <MudAlert Severity="Severity.Info">With advanced syntax, all CSS statements can be transform into BCSS.</MudAlert>
+        <CodeBlock Description="Advanced syntax has two more special characters. '*' character is used instead of a space and '+' character instead of '-'" Code="@("transition-color-2s-ease-in-out\ntransition-color*2s*ease+in+out\ntransition--color-2s-ease+in+out\ntransition--color*2s*ease+in+out\n//transition: color 2s ease-in-out")" />
+        <MudAlert Severity="Severity.Info">With advanced syntax, all CSS statements can be transform into BCSS. If your basic syntax doesn't work, try with advanced syntax.</MudAlert>
     </MudStack>
 
     <PageBottomRouting PreviousHref="/syntax/doubledash" PreviousText="Dash and DoubleDash" NextHref="/syntax/unitmeasurement" NextText="Unit Measurement" />

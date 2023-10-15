@@ -846,8 +846,82 @@ namespace BCSS.Services
             {
                 return string.Empty;
             }
-            string subString = GetCustomValue(value);
-            return $"{(string.IsNullOrEmpty(name) ? null : name + ":")}{value.Replace("["+subString+"]", CustomValueResult(subString)).Replace('-', '*')}";
+
+            List<string> partialValues = new();
+
+            if (value.Contains("ease-in-out"))
+            {
+                partialValues.Add("ease+in+out");
+                value = value.Replace("ease-in-out", "");
+            }
+            if (value.Contains("ease-in"))
+            {
+                partialValues.Add("ease+in");
+                value = value.Replace("ease-in", "");
+            }
+            if (value.Contains("ease-out"))
+            {
+                partialValues.Add("ease+out");
+                value = value.Replace("ease-out", "");
+            }
+            if (value.Contains("background-color"))
+            {
+                partialValues.Add("background+color");
+                value = value.Replace("background-color", "");
+            }
+            if (value.Contains("border-color"))
+            {
+                partialValues.Add("border+color");
+                value = value.Replace("border-color", "");
+            }
+            if (value.Contains("box-shadow"))
+            {
+                partialValues.Add("box+shadow");
+                value = value.Replace("box-shadow", "");
+            }
+            if (value.Contains("backdrop-filter"))
+            {
+                partialValues.Add("backdrop+filter");
+                value = value.Replace("backdrop-filter", "");
+            }
+
+            string[] splittedValue = value.Split('-');
+            
+
+            foreach (var val in splittedValue)
+            {
+                if (string.IsNullOrEmpty(val))
+                {
+                    continue;
+                }
+                if (name == null)
+                {
+                    partialValues.Add(val);
+                    continue;
+                }
+                if (name == "transition" || name == "animation")
+                {
+                    if (double.TryParse(val, out double result))
+                    {
+                        partialValues.Add(result.ToString().Replace(',', '.') + "s");
+                        continue;
+                    }
+                }
+
+                if (name.Contains("border"))
+                {
+                    if (double.TryParse(val, out double result))
+                    {
+                        partialValues.Add(result.ToString().Replace(',', '.') + "px");
+                        continue;
+                    }
+                }
+
+                partialValues.Add(val);
+            }
+            string unifiedValue = string.Join("-", partialValues);
+            string subString = GetCustomValue(unifiedValue);
+            return $"{(string.IsNullOrEmpty(name) ? null : name + ":")}{unifiedValue.Replace("["+subString+"]", CustomValueResult(subString)).Replace('-', '*')}";
         }
 
         public static string CustomValueResult(string? val)
