@@ -19,7 +19,7 @@ namespace BCSS
                 return null;
             }
 
-            List<string> toBeDecodedValue = new();
+            List<string> decodedValue = new();
 
             string[] values = value.Split(' ');
             foreach (var val in values)
@@ -27,14 +27,14 @@ namespace BCSS
                 List<string> prefixes = BlazorCssConverter.GetPrefixes(val);
                 if (prefixes.Contains("c"))
                 {
-                    toBeDecodedValue.Add(val);
+                    decodedValue.Add(val);
                     continue;
                 }
 
-                bool isDuplicated = Provider.CheckDuplicate(val);
-                if (isDuplicated)
+                BcssInfo? duplicatedInfo = Provider.CheckDuplicate(val);
+                if (duplicatedInfo != null)
                 {
-                    toBeDecodedValue.Add(val);
+                    decodedValue.Add(duplicatedInfo.Key ?? string.Empty);
                     continue;
                 }
 
@@ -42,7 +42,7 @@ namespace BCSS
                 {
                     if (Provider.UnifiedClasses.ContainsKey(val))
                     {
-                        toBeDecodedValue.Add(Provider.UnifiedClasses[val]);
+                        decodedValue.Add(Provider.UnifiedClasses[val]);
                         continue;
                     }
                 }
@@ -54,11 +54,11 @@ namespace BCSS
                 info.Key = key;
                 info.Value = result;
                 _ = Provider.AddInfo(info);
-                toBeDecodedValue.Add(val);
+                decodedValue.Add(key);
             }
 
             Provider.Update();
-            return Decode(string.Join(" ", toBeDecodedValue));
+            return string.Join(" ", decodedValue);
         }
 
         /// <summary>

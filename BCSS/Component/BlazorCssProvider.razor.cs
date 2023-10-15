@@ -161,9 +161,9 @@ namespace BCSS
             return false;
         }
 
-        protected internal bool CheckDuplicate(string key) 
+        protected internal BcssInfo? CheckDuplicate(string key) 
         {
-            return _bcssInfos.Any(x => x.Key == key);
+            return _bcssInfos.FirstOrDefault(x => x.Key == key);
         }
 
         protected string GetMediaString(string breakpoint)
