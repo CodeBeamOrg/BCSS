@@ -994,6 +994,16 @@ namespace BCSS.Services
             return val;
         }
 
+        public static string PostProcess(string? val)
+        {
+            if (string.IsNullOrWhiteSpace(val))
+            {
+                return string.Empty; 
+            }
+
+            return val.Replace('+', '-').Replace('*', ' ');
+        }
+
         public static string GetOneWordResult(string? className)
         {
             if (string.IsNullOrEmpty(className))

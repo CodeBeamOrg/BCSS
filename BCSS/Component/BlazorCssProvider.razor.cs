@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BCSS.Services;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace BCSS
@@ -93,7 +94,7 @@ namespace BCSS
             bool isValid = true;
             foreach (var v in splittedValue)
             {
-                string[] definition = v.Replace('*', ' ').Replace('+', '-').Split(':');
+                string[] definition = BlazorCssConverter.PostProcess(v).Split(':');
                 if (definition.Length > 1)
                 {
                     isValid = await IsValid(definition[0], definition[1]);
@@ -151,7 +152,7 @@ namespace BCSS
                 return false;
             }
             
-            string[] definition = bcssInfo.Value.Replace('*', ' ').Split(':');
+            string[] definition = BlazorCssConverter.PostProcess(bcssInfo.Value).Split(':');
             if (definition.Length > 1)
             {
                 bool result = await IsValid(definition[0], definition[1], force);
@@ -174,7 +175,7 @@ namespace BCSS
                 List<string> processedValue = new();
                 foreach (var s in listedValue)
                 {
-                    processedValue.Add(GetWebkitString(info.Prefixes) + s.Replace('*', ' ').Replace('+', '-'));
+                    processedValue.Add(GetWebkitString(info.Prefixes) + BlazorCssConverter.PostProcess(s));
                 }
                 result += $".{info.Key}{GetPrefixString(info.Prefixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}";
             }

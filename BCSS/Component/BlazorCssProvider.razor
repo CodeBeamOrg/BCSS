@@ -1,4 +1,5 @@
 ﻿@namespace BCSS
+@using BCSS.Services;
 @inherits ComponentBase
 @inject BcssService BcssService
 
@@ -13,7 +14,7 @@
         List<string> processedValue = new();
         foreach (var s in listedValue)
         {
-            processedValue.Add(GetWebkitString(info.Prefixes) + s.Replace('*', ' ').Replace('+', '-'));
+            processedValue.Add(GetWebkitString(info.Prefixes) + BlazorCssConverter.PostProcess(s));
         }
         @($".{info.Key}{GetPrefixString(info.Prefixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}")
     }

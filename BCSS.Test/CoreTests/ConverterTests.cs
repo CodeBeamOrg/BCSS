@@ -38,10 +38,10 @@ namespace BCSS.Test.Core
         public void AdvancedConvertTest()
         {
             BcssService service = new BcssService();
-            BlazorCssConverter.Convert("transition-color-1s-ease+in+out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:color 1s ease-in-out");
-            BlazorCssConverter.Convert("transition-color*1s*ease+in+out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:color 1s ease-in-out");
-            BlazorCssConverter.Convert("transition--color-1s-ease+in+out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:color 1s ease-in-out");
-            BlazorCssConverter.Convert("transition--color*1s*ease+in+out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:color 1s ease-in-out");
+            BlazorCssConverter.PostProcess(BlazorCssConverter.Convert("transition-color-1s-ease+in+out")).Should().Be("transition:color 1s ease-in-out");
+            BlazorCssConverter.PostProcess(BlazorCssConverter.Convert("transition-color*1s*ease+in+out")).Should().Be("transition:color 1s ease-in-out");
+            BlazorCssConverter.PostProcess(BlazorCssConverter.Convert("transition--color-1s-ease+in+out")).Should().Be("transition:color 1s ease-in-out");
+            BlazorCssConverter.PostProcess(BlazorCssConverter.Convert("transition--color*1s*ease+in+out")).Should().Be("transition:color 1s ease-in-out");
 
         }
 
@@ -49,10 +49,10 @@ namespace BCSS.Test.Core
         public void SpacedResultTest()
         {
             BcssService service = new BcssService();
-            BlazorCssConverter.Convert("transition-color-1-ease-in-out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:ease-in-out color 1s");
-            BlazorCssConverter.Convert("transition-color-1s-ease-in").Replace('*', ' ').Replace('+', '-').Should().Be("transition:ease-in color 1s");
+            BlazorCssConverter.PostProcess(BlazorCssConverter.Convert("transition-color-1-ease-in-out")).Should().Be("transition:ease-in-out color 1s");
+            BlazorCssConverter.PostProcess(BlazorCssConverter.Convert("transition-color-1s-ease-in")).Should().Be("transition:ease-in color 1s");
             //Wrong example
-            BlazorCssConverter.Convert("transition-color-1-easein-out").Replace('*', ' ').Replace('+', '-').Should().Be("transition:color 1s easein out");
+            BlazorCssConverter.PostProcess(BlazorCssConverter.Convert("transition-color-1-easein-out")).Should().Be("transition:color 1s easein out");
         }
 
         [Test]

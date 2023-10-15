@@ -8,7 +8,7 @@
 
 <MudContainer>
     <MudText Typo="Typo.h4">BCSS QuickDebug</MudText>
-    <MudText Class="mt-2">Write the BCSS value and press convert to see results.</MudText>
+    <MudText Class="mt-2">Write the BCSS class and press convert to see results.</MudText>
 
     <MudTextField Class="mt-4" @bind-Value="_cssString" Variant="Variant.Outlined" Label="BCSS Classname" />
     <MudButton Class="mt-2" OnClick="Convert" Variant="Variant.Filled" Color="Color.Primary">Convert</MudButton>
@@ -27,13 +27,19 @@
     private async Task Convert()
     {
         _prefixes = BlazorCssConverter.GetPrefixes(_cssString);
-        _value = GetWebkitString(_prefixes) + BlazorCssConverter.Convert(_cssString).Replace('*', ' ');
-
-        string[] definition = _value.Split(':');
-        if (definition.Length > 1)
+        string[] values = _cssString.Split(' ');
+        _value = string.Empty;
+        foreach (var val in values)
         {
-            object[] parameters = new object[] { definition[0], definition[1] };
-            _isValid = await JSRuntime.InvokeAsync<bool>("checkcss", parameters);
+            string currentVal = BlazorCssConverter.PostProcess(BlazorCssConverter.Convert(val));
+            _value += GetWebkitString(_prefixes) + currentVal + " ";
+
+            string[] definition = currentVal.Split(':');
+            if (definition.Length > 1)
+            {
+                object[] parameters = new object[] { definition[0], definition[1] };
+                _isValid = await JSRuntime.InvokeAsync<bool>("checkcss", parameters);
+            }
         }
     }
 
