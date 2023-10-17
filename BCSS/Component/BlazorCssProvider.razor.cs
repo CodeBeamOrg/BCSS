@@ -83,9 +83,6 @@ namespace BCSS
                     Clear(info.Key);
                 }
                 _bcssInfos.Add(info);
-                //_shouldRender = true;
-                //StateHasChanged();
-                //_shouldRender = false;
                 Update();
                 return;
             }
@@ -115,9 +112,6 @@ namespace BCSS
 
                 _bcssInfos.Add(info);
             }
-            //_shouldRender = true;
-            //StateHasChanged();
-            //_shouldRender = false;
             Update();
         }
 

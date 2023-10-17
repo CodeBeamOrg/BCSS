@@ -24,13 +24,6 @@ namespace BCSS
             string[] values = value.Split(' ');
             foreach (var val in values)
             {
-                List<string> prefixes = BlazorCssConverter.GetPrefixes(val);
-                if (prefixes.Contains("c"))
-                {
-                    decodedValue.Add(val);
-                    continue;
-                }
-
                 BcssInfo? duplicatedInfo = Provider.CheckDuplicate(val);
                 if (duplicatedInfo != null)
                 {
@@ -45,6 +38,13 @@ namespace BCSS
                         decodedValue.Add(Provider.UnifiedClasses[val]);
                         continue;
                     }
+                }
+
+                List<string> prefixes = BlazorCssConverter.GetPrefixes(val);
+                if (prefixes.Contains("c"))
+                {
+                    decodedValue.Add(val);
+                    continue;
                 }
 
                 string? result = BlazorCssConverter.Convert(val, Provider);
