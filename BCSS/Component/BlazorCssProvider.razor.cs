@@ -24,18 +24,33 @@ namespace BCSS
         [Parameter]
         public bool KeepSingleValue { get; set; }
 
+        /// <summary>
+        /// The spacing multiplier for px measured CSS properties like padding, margin, top, left, right, bottom.
+        /// </summary>
         [Parameter]
         public int Spacing { get; set; } = 1;
 
+        /// <summary>
+        /// The small size measured by pixels.
+        /// </summary>
         [Parameter]
         public int Sm { get; set; } = 600;
 
+        /// <summary>
+        /// The medium size measured by pixels.
+        /// </summary>
         [Parameter]
         public int Md { get; set; } = 960;
 
+        /// <summary>
+        /// The large size measured by pixels.
+        /// </summary>
         [Parameter]
         public int Lg { get; set; } = 1280;
 
+        /// <summary>
+        /// The extra large size measured by pixels.
+        /// </summary>
         [Parameter]
         public int Xl { get; set; } = 1920;
 
@@ -126,6 +141,10 @@ namespace BCSS
             return true;
         }
 
+        /// <summary>
+        /// Check all BCSS classes if they are valid or not. The method will automatically removes stored and invalid BCSS classes.
+        /// </summary>
+        /// <returns></returns>
         public async Task CheckAllValues()
         {
             List<BcssInfo> toBeDeletedInfos = new();
@@ -227,16 +246,23 @@ namespace BCSS
             _shouldRender = false;
         }
 
-        public void Clear(string key)
+        /// <summary>
+        /// Removes all BCSS classes (if key is null or empty) or matched classes (if key specified). If a BCSS class is currently using in the page, it will automatically add again.
+        /// </summary>
+        /// <param name="key"></param>
+        public void Clear(string? key = null)
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                _bcssInfos.Clear();
+                return;
+            }
             _bcssInfos.RemoveAll(x => x.Key?.Split("-").First() == key.Split('-').First());
         }
 
-        public void Clear()
-        {
-            _bcssInfos.Clear();
-        }
-
+        /// <summary>
+        /// Removes last added BcssInfo.
+        /// </summary>
         public void ClearLast()
         {
             _bcssInfos.Remove(_bcssInfos.Last());

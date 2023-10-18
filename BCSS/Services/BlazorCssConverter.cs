@@ -43,7 +43,7 @@ namespace BCSS.Services
             }
 
             bool _shouldNotLowercase = false;
-            if (className.Contains("[") && className.Contains("/"))
+            if (className.Contains('[') && className.Contains('/'))
             {
                 _shouldNotLowercase = true;
             }
@@ -226,7 +226,7 @@ namespace BCSS.Services
 
             if (string.Equals(fullKey, "bottom", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, fullKey);
+                return DimensionResult(processedValue.Replace('n', '-'), fullKey);
             }
 
             if (string.Equals(fullKey, "box", StringComparison.InvariantCultureIgnoreCase))
@@ -306,7 +306,7 @@ namespace BCSS.Services
 
             if (string.Equals(fullKey, "left", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, fullKey);
+                return DimensionResult(processedValue.Replace('n', '-'), fullKey);
             }
 
             if (string.Equals(fullKey, "min-height", StringComparison.InvariantCultureIgnoreCase))
@@ -541,7 +541,7 @@ namespace BCSS.Services
 
             if (string.Equals(fullKey, "right", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, fullKey);
+                return DimensionResult(processedValue.Replace('n', '-'), fullKey);
             }
 
             if (string.Equals(fullKey, "rotate", StringComparison.InvariantCultureIgnoreCase))
@@ -663,7 +663,7 @@ namespace BCSS.Services
 
             if (string.Equals(fullKey, "top", StringComparison.InvariantCultureIgnoreCase))
             {
-                return DimensionResult(processedValue, fullKey);
+                return DimensionResult(processedValue.Replace('n', '-'), fullKey);
             }
 
             if (string.Equals(fullKey, "translate", StringComparison.InvariantCultureIgnoreCase))

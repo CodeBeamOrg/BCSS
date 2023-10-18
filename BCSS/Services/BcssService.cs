@@ -114,6 +114,11 @@ namespace BCSS
             Provider.Update();
         }
 
+        /// <summary>
+        /// Adds unified classes with given user-created name and BCSS classes seperated with space.
+        /// </summary>
+        /// <param name="unifiedName"></param>
+        /// <param name="value"></param>
         public void AddUnifiedClass(string unifiedName, string value)
         {
             if (Provider == null)
@@ -181,7 +186,7 @@ namespace BCSS
 #pragma warning restore BL0005
         }
 
-        public async Task CheckValuesIsValid()
+        public async Task RemoveInvalidClasses()
         {
             if (Provider == null)
             {
