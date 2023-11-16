@@ -16,8 +16,6 @@
 
     <MudText Typo="Typo.h6">by CodeBeam</MudText>
 
-    <MudAlert Severity="Severity.Success" Icon="@Icons.Material.Filled.Celebration">Full release will come at 17th of November. Production ready RC is also available on <MudLink Href="https://www.nuget.org/packages/CodeBeam.bcss" Target="_blank" Color="Color.Success" Underline="Underline.Always">NuGet</MudLink> now.</MudAlert>
-
     <MudButton Class="mt-8" Variant="Variant.Outlined" Color="Color.Primary" Href="/gettingstarted/what">GET STARTED</MudButton>
 </MudContainer>
 
@@ -128,8 +126,9 @@
 </MudContainer>
 
 @code {
-    bool _boring = true;
 
+    bool _boring = true;
+    
     string _cssString = "";
     string[] _possibleWidth = new string[] { "w-100", "w-125", "w-150", "w-175", "w-200", "w-225", "w-250", "w-275", "w-300" };
     string[] _possibleHeight = new string[] { "h-100", "h-125", "h-150", "h-175", "h-200", "h-225", "h-250", "h-275", "h-300" };
