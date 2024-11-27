@@ -18,8 +18,8 @@
     </MudPaper>
 
     <div class="@Bc["d-flex my-16 gap-12"]">
-        <MudSwitchM3 @bind-Checked="_bcssRender" Label="Use Bcss" Color="Color.Primary" />
-        <MudSwitchM3 T="bool" CheckedChanged="ChangePerformanceMode" Label="Performance Mode" Color="Color.Primary" />
+        <MudSwitchM3 @bind-Value="_bcssRender" Label="Use Bcss" Color="Color.Primary" />
+        <MudSwitchM3 T="bool" ValueChanged="ChangePerformanceMode" Label="Performance Mode" Color="Color.Primary" />
     </div>
     
     <div class="@Bc["d-flex mt-16 gap-12"]">
