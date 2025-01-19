@@ -46,7 +46,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\..\..\..\Desktop\BCSS.jpg">
+		<None Include="BCSS.jpg">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
