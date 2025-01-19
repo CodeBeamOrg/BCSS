@@ -7,6 +7,11 @@
 [![NuGet version](https://img.shields.io/nuget/v/CodeBeam.bcss?color=ff4081&label=nuget%20version&logo=nuget&style=flat-square)](https://www.nuget.org/packages/CodeBeam.bcss)
 [![NuGet downloads](https://img.shields.io/nuget/dt/CodeBeam.bcss?color=ff4081&label=nuget%20downloads&logo=nuget&style=flat-square)](https://www.nuget.org/packages/CodeBeam.bcss)
 
+| BCSS  |      .NET       |
+| :------------- | :-------------: |
+| 1.0.0  |    .NET 6 - .NET 7 - .NET 8     |
+| 1.0.1 | .NET 8 - .NET 9 |
+
 ## Installation
 1. Install CodeBeam.BCSS Nuget package
 ```razor
