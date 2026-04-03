@@ -1,33 +1,26 @@
+name: Deploy BCSS
+
 on:
   push:
+    branches:
+      - master
+
   workflow_dispatch:
-name: 🚀 Deploy website on push
+
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: |
-          8.0.x
-          9.0.x
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build with dotnet
-      run: dotnet build --configuration Release --no-restore
-    - name: Publish
-      run: dotnet publish /home/runner/work/BCSS/BCSS/BCSSViewer.Wasm/BCSSViewer.Wasm.csproj -c Release -f net9.0 --output ./Release
-    
-    - name: 📂 Sync files
-      if: ${{ github.repository_owner == 'CodeBeamOrg' }}
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.ftp_server }}
-        username: ${{ secrets.ftp_username }}
-        password: ${{ secrets.ftp_password }}
-        local-dir: ./Release/wwwroot/
-        server-dir: ./bcss/
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/apps/BCSS
+            git pull origin master
+            docker compose down
+            docker compose up -d --build
+            
