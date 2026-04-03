@@ -1,28 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>0.8.1-beta</Version>
+		<Version>1.0.1</Version>
 		<Authors>CodeBeam</Authors>
 		<Copyright>CodeBeam OpenSource MIT</Copyright>
-		<PackageTags>Blazor; CSS; Style</PackageTags>
+		<PackageTags>Blazor; CSS; Style; Generate</PackageTags>
 		<Description>Runtime CSS generator for Blazor.</Description>
 		<Title>CodeBeam.BCSS</Title>
 		<PackageIcon>BCSS.jpg</PackageIcon>
 		<RepositoryUrl>https://github.com/CodeBeamOrg/BCSS</RepositoryUrl>
 		<PackageId>CodeBeam.BCSS</PackageId>
+		<PackageProjectUrl>http://bcss.codebeam.org</PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Remove="bundleconfig.json" />
-	  <Content Remove="wwwroot\Bcss.js" />
+		<Content Remove="bundleconfig.json" />
+		<Content Remove="wwwroot\Bcss.js" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="bundleconfig.json" />
+		<_ContentIncludedByDefault Remove="bundleconfig.json" />
 	</ItemGroup>
 
 
@@ -30,21 +31,27 @@
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.11" />
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.*" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.*" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\..\..\Desktop\BCSS.jpg">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Include="bundleconfig.json" />
-	  <None Include="wwwroot\Bcss.js" />
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>BCSS.Test</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="BCSS.jpg">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="bundleconfig.json" />
+		<None Include="wwwroot\Bcss.js" />
 	</ItemGroup>
 
 </Project>

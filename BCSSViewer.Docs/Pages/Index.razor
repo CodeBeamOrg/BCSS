@@ -1,25 +1,26 @@
 ﻿@page "/"
+@using Microsoft.JSInterop;
 @inject BcssService Bc
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <MudContainer Class="@Bc["h-93vh d-flex flex-column justify-center align-center"]">
     <div class="d-flex justify-center">
         <MudText Class="text-move" Style="font-weight:900; user-select: none; cursor: default" Typo="Typo.h3" Color="Color.Default">Blazor-</MudText>
         <MudText Class="text-wrap" Style="font-weight:900; user-select: none; cursor: default" Inline="true" Typo="Typo.h3" Color="Color.Default">CSS</MudText>
     </div>
-    
+
     <MudText Class="mt-8" Align="Align.Center" Typo="Typo.h3" Color="Color.Secondary"
              Style="font-weight:900; stroke-width: 2px; background-image: linear-gradient(143deg, var(--mud-palette-primary),  #f45b69, #eef4d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Revolutionary Runtime</MudText>
     <MudText Class="" Typo="Typo.h3" Color="Color.Primary" Style="font-weight:900;">CSS Generator</MudText>
-    
+
     <MudText Typo="Typo.h6">by CodeBeam</MudText>
-    
-    
+
     <MudButton Class="mt-8" Variant="Variant.Outlined" Color="Color.Primary" Href="/gettingstarted/what">GET STARTED</MudButton>
 </MudContainer>
 
 <MudContainer Class="@Bc["hmin-60vh"]">
-    <MudGrid>
+    <MudGrid Class="justify-center">
         <MudItem xs="12" sm="6" md="4">
             <BcssCard Icon="@Icons.Material.Filled.Public" Header="OpenSource" Description="BCSS is open source and free forever with MIT license." />
         </MudItem>
@@ -27,7 +28,7 @@
             <BcssCard Icon="@Icons.Material.Filled.Assistant" Header="Dynamic" Description="All content can be created and changed on runtime." />
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
-            <BcssCard Icon="@Icons.Material.Filled.Pages" Header="Optimized" Description="Not allowed any repeated values and unnecessary render cycles for the best performance." />
+            <BcssCard Icon="@Icons.Material.Filled.Pages" Header="Lightweight & Optimized" Description="Not allowed any repeated values and unnecessary render cycles for the best performance." />
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
             <BcssCard Icon="@Icons.Material.Filled.AutoStories" Header="Smart Usage" Description="Easy to learn and use. Does not require advanced CSS knowledge." />
@@ -36,50 +37,107 @@
             <BcssCard Icon="@Icons.Material.Filled.MobileFriendly" Header="Mobile Friendly" Description="Suits for responsive design." />
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
-            <BcssCard Icon="@Icons.Material.Filled.Code" Header="C#" Description="Not needed to work any css or scss content files. Possible to work with C# variables." />
+            <BcssCard Icon="@Icons.Material.Filled.Code" Header="Complete C#" Description="Not needed to work any js, css or scss content files. Possible to work with C# variables." />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <BcssCard Icon="@Icons.Material.Filled.Speed" Header="Rapid Development" Description="One of the best ways to make and stabile your application quickly." />
         </MudItem>
     </MudGrid>
-    
+
 </MudContainer>
 
+<MudContainer Class="@Bc["hmin-100vh d-flex flex-column align-center justify-center"]">
+    <div class="relative d-flex flex-column align-center justify-center">
+        <MudIcon Class="absolute rotate-infinite" Style="margin-top:-68px" Icon="@Icons.Material.Filled.Settings" Color="Color.Primary" />
+        <MudIcon Class="absolute vibrate-infinite" Style="margin-top:-154px" Icon="@Icons.Material.Filled.Bolt" />
+    </div>
+    <MudText Typo="Typo.h4" Color="Color.Primary">Perfect Balance Between Performance and Development Speed</MudText>
+    <MudText>Easy to learn, implement and refactor the code. Less files and size, more capability. Have a complete control on your styles without JS.</MudText>
+</MudContainer>
+
+<MudDivider Class="@Bc["mb-24 invisible"]" id="playground" />
 <MudContainer Class="@Bc["hmin-80vh mt-32"]">
     <MudText Typo="Typo.h4" Color="Color.Primary">PlayGround</MudText>
-    <MudText Typo="Typo.body1">Try the BCSS abilities and re-style the box.</MudText>
+    <MudText Typo="Typo.body1">Try the BCSS abilities and re-style the box. Don't be shy to write or click!</MudText>
 
-
-        <MudGrid Class="@Bc["mud-width-full mud-height-full mt-32"]">
-            <MudItem xs="12" sm="8" Class="d-flex align-center justify-center">
-                <MudPaper Class="@Bc[_cssString]" Width="200px" Height="200px" tabindex="1" />
-            </MudItem>
-
-            <MudItem xs="12" sm="4">
-                <MudTextFieldExtended @bind-Value="_cssString" Lines="4" Variant="Variant.Outlined" Label="Bcss Class" Immediate="true" spellcheck="false">
-                    <AdornmentEnd>
-                        <MudTooltip Text="Generate" Delay="300">
+    <MudGrid Class="@Bc["mud-width-full mud-height-full mt-32"]">
+        <MudItem xs="12" sm="12" Class="d-flex flex-column align-center justify-center mud-width-full">
+            <MudTextFieldExtended Class="@Bc["w-full"]" @bind-Value="_cssString" Lines="2" Variant="Variant.Outlined" Label="Bcss Class" Immediate="true" spellcheck="false">
+                <AdornmentEnd>
+                    <MudTooltip Text="Generate" Delay="300" ShowOnFocus="false" ShowOnClick="false">
                         <MudIconButton Icon="@Icons.Material.Filled.Loop" OnClick="Generate" />
-                        </MudTooltip>
-                    </AdornmentEnd>
-                </MudTextFieldExtended>
-            </MudItem>
-        </MudGrid>
+                    </MudTooltip>
+                </AdornmentEnd>
+            </MudTextFieldExtended>
+        </MudItem>
+        <MudItem xs="12" sm="12" Class="d-flex align-center justify-center">
+            <MudPaper Class="@Bc[_cssString + " d-flex align-center justify-center pa-4 transition--all*1s"]" Width="200px" Height="200px" tabindex="1" @onclick="Generate">
+                <MudText Align="Align.Center"><b>@_playgroundText</b></MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
 </MudContainer>
 
-<MudContainer Class="@Bc["hmin-60vh d-flex flex-column align-center justify-start"]">
-    <MudText Typo="Typo.h3" Align="Align.Center">Like It?</MudText>
+<MudDivider Class="@Bc["mb-24 invisible"]" id="showcase" />
+<MudContainer Class="@Bc["hmin-100vh mt-32"]">
+    <MudText Typo="Typo.h4" Color="Color.Primary">Showcase</MudText>
+    <MudText Typo="Typo.body1">Let's make a more real world thing with a little bit more BCSS.</MudText>
+
+
+    <MudGrid Class="@Bc["mud-width-full mud-height-full mt-32"]">
+        <MudItem xs="12" sm="12" Class="d-flex flex-column align-center justify-center mud-width-full">
+            @if (_boring)
+            {
+                <MudButton Class="@Bc["text-transform--none"]" StartIcon="@Icons.Material.Filled.Loop" OnClick="GenerateShowcase" Color="Color.Primary" Variant="Variant.Filled">Click To Style The Boring Card</MudButton>
+            }
+            else
+            {
+                <MudTooltip Text="Generate" Delay="300" ShowOnFocus="false" ShowOnClick="false">
+                    <MudIconButton Icon="@Icons.Material.Filled.Loop" OnClick="GenerateShowcase" Color="Color.Primary" Variant="Variant.Filled" />
+                </MudTooltip>
+            }
+        </MudItem>
+        <MudItem xs="12" sm="12" Class="d-flex align-center justify-center">
+            <MudPaper Class="@Bc[_showcaseString + " " + _colorClass + " d-flex flex-column justify-center pa-4 cursor-pointer transition--all*1s"]" Width="320px" Height="400px" tabindex="1" @onclick="GenerateShowcase">
+                <div class="@Bc[_spacingClass + " d-flex flex-column justify-center align-center transition--all*1s"]">
+                    <MudAvatar Class="@Bc[_iconClass + " " + _colorClass + " " + _dimensionClass + _fontClass]" Variant="Variant.Filled">MCK</MudAvatar>
+                    <MudText Class="@Bc[_fontClass]" Typo="Typo.h6">Mehmet Can Karagöz</MudText>
+                    <MudText Class="@Bc[_fontClass]">Creator of BCSS</MudText>
+                    <MudDivider />
+                    <MudText Class="@Bc[_fontClass]">Achievements</MudText>
+                    <div class="@Bc[_spacingClass + " d-flex justify-center transition--all*1s"]">
+                        <MudIcon Class="@Bc[_iconClass + " transition--all*0.3s " + _hoverClass]" Icon="@Icons.Material.Filled.Star" Size="Size.Large" />
+                        <MudIcon Class="@Bc[_iconClass + " transition--all*0.3s " + _hoverClass]" Icon="@Icons.Material.Filled.Bolt" Size="Size.Large" />
+                        <MudIcon Class="@Bc[_iconClass + " transition--all*0.3s " + _hoverClass]" Icon="@Icons.Material.Filled.SettingsSuggest" Size="Size.Large" />
+                    </div>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+<MudContainer Class="@Bc["hmin-70vh d-flex flex-column align-center justify-start"]">
+    <MudText Typo="Typo.h3" Align="Align.Center" Color="Color.Primary">Like <MudText Inline="true" Typo="Typo.h3" Align="Align.Center" Color="Color.Secondary">It?</MudText></MudText>
     <MudText>Learn the Fundamentals</MudText>
     <div class="mud-width-full d-flex flex-wrap justify-center gap-4 mt-8">
-        <MudButton Variant="Variant.Outlined">Syntax</MudButton>
-        <MudButton Variant="Variant.Outlined">Usage</MudButton>
+        <MudButton Href="/syntax/basics" Variant="Variant.Outlined">Syntax</MudButton>
+        <MudButton Href="/content" Variant="Variant.Outlined">Content</MudButton>
     </div>
 </MudContainer>
 
 @code {
+
+    bool _boring = true;
+    
     string _cssString = "";
     string[] _possibleWidth = new string[] { "w-100", "w-125", "w-150", "w-175", "w-200", "w-225", "w-250", "w-275", "w-300" };
     string[] _possibleHeight = new string[] { "h-100", "h-125", "h-150", "h-175", "h-200", "h-225", "h-250", "h-275", "h-300" };
-    string[] _possibleColors = new string[] { "bg-purple", "bg-blue", "bg-red", "bg-green", "bg-[#123456]", "bg-[#efefef]" };
-    string[] _possibleRounded = new string[] { "r-0", "r-10", "r-20", "r-30", "r-40", "r-50" };
-    string[] _possibleBorders = new string[] { "", "b--8px-solid-yellow", "b--8px-dotted-yellow", "b--4px-dashed-yellow" };
+    string[] _possibleColors = new string[] { "bg-purple", "bg-midnightblue", "bg-blue", "bg-crimson", "bg-steelblue", "bg-purple", "bg-pink", "bg-teal", "bg-orange", "bg-[#123456]", "bg-[#efefef]", "bg-lightsalmon" };
+    string[] _possibleRounded = new string[] { "r-0", "r-20", "r-50", "r-50%", "r-100%" };
+    string[] _possibleBorders = new string[] { "", "b--8px-solid-yellow", "b--8px-dotted-yellow", "b--4px-dashed-yellow", "b--8px-solid-snow", "b--8px-dotted-snow", "b--4px-solid-snow" };
+    string[] _possibleCursor = new string[] { "cursor-default", "cursor-pointer", "cursor-progress", "cursor--not-allowed", "cursor-move", "cursor-help" };
+    string[] _possibleShadow = new string[] { "", "box-shadow--5px*5px*5px*black", "box-shadow--5px*-5px*10px*black", "box-shadow---5px*5px*20px*black" };
+    string _playgroundText = "Click On Me!";
 
     private void Generate()
     {
@@ -88,11 +146,103 @@
         _cssString = _possibleWidth[val];
         val = rnd.Next(0, 9);
         _cssString += $" {_possibleHeight[val]}";
-        val = rnd.Next(0, 5);
+        val = rnd.Next(0, 12);
         _cssString += $" {_possibleColors[val]}";
-        val = rnd.Next(0, 6);
+        if (10 <= val)
+        {
+            _cssString += " color-black";
+        }
+        else
+        {
+            _cssString += " color-white";
+        }
+        val = rnd.Next(0, 5);
         _cssString += $" {_possibleRounded[val]}";
-        val = rnd.Next(0, 4);
+        val = rnd.Next(0, 7);
         _cssString += $" {_possibleBorders[val]}";
+        val = rnd.Next(0, 6);
+        _cssString += $" {_possibleCursor[val]}";
+        val = rnd.Next(0, 4);
+        _cssString += $" {_possibleShadow[val]}";
+        _playgroundText = "One More Lucky Click!";
+    }
+
+    string[] _possibleSpacing = new string[] { "", "gap-2", "gap-4", "gap-6", "gap-8", "gap-10" };
+    string[] _possibleInsideBorders = new string[] { "", "b--2px-solid-yellow", "b--2px-dotted-yellow", "b--2px-dashed-yellow", "b--2px-solid-snow", "b--2px-dotted-snow", "b--2px-dashed-snow" };
+    string[] _possibleDimensions = new string[] { "w-100 h-100", "w-120 h-120", "w-140 h-140", "w-160 h-160" };
+    string[] _possibleFonts = new string[] { "font-family--Roboto", "font-family--Fuggles", "font-family--Pixelify*Sans", "font-family--Young*Serif" };
+    string[] _possibleHover = new string[] { "", "h:scale-150", "h:rotate-45", "h:rotate-90", "h:rotate-360", "h:rotate:720" };
+
+    string _showcaseString = "";
+    string _iconClass = "";
+    string _spacingClass = "";
+    string _colorClass = "";
+    string _dimensionClass = "";
+    string _fontClass = "";
+    string _hoverClass = "";
+
+    private void GenerateShowcase()
+    {
+        _boring = false;
+        _showcaseString = "";
+        Random rnd = new();
+        int val = rnd.Next(0, 6);
+        _spacingClass = _possibleSpacing[val];
+        val = rnd.Next(0, 4);
+        _dimensionClass = _possibleDimensions[val];
+        val = rnd.Next(0, 6);
+        _hoverClass = _possibleHover[val];
+        val = rnd.Next(0, 12);
+        _showcaseString += $" {_possibleColors[val]}";
+        _colorClass = $" {_possibleColors[val]}";
+        if (10 <= val)
+        {
+            _showcaseString += " color-black";
+            _colorClass += " color-black";
+        }
+        else
+        {
+            _showcaseString += " color-white";
+            _colorClass += " color-white";
+        }
+        val = rnd.Next(0, 5);
+        _showcaseString += $" {_possibleRounded[val]}";
+        val = rnd.Next(0, 7);
+        _showcaseString += $" {_possibleBorders[val]}";
+        _iconClass = $" {_possibleInsideBorders[val]}";
+        val = rnd.Next(0, 4);
+        _showcaseString += $" {_possibleShadow[val]}";
+        val = rnd.Next(0, 4);
+        _fontClass = $" {_possibleFonts[val]}";
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ScrollToFragment();
+        }
+    }
+
+    private async Task ScrollToFragment()
+    {
+        var uri = new Uri(NavigationManager.Uri, UriKind.Absolute);
+        var fragment = uri.Fragment;
+        if (fragment.StartsWith('#'))
+        {
+            // Handle text fragment (https://example.org/#test:~:text=foo)
+            // https://github.com/WICG/scroll-to-text-fragment/
+            var elementId = fragment.Substring(1);
+            var index = elementId.IndexOf(":~:", StringComparison.Ordinal);
+            if (index > 0)
+            {
+                elementId = elementId.Substring(0, index);
+            }
+
+            if (!string.IsNullOrEmpty(elementId))
+            {
+                await JSRuntime.InvokeVoidAsync("BlazorScrollToId", elementId);
+            }
+        }
     }
 }

@@ -1,0 +1,13 @@
+services:
+  bcss:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bcss
+    restart: unless-stopped
+    networks:
+      - edge
+
+networks:
+  edge:
+    external: true

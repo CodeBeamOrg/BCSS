@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Components.Routing;
 @inherits LayoutComponentBase
 @inject BcssService Bc
+@inject NavigationManager NavigationManager
 
 <MudScrollbar Color="var(--mud-palette-primary)" BorderRadius="20" Width="4" />
 
@@ -15,50 +16,71 @@
 
     <MudDrawer @bind-Open="@_open" Elevation="1" Variant="@DrawerVariant.Responsive" ClipMode="DrawerClipMode.Always">
         <MudNavMenu Bordered="true" Rounded="true">
-            <MudNavGroup Title="Getting Started">
-                <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/what">What is BCSS</MudNavLink>
+            <MudNavGroup Title="Getting Started" Icon="@Icons.Material.Filled.Css" Expanded="@GetExpandedStatus("gettingstarted")" IconColor="Color.Primary">
+                <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/what">What is & Why BCSS</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/howitworks">How It Works</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="gettingstarted/installation">Installation</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Configuration">
+            <MudNavGroup Title="Configuration" Icon="@Icons.Material.Filled.SettingsSuggest" Expanded="@GetExpandedStatus("configuration")" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="configuration/breakpoints">Breakpoints</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="configuration/spacing">Spacing</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="configuration/performancemode">Performance Mode</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Syntax">
+            <MudNavGroup Title="Syntax" Icon="@Icons.Material.Filled.EditNote" Expanded="@GetExpandedStatus("syntax")" IconColor="Color.Primary">
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/basics">Basics and Usage</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/doubledash">Dash and Double Dash</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/advancedsyntax">Advanced Syntax</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/unitmeasurement">Unit Measurement (Px, Rem)</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/syntax/prefixes">Prefixes (Breakpoints, Hover, Focus etc.)</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/customvalues">Custom Values</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/caseinsensitive">Case Insensitive</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/vendorprefixes">Vendor Prefixes (webkit, moz, ms, o)</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/customclasses">Custom Classes</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/customvalues">Custom Values & Colors</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/casesensitivity">Case Sensitivity</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/syntax/unifiedclass">Unified Class (Reusing Classes)</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Content">
-                <MudNavLink Match="NavLinkMatch.All" Href="/usage/border">Borders</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/usage/dimension">Dimensions</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/usage/position">Position & Flex</MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Href="/usage/spacing">Spacing</MudNavLink>
+            <MudNavGroup Title="Content" Icon="@Icons.Material.Filled.Dashboard" Expanded="@GetExpandedStatus("content")" IconColor="Color.Primary">
+                <MudNavLink Match="NavLinkMatch.All" Href="/content">General</MudNavLink>
+                <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/border">Borders</MudNavLink>
+                <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/dimension">Dimensions</MudNavLink>
+                <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/position">Position</MudNavLink>
+                <MudNavLink Disabled="true" Match="NavLinkMatch.All" Href="/content/text">Text</MudNavLink>
+            </MudNavGroup>
+            <MudNavGroup Title="Special Content" Icon="@Icons.Material.Filled.DashboardCustomize" Expanded="@GetExpandedStatus("contentspecial")" IconColor="Color.Primary">
+                <MudNavLink Match="NavLinkMatch.All" Href="/contentspecial/filter">Filter & Backdrop Filter</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/contentspecial/flexbox">Flexbox</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/contentspecial/shadow">Shadow</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/contentspecial/transform">Transforms</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/contentspecial/transition">Transitions</MudNavLink>
+            </MudNavGroup>
+            <MudNavGroup Title="Dev Tools" Icon="@Icons.Material.Filled.DeveloperBoard" IconColor="Color.Primary">
+                <MudNavLink Match="NavLinkMatch.All" Href="/devtools/quickdebug">QuickDebug</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/devtools/benchmark">Benchmark</MudNavLink>
             </MudNavGroup>
         </MudNavMenu>
     </MudDrawer>
 
-    <MudMainContent>
+    <MudMainContent Class="@Bc["hmin-100vh d-flex flex-column justify-space-between"]">
         @Body
-        <MudContainer Class="@Bc["mt-24"]">
-            <MudDivider Class="mb-4" />
-            <MudText Class="mb-4"><MudLink Href="https://codebeam.org" Target="_blank" Underline="Underline.Hover"><b>CodeBeam</b></MudLink> OpenSource @DateTime.Now.Year.</MudText>
+        <MudContainer Class="@Bc["margin-bottom--4px d-flex align-center"]">
+            <MudText><MudLink Href="https://codebeam.org" Target="_blank" Underline="Underline.Hover"><b>CodeBeam</b></MudLink> OpenSource @DateTime.Now.Year.</MudText>
+            <MudSpacer />
+            <MudText Class="@Bc["hidden sm:d-block"]" Typo="Typo.subtitle2">BCSS @Version</MudText>
+            <MudSpacer />
+            <MudButton Href="https://github.com/sponsors/CodeBeamOrg" Size="Size.Small" Target="_blank" StartIcon="@Icons.Material.Filled.VolunteerActivism" Variant="Variant.Outlined" Color="Color.Secondary">Donate</MudButton>
         </MudContainer>
     </MudMainContent>
 </MudLayout>
 
 <MudThemeProvider @ref="_mudThemeProvider" Theme="_bcssTheme" @bind-IsDarkMode="_darkMode" />
-<MudDialogProvider />
-<MudSnackbarProvider />
+<MudPopoverProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 <BlazorCssProvider />
 
 @code {
     MudTheme _bcssTheme = new MudTheme()
         {
-            Palette = new PaletteLight()
+            PaletteLight = new PaletteLight()
             {
                 Primary = "#313B72",
                 Secondary = "#F45B69",
@@ -82,8 +104,34 @@
     {
         if (firstRender)
         {
-            _darkMode = await _mudThemeProvider?.GetSystemPreference();
+            if (_mudThemeProvider != null)
+            {
+                _darkMode = await _mudThemeProvider.GetSystemPreference();
+            }
+            Bc.AddUnifiedClass("classOfBcss", "bg-yellow color-blue");
             StateHasChanged();
+        }
+    }
+
+    private bool GetExpandedStatus(string routeString)
+    {
+        if (NavigationManager.Uri.Contains(routeString))
+        {
+            if (routeString == "content" && NavigationManager.Uri.Contains("contentspecial"))
+            {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private string Version
+    {
+        get
+        {
+            Version v = typeof(BlazorCssProvider).Assembly.GetName().Version ?? new();
+            return $"v {v.Major}.{v.Minor}.{v.Build}";
         }
     }
 }

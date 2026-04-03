@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BCSS.Services;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace BCSS
@@ -9,24 +10,47 @@ namespace BCSS
 
         protected List<BcssInfo> _bcssInfos = new();
 
+        protected internal Dictionary<string, string>? UnifiedClasses { get; set; }
+
+        /// <summary>
+        /// If true, BCSS skips the validation checks and increase performance.
+        /// </summary>
+        [Parameter]
+        public bool PerformanceMode { get; set; }
+
         /// <summary>
         /// If true, deletes and overrides all other same CSS properties when new value is added. Default is false.
         /// </summary>
         [Parameter]
         public bool KeepSingleValue { get; set; }
 
+        /// <summary>
+        /// The spacing multiplier for px measured CSS properties like padding, margin, top, left, right, bottom.
+        /// </summary>
         [Parameter]
-        public int Xs { get; set; } = 0;
+        public int Spacing { get; set; } = 1;
 
+        /// <summary>
+        /// The small size measured by pixels.
+        /// </summary>
         [Parameter]
         public int Sm { get; set; } = 600;
 
+        /// <summary>
+        /// The medium size measured by pixels.
+        /// </summary>
         [Parameter]
         public int Md { get; set; } = 960;
 
+        /// <summary>
+        /// The large size measured by pixels.
+        /// </summary>
         [Parameter]
         public int Lg { get; set; } = 1280;
 
+        /// <summary>
+        /// The extra large size measured by pixels.
+        /// </summary>
         [Parameter]
         public int Xl { get; set; } = 1920;
 
@@ -40,9 +64,9 @@ namespace BCSS
         //int _renderCount;
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await CheckAllValues();
                 _firstRendered = true;
                 StateHasChanged();
             }
@@ -55,7 +79,7 @@ namespace BCSS
             return _shouldRender;
         }
 
-        string? _isValidResult;
+        //string? _isValidResult;
         protected internal async Task AddInfo(BcssInfo info)
         {
             if (string.IsNullOrEmpty(info.Key) || string.IsNullOrEmpty(info.Value))
@@ -67,12 +91,31 @@ namespace BCSS
                 return;
             }
 
-            bool isValid = true;
-            string[] definition = info.Value.Replace('*', ' ').Replace('+', '-').Split(':');
-            if (definition.Length > 1)
+            if (PerformanceMode)
             {
-                isValid = await IsValid(definition[0], definition[1]);
-                _isValidResult = "Is Valid" + isValid.ToString();
+                if (KeepSingleValue)
+                {
+                    Clear(info.Key);
+                }
+                _bcssInfos.Add(info);
+                Update();
+                return;
+            }
+
+            List<string> splittedValue = info.Value.Split(' ').ToList();
+            bool isValid = true;
+            foreach (var v in splittedValue)
+            {
+                string[] definition = BlazorCssConverter.PostProcess(v).Split(':');
+                if (definition.Length > 1)
+                {
+                    isValid = await IsValid(definition[0], definition[1]);
+                    //_isValidResult = "Is Valid" + isValid.ToString();
+                }
+                if (isValid == false)
+                {
+                    break;
+                }
             }
 
             if (isValid == true)
@@ -84,9 +127,7 @@ namespace BCSS
 
                 _bcssInfos.Add(info);
             }
-            _shouldRender = true;
-            StateHasChanged();
-            _shouldRender = false;
+            Update();
         }
 
         protected internal async Task<bool> IsValid(string propName, string propValue, bool force = false)
@@ -100,6 +141,10 @@ namespace BCSS
             return true;
         }
 
+        /// <summary>
+        /// Check all BCSS classes if they are valid or not. The method will automatically removes stored and invalid BCSS classes.
+        /// </summary>
+        /// <returns></returns>
         public async Task CheckAllValues()
         {
             List<BcssInfo> toBeDeletedInfos = new();
@@ -120,7 +165,7 @@ namespace BCSS
                 return false;
             }
             
-            string[] definition = bcssInfo.Value.Replace('*', ' ').Split(':');
+            string[] definition = BlazorCssConverter.PostProcess(bcssInfo.Value).Split(':');
             if (definition.Length > 1)
             {
                 bool result = await IsValid(definition[0], definition[1], force);
@@ -129,9 +174,9 @@ namespace BCSS
             return false;
         }
 
-        protected internal bool CheckDuplicate(string value) 
+        protected internal BcssInfo? CheckDuplicate(string key) 
         {
-            return _bcssInfos.Any(x => x.Value == value);
+            return _bcssInfos.FirstOrDefault(x => x.Key == key);
         }
 
         protected string GetMediaString(string breakpoint)
@@ -139,7 +184,12 @@ namespace BCSS
             string result = string.Empty;
             foreach (var info in _bcssInfos.Where(x => x.Prefixes.Contains(breakpoint)))
             {
-                var processedValue = info.Value?.Split(' ') ?? new string[0];
+                var listedValue = info.Value?.Split(' ') ?? new string[0];
+                List<string> processedValue = new();
+                foreach (var s in listedValue)
+                {
+                    processedValue.Add(GetWebkitString(info.Prefixes) + BlazorCssConverter.PostProcess(s));
+                }
                 result += $".{info.Key}{GetPrefixString(info.Prefixes)} {{ {string.Join("!important;", processedValue) + "!important;"} }}";
             }
             return result;
@@ -166,30 +216,59 @@ namespace BCSS
             return result;
         }
 
+        protected string GetWebkitString(List<string> prefixes)
+        {
+            var result = string.Empty;
+            if (prefixes.Contains("w"))
+            {
+                return "-webkit-";
+            }
+            if (prefixes.Contains("m"))
+            {
+                return "-moz-";
+            }
+            if (prefixes.Contains("o"))
+            {
+                return "-o-";
+            }
+            if (prefixes.Contains("ms"))
+            {
+                return "-ms-";
+            }
+
+            return result;
+        }
+
         public void Update()
         {
+            _shouldRender = true;
             StateHasChanged();
+            _shouldRender = false;
         }
 
-        public void Clear(string key)
+        /// <summary>
+        /// Removes all BCSS classes (if key is null or empty) or matched classes (if key specified). If a BCSS class is currently using in the page, it will automatically add again.
+        /// </summary>
+        /// <param name="key"></param>
+        public void Clear(string? key = null)
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                _bcssInfos.Clear();
+                return;
+            }
             _bcssInfos.RemoveAll(x => x.Key?.Split("-").First() == key.Split('-').First());
-            StateHasChanged();
         }
 
-        public void Clear()
-        {
-            _bcssInfos.Clear();
-            StateHasChanged();
-        }
-
+        /// <summary>
+        /// Removes last added BcssInfo.
+        /// </summary>
         public void ClearLast()
         {
             _bcssInfos.Remove(_bcssInfos.Last());
-            StateHasChanged();
         }
 
-        private readonly List<string> _breakpoints = new List<string>() { "xs", "sm", "md", "lg", "xl" };
+        private readonly List<string> _breakpoints = new List<string>() { "xs", "sm", "md", "lg", "xl", "mobile" };
         private readonly List<string> _prefixes = new List<string>() 
         { 
             "active",

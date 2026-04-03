@@ -11,6 +11,7 @@ namespace BCSS
             Provider = provider;
         }
 
+        //This is the method where we need maximum performance.
         public string? Add(string value)
         {
             if (Provider == null)
@@ -18,33 +19,120 @@ namespace BCSS
                 return null;
             }
 
-            string[] values = value.Split(' ');
+            List<string> decodedValue = new();
 
+            string[] values = value.Split(' ');
             foreach (var val in values)
             {
-                bool isDuplicated = Provider.CheckDuplicate(val);
-                if (isDuplicated)
+                BcssInfo? duplicatedInfo = Provider.CheckDuplicate(val);
+                if (duplicatedInfo != null)
                 {
+                    decodedValue.Add(duplicatedInfo.Key ?? string.Empty);
                     continue;
                 }
 
-                string? result = BlazorCssConverter.Convert(val);
+                if (Provider.UnifiedClasses != null)
+                {
+                    if (Provider.UnifiedClasses.ContainsKey(val))
+                    {
+                        decodedValue.Add(Provider.UnifiedClasses[val]);
+                        continue;
+                    }
+                }
 
-                BcssInfo info = new BcssInfo();
-                info.Prefixes = BlazorCssConverter.GetSuffixes(val);
-                info.Key = Decode(val);
+                List<string> prefixes = BlazorCssConverter.GetPrefixes(val);
+                if (prefixes.Contains("c"))
+                {
+                    decodedValue.Add(val);
+                    continue;
+                }
+
+                string? result = BlazorCssConverter.Convert(val, Provider);
+                string key = Decode(val);
+                BcssInfo info = new();
+                info.Prefixes = prefixes;
+                info.Key = key;
                 info.Value = result;
-                Provider.AddInfo(info);
+                _ = Provider.AddInfo(info);
+                decodedValue.Add(key);
             }
-            
+
             Provider.Update();
-            return Decode(value);
+            return string.Join(" ", decodedValue);
         }
 
-        public void Clear()
+        /// <summary>
+        /// Clears regular BCSS classes.
+        /// </summary>
+        /// <param name="update"></param>
+        public void Clear(bool update = true)
         {
-            Provider?.Clear();
-            Provider?.Update();
+            if (Provider == null)
+            {
+                return;
+            }
+            Provider.Clear();
+            foreach (var item in Provider.UnifiedClasses ?? new Dictionary<string, string>())
+            {
+                AddUnifiedClass(item.Key, item.Value);
+            }
+            if (update == true)
+            {
+                Provider.Update();
+            }
+        }
+
+        /// <summary>
+        /// Clears unified classes.
+        /// </summary>
+        /// <param name="update"></param>
+        public void ClearUnifiedClasses(bool update = true)
+        { 
+            if (Provider == null) 
+            { 
+                return;
+            }
+            Provider.UnifiedClasses = null;
+            if (update == true)
+            {
+                Provider.Update();
+            }
+        }
+
+        /// <summary>
+        /// Clears both Unified Classes and regular BCSS classes.
+        /// </summary>
+        public void Reset()
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+
+            ClearUnifiedClasses(false);
+            Clear(false);
+            Provider.Update();
+        }
+
+        /// <summary>
+        /// Adds unified classes with given user-created name and BCSS classes seperated with space.
+        /// </summary>
+        /// <param name="unifiedName"></param>
+        /// <param name="value"></param>
+        public void AddUnifiedClass(string unifiedName, string value)
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+
+            if (Provider.UnifiedClasses == null)
+            {
+                Provider.UnifiedClasses = new();
+            }
+
+            Add(value);
+            Provider.UnifiedClasses.TryAdd(unifiedName, value);
         }
 
         public string? this[string key]
@@ -52,24 +140,59 @@ namespace BCSS
             get => Add(key);
         }
 
-        protected string Decode(string value)
+        protected internal string Decode(string value)
         {
-            return value.Replace(":", "_1").Replace("/", "_2").Replace("*", "_3").Replace("#", "_4").Replace(",", "_5").Replace("+", "_6").Replace("%", "_7").Replace(".", "_8").Replace("[", null).Replace("]", null);
+            string result = value.ToLower();
+            if (result.StartsWith("c:"))
+            {
+                result = result.Substring(2);
+            }
+            return result.Replace(':', 'q').Replace('/', 'w').Replace('*', 'e').Replace('#', 'r').Replace(',', 't').Replace('+', 'y').Replace('%', 'a').Replace('.', 's').Replace("[", null).Replace("]", null);
         }
 
-        public void ChangeBreakpoints(int xs = 0, int sm = 600, int md = 960, int lg = 1280, int xl = 1920)
+        public void SetBreakpoints(int xs = 0, int sm = 600, int md = 960, int lg = 1280, int xl = 1920)
         {
             if (Provider == null)
             {
                 return;
             }
 #pragma warning disable BL0005
-            Provider.Xs = xs;
             Provider.Sm = sm;
             Provider.Md = md;
             Provider.Lg = lg;
             Provider.Xl = xl;
 #pragma warning restore BL0005
+        }
+
+        public void SetSpacing(int value)
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+#pragma warning disable BL0005
+            Provider.Spacing = value;
+#pragma warning restore BL0005
+        }
+
+        public void SetPerformanceMode(bool value)
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+#pragma warning disable BL0005
+            Provider.PerformanceMode = value;
+#pragma warning restore BL0005
+        }
+
+        public async Task RemoveInvalidClasses()
+        {
+            if (Provider == null)
+            {
+                return;
+            }
+            await Provider.CheckAllValues();
         }
 
     }

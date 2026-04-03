@@ -108,27 +108,26 @@ a, .btn-link {
     background-clip: border-box;
     -webkit-background-clip: text;
     background-size: 600% 600%;
-    animation: AnimationName 9s ease infinite;
 }
 
 .text-move {
     overflow: hidden;
     white-space: nowrap;
-    animation: TextWidth 12s ease-in-out infinite;
+    animation: TextWidth 8s ease-in-out infinite;
 }
 
 .text-wrap {
-    animation: TextWrap 12s linear infinite;
+    animation: TextWrap 8s linear infinite;
 }
 
 @keyframes TextWidth {
     0% {
-        width: 28px;
+        width: 30px;
         color: var(--mud-palette-primary);
     }
 
-    25% {
-        width: 28px;
+    15% {
+        width: 30px;
         color: var(--mud-palette-primary);
     }
 
@@ -142,13 +141,13 @@ a, .btn-link {
         color: var(--mud-palette-text-primary);
     }
 
-    75% {
-        width: 28px;
+    80% {
+        width: 30px;
         color: var(--mud-palette-primary);
     }
 
     100% {
-        width: 28px;
+        width: 30px;
         color: var(--mud-palette-primary);
     }
 }
@@ -159,22 +158,22 @@ a, .btn-link {
         color: var(--mud-palette-secondary);
     }
 
-    25% {
+    15% {
         letter-spacing: -4px;
         color: var(--mud-palette-secondary);
     }
 
     45% {
-        letter-spacing: 4px;
+        letter-spacing: 2px;
         color: var(--mud-palette-text-primary);
     }
 
     55% {
-        letter-spacing: 4px;
+        letter-spacing: 2px;
         color: var(--mud-palette-text-primary);
     }
 
-    75% {
+    80% {
         letter-spacing: -4px;
         color: var(--mud-palette-secondary);
     }
@@ -185,6 +184,51 @@ a, .btn-link {
     }
 }
 
-.monaco-editor-container {
-    height: 60px;
+.rotate-infinite {
+    animation: rotatefull 1s ease-in-out infinite;
+    height: 80px !important;
+    width: 80px !important;
+}
+
+@keyframes rotatefull {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.vibrate-infinite {
+    animation: vibrate 2s ease-in-out infinite;
+    color: gold;
+    height: 60px !important;
+    width: 60px !important;
+}
+
+@keyframes vibrate {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 4px);
+    }
+
+    40% {
+        transform: translate(2px, -4px);
+    }
+
+    60% {
+        transform: translate(-2px, 4px);
+    }
+
+    80% {
+        transform: translate(2px, -4px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
 }

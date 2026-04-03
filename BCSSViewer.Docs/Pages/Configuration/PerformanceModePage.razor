@@ -1,0 +1,16 @@
+﻿@page "/configuration/performancemode"
+@namespace BCSSViewer.Docs.Pages
+
+<MudContainer>
+    <MudText Class="mb-4" Typo="Typo.h4">Performance Mode</MudText>
+
+    <MudStack Class="mt-4" Spacing="4">
+        <MudText>BcssService has some validation checks when user adds a BCSS class. If PerformanceMode is true, these checks will disable and users have performance gain. It's especially remarkable on the first initialization and render of BCSS classes.</MudText>
+        <CodeBlock Description="There are two ways to change performance mode dynamically (similar to breakpoint). First, in BlazorCssProvider component you can set mode." Code="@("<BlazorCssProvider PerformanceMode=\"true\" />")" />
+        <CodeBlock Description="And the second is with using BcssService's SetPerformanceMode method." Code="@("@inject BcssService Bc\nBc.SetPerformanceMode(true)")" />
+        <MudAlert Severity="Severity.Info">PerformanceMode is false by default. You may not need this feature until you have hundreds of components and BCSS classes.</MudAlert>
+        <MudAlert Severity="Severity.Info">Check the <MudLink Href="/devtools/benchmark">Benchmark Page</MudLink> to see performance values with or without PerformanceMode.</MudAlert>
+    </MudStack>
+
+    <PageBottomRouting PreviousHref="/configuration/spacing" PreviousText="Spacing" NextHref="/syntax/basics" NextText="Basic Syntax" />
+</MudContainer>
